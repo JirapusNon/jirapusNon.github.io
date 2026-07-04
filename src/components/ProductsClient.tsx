@@ -110,7 +110,7 @@ export default function ProductsClient() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="ค้นหารุ่น, แบรนด์..."
-              className="w-full border border-rule bg-card py-2 pl-9 pr-8 text-sm outline-none transition duration-200 focus:border-accent focus:ring-1 focus:ring-accent/30"
+              className="w-full rounded-lg border border-border bg-card py-2 pl-9 pr-8 text-sm shadow-xs outline-none transition duration-200 focus:border-accent-300 focus:ring-2 focus:ring-accent/20"
             />
             {query && (
               <button
@@ -128,7 +128,7 @@ export default function ProductsClient() {
         {isPending && <ProductGridSkeleton />}
 
         {!isPending && filtered.length === 0 && (
-          <div className="flex flex-col items-center gap-3 border border-rule bg-card py-16 text-center">
+          <div className="flex flex-col items-center gap-3 rounded-xl border border-border bg-card py-16 text-center shadow-xs">
             <p className="font-heading text-base font-semibold text-ink">ไม่พบสินค้าที่ตรงกับการค้นหา</p>
             <p className="max-w-sm text-sm text-graphite">
               ลองค้นหาด้วยรุ่นเครื่องพิมพ์ เช่น L3250 หรือบอกทีมงานให้ช่วยหา
@@ -137,7 +137,7 @@ export default function ProductsClient() {
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 cursor-pointer bg-line px-5 py-2.5 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
+              className="btn btn-line-solid mt-2"
             >
               สอบถามผ่าน LINE
             </a>

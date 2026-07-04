@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, IBM_Plex_Sans_Thai } from "next/font/google";
+import { IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,12 +8,6 @@ const bodyFont = IBM_Plex_Sans_Thai({
   variable: "--font-thai",
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
-});
-
-const headingFont = Chakra_Petch({
-  variable: "--font-chakra",
-  subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -33,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${bodyFont.variable} ${headingFont.variable} h-full scroll-smooth antialiased`}
+      className={`${bodyFont.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Header />

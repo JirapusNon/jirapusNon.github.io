@@ -32,14 +32,14 @@ export default function SearchBar({
     <form
       onSubmit={handleSubmit}
       role="search"
-      className={`flex w-full items-center gap-2 border transition duration-200 focus-within:ring-2 focus-within:ring-accent/40 ${
+      className={`flex w-full items-center gap-2 rounded-lg border transition duration-200 focus-within:ring-2 focus-within:ring-accent/20 ${
         isDark
-          ? "border-paper/15 bg-paper/5 focus-within:border-paper/30"
-          : "border-rule bg-card focus-within:border-accent"
+          ? "border-border bg-muted focus-within:border-accent-300"
+          : "border-border bg-card shadow-xs focus-within:border-accent-300"
       } ${isLarge ? "p-2 pl-4" : "p-1.5 pl-3"} ${className}`}
     >
       <svg
-        className={`shrink-0 ${isLarge ? "h-5 w-5" : "h-4 w-4"} ${isDark ? "text-paper/50" : "text-graphite"}`}
+        className={`shrink-0 ${isLarge ? "h-5 w-5" : "h-4 w-4"} ${isDark ? "text-muted-foreground" : "text-graphite"}`}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -59,16 +59,12 @@ export default function SearchBar({
         placeholder={placeholder}
         aria-label="ค้นหาสินค้า"
         className={`min-w-0 flex-1 bg-transparent outline-none ${
-          isDark ? "text-paper placeholder:text-paper/40" : "placeholder:text-navy-300"
+          isDark ? "text-ink placeholder:text-muted-foreground" : "placeholder:text-navy-300"
         } ${isLarge ? "py-2 text-base" : "py-1.5 text-sm"}`}
       />
       <button
         type="submit"
-        className={`shrink-0 cursor-pointer font-medium transition duration-200 ${
-          isDark
-            ? "bg-paper px-4 py-1.5 text-sm text-ink hover:bg-paper/90"
-            : "bg-accent px-4 py-1.5 text-sm text-on-primary hover:bg-accent-hover"
-        } ${isLarge ? "px-5 py-2.5 text-base" : ""}`}
+        className={`btn btn-accent shrink-0 ${isLarge ? "px-5 py-2.5 text-base" : "px-4 py-1.5 text-sm"}`}
       >
         ค้นหา
       </button>

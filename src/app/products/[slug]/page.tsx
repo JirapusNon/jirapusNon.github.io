@@ -51,7 +51,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <div className="grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="relative aspect-square w-full overflow-hidden border border-rule bg-muted/30 p-6">
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-border bg-muted/30 p-6 shadow-xs">
             <Image
               src={product.image}
               alt={product.name}
@@ -65,7 +65,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {product.compatiblePrinters.slice(0, 4).map((printer) => (
               <div
                 key={printer}
-                className="relative aspect-square overflow-hidden border border-rule-subtle bg-muted/30"
+                className="relative aspect-square overflow-hidden rounded-lg border border-border-subtle bg-muted/30"
               >
                 <Image src={product.image} alt={`${product.name} - ${printer}`} fill sizes="120px" className="object-cover" />
               </div>
@@ -79,10 +79,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <h1 className="font-heading mt-2 text-2xl font-semibold text-ink sm:text-3xl">{product.name}</h1>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <span className={`px-2.5 py-1 text-xs font-medium uppercase tracking-wide ${typeBadge.bg} ${typeBadge.text}`}>
+            <span className={`rounded-md px-2.5 py-1 text-xs font-medium tracking-wide ${typeBadge.bg} ${typeBadge.text}`}>
               {typeBadge.label}
             </span>
-            <span className={`px-2.5 py-1 text-xs font-medium uppercase tracking-wide ${stockBadge.bg} ${stockBadge.text}`}>
+            <span className={`rounded-md px-2.5 py-1 text-xs font-medium tracking-wide ${stockBadge.bg} ${stockBadge.text}`}>
               {stockBadge.label}
             </span>
           </div>
@@ -91,7 +91,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
           <p className="mt-4 text-sm leading-relaxed text-graphite">{product.description}</p>
 
-          <dl className="mt-8 border border-rule">
+          <dl className="mt-8 overflow-hidden rounded-xl border border-border">
             <SpecRow label="สี" value={product.color} />
             {product.volumeMl != null && <SpecRow label="ปริมาณหมึก" value={`${product.volumeMl} มล.`} />}
             <SpecRow label="รหัสสินค้า" value={product.id} highlight />
@@ -104,7 +104,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {product.compatiblePrinters.map((printer) => (
                 <li
                   key={printer}
-                  className="border border-rule px-2.5 py-1 text-xs text-secondary"
+                  className="rounded-md border border-border bg-muted/30 px-2.5 py-1 text-xs text-secondary"
                 >
                   {printer}
                 </li>
@@ -117,14 +117,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               href={`${CONTACT.lineUrl}?text=${lineMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex cursor-pointer items-center gap-2 bg-line px-6 py-3 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
+              className="btn btn-line-solid"
             >
               สอบถามราคา/สต็อก
             </a>
-            <a
-              href={CONTACT.phoneHref}
-              className="flex cursor-pointer items-center gap-2 border border-rule px-6 py-3 text-sm font-medium text-secondary transition duration-200 hover:border-accent hover:text-accent"
-            >
+            <a href={CONTACT.phoneHref} className="btn btn-secondary">
               โทร {CONTACT.phone}
             </a>
           </div>
@@ -156,7 +153,7 @@ function SpecRow({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex justify-between gap-4 border-b border-rule-subtle px-4 py-3 text-sm last:border-b-0">
+    <div className="flex justify-between gap-4 border-b border-border-subtle px-4 py-3 text-sm last:border-b-0">
       <dt className="text-graphite">{label}</dt>
       <dd className={`text-right font-medium ${highlight ? "font-heading text-ink" : "text-secondary"}`}>
         {value}

@@ -4,18 +4,11 @@ import { CONTACT, SITE_NAME } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-rule bg-paper">
-      <div className="cmyk-strip" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-
+    <footer id="contact" className="border-t border-border bg-card">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center border border-ink text-sm font-bold text-ink">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-sm font-semibold text-on-primary">
               R
             </span>
             <span className="font-heading text-base font-semibold text-ink">{SITE_NAME}</span>
@@ -88,7 +81,7 @@ export default function Footer() {
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 items-center justify-center border border-line px-3 text-xs font-medium text-line transition duration-200 hover:bg-line hover:text-white"
+              className="btn btn-line px-3 py-2 text-xs"
               aria-label="LINE"
             >
               LINE
@@ -97,7 +90,7 @@ export default function Footer() {
               href={CONTACT.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 items-center justify-center border border-graphite/30 px-3 text-xs font-medium text-graphite transition duration-200 hover:border-graphite hover:text-ink"
+              className="btn btn-secondary px-3 py-2 text-xs"
               aria-label="Facebook"
             >
               FB
@@ -106,7 +99,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-rule py-4 text-center text-xs text-graphite">
+      <div className="border-t border-border-subtle py-4 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} {SITE_NAME} สงวนลิขสิทธิ์
       </div>
     </footer>

@@ -29,13 +29,6 @@ export default function ProductsPage() {
         ค้นหาและเลือกหมึกที่ตรงกับเครื่องพิมพ์ของคุณ
       </p>
 
-      <div className="cmyk-strip mt-6" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-
       <div className="mt-8">
         <Suspense fallback={<ProductGridSkeleton />}>
           <ProductsClient />

@@ -1,14 +1,8 @@
 export function ProductCardSkeleton() {
   return (
-    <div className="flex flex-col overflow-hidden border border-rule bg-card">
-      <div className="cmyk-strip" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
+    <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs">
       <div className="skeleton aspect-square w-full" />
-      <div className="flex flex-col gap-2 border-t border-rule-subtle p-3 sm:p-4">
+      <div className="flex flex-col gap-2 border-t border-border-subtle p-3 sm:p-4">
         <div className="skeleton h-2.5 w-1/4 rounded-sm" />
         <div className="skeleton h-4 w-full rounded-sm" />
         <div className="skeleton h-3 w-2/3 rounded-sm" />

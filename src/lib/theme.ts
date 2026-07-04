@@ -47,10 +47,10 @@ interface Badge {
 }
 
 const TYPE_BADGES: Record<InkType, Badge> = {
-  "หมึกแท้": { bg: "bg-slate-100", text: "text-slate-700", label: "แท้" },
-  "หมึกเทียบเท่า": { bg: "bg-accent-50", text: "text-accent-700", label: "เทียบเท่า" },
+  "หมึกแท้": { bg: "bg-accent-50", text: "text-accent-700", label: "แท้" },
+  "หมึกเทียบเท่า": { bg: "bg-slate-100", text: "text-slate-600", label: "เทียบเท่า" },
   "หมึกเติม": { bg: "bg-slate-100", text: "text-slate-600", label: "หมึกเติม" },
-  "โทนเนอร์": { bg: "bg-slate-200", text: "text-slate-700", label: "โทนเนอร์" },
+  "โทนเนอร์": { bg: "bg-slate-100", text: "text-slate-600", label: "โทนเนอร์" },
 };
 
 export function getTypeBadge(type: InkType): Badge {

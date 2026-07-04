@@ -14,17 +14,10 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 
   return (
-    <article className="group flex flex-col overflow-hidden border border-rule bg-card transition duration-200 hover:border-accent">
-      <div className="cmyk-strip" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-sm">
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square w-full cursor-pointer bg-muted/30 p-5"
+        className="relative block aspect-square w-full cursor-pointer bg-muted/40 p-5"
       >
         <Image
           src={product.image}
@@ -35,19 +28,19 @@ export default function ProductCard({ product }: { product: Product }) {
         />
         <div className="absolute left-3 top-3 flex flex-col gap-1">
           <span
-            className={`px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${typeBadge.bg} ${typeBadge.text}`}
+            className={`rounded-md px-2 py-0.5 text-[10px] font-medium tracking-wide ${typeBadge.bg} ${typeBadge.text}`}
           >
             {typeBadge.label}
           </span>
           <span
-            className={`px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${stockBadge.bg} ${stockBadge.text}`}
+            className={`rounded-md px-2 py-0.5 text-[10px] font-medium tracking-wide ${stockBadge.bg} ${stockBadge.text}`}
           >
             {stockBadge.label}
           </span>
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col border-t border-rule-subtle p-4">
+      <div className="flex flex-1 flex-col border-t border-border-subtle p-4">
         <span className="spec-label">{product.id}</span>
 
         <Link
@@ -70,9 +63,9 @@ export default function ProductCard({ product }: { product: Product }) {
           href={`${CONTACT.lineUrl}?text=${lineMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 flex w-full cursor-pointer items-center justify-center gap-2 bg-line py-2.5 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
+          className="btn btn-line mt-3 w-full py-2.5"
         >
-          <LineIcon className="h-5 w-5 shrink-0" />
+          <LineIcon className="h-4 w-4 shrink-0" />
           สอบถาม / สั่งซื้อ
         </a>
       </div>

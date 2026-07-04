@@ -17,18 +17,11 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-rule bg-card">
-        <div className="cmyk-strip" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
+      <section className="border-b border-border-subtle bg-card">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
           <div>
             <p className="spec-label">หมึกและอุปกรณ์สำนักงาน</p>
-            <h1 className="font-heading mt-3 text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+            <h1 className="font-heading mt-3 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
               หมึกตรงรุ่น
               <br />
               สั่งง่าย ส่งไว
@@ -39,35 +32,32 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="#catalog"
-                className="cursor-pointer bg-ink px-6 py-3 text-sm font-medium text-paper transition duration-200 hover:bg-navy-700"
-              >
+              <Link href="#catalog" className="btn btn-primary">
                 ดูแคตตาล็อก
               </Link>
               <a
                 href={CONTACT.lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex shrink-0 cursor-pointer items-center gap-2 bg-line px-5 py-3 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
+                className="btn btn-line-solid shrink-0"
               >
                 <LineIcon className="h-5 w-5 shrink-0" />
                 สั่งซื้อ LINE
               </a>
             </div>
 
-            <p className="mt-6 text-xs text-graphite sm:text-sm">
+            <p className="mt-6 text-xs text-muted-foreground sm:text-sm">
               ส่งฟรีทั่วประเทศ · รับประกันคุณภาพ · มีสินค้าพร้อมส่ง
             </p>
           </div>
 
           {heroProducts.length > 0 && (
-            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {heroProducts.map((product) => (
                 <Link
                   key={product.id}
                   href={`/products/${product.slug}`}
-                  className="group relative aspect-square cursor-pointer border border-rule bg-muted/30 p-4 transition duration-200 hover:border-accent"
+                  className="group relative aspect-square cursor-pointer rounded-xl border border-border bg-muted/30 p-4 shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-sm"
                 >
                   <Image
                     src={product.image}
@@ -76,7 +66,7 @@ export default function Home() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-contain p-2 transition duration-300 group-hover:scale-[1.02]"
                   />
-                  <span className="absolute bottom-2 left-2 bg-card/90 px-2 py-0.5 text-[10px] font-medium text-graphite">
+                  <span className="absolute bottom-2 left-2 rounded-md bg-card/90 px-2 py-0.5 text-[10px] font-medium text-graphite backdrop-blur-sm">
                     {product.brand}
                   </span>
                 </Link>
@@ -173,7 +163,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="catalog-section border-b border-rule bg-card">
+      <section className="catalog-section border-b border-border-subtle bg-card">
         <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-heading text-xl font-semibold text-ink sm:text-2xl">
             บอกรุ่นเครื่องพิมพ์ เราหาให้
@@ -187,14 +177,11 @@ export default function Home() {
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer bg-line px-5 py-2.5 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
+              className="btn btn-line-solid"
             >
               แชท LINE
             </a>
-            <a
-              href={CONTACT.phoneHref}
-              className="cursor-pointer border border-rule px-5 py-2.5 text-sm font-medium text-secondary transition duration-200 hover:border-accent hover:text-accent"
-            >
+            <a href={CONTACT.phoneHref} className="btn btn-secondary">
               โทร {CONTACT.phone}
             </a>
           </div>

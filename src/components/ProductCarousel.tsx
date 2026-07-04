@@ -163,7 +163,7 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
         type="button"
         onClick={() => scroll("left")}
         aria-label="เลื่อนดูสินค้าก่อนหน้า"
-        className="absolute -left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center border border-rule bg-card p-2 text-graphite transition duration-200 hover:border-accent hover:text-accent sm:flex"
+        className="absolute -left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
       >
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -173,7 +173,7 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
         type="button"
         onClick={() => scroll("right")}
         aria-label="เลื่อนดูสินค้าถัดไป"
-        className="absolute -right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center border border-rule bg-card p-2 text-graphite transition duration-200 hover:border-accent hover:text-accent sm:flex"
+        className="absolute -right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
       >
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
