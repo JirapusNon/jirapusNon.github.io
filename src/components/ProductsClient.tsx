@@ -89,10 +89,10 @@ export default function ProductsClient() {
 
       <div className="flex-1">
         <div className="mb-4 flex items-center justify-between gap-4">
-          <p className="shrink-0 text-sm text-muted-foreground">พบ {filtered.length} รายการ</p>
+          <p className="spec-label shrink-0">พบ {filtered.length} รายการ</p>
           <div className="relative w-full max-w-xs">
             <svg
-              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-300"
+              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-graphite"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -110,14 +110,14 @@ export default function ProductsClient() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="ค้นหารุ่น, แบรนด์..."
-              className="w-full rounded-lg bg-muted/50 py-2 pl-9 pr-8 text-sm shadow-xs outline-none transition duration-200 focus:ring-2 focus:ring-accent/30"
+              className="w-full border border-rule bg-card py-2 pl-9 pr-8 text-sm outline-none transition duration-200 focus:border-accent focus:ring-1 focus:ring-accent/30"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="ล้างคำค้นหา"
-                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-navy-300 transition duration-200 hover:text-secondary"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-graphite transition duration-200 hover:text-ink"
               >
                 ✕
               </button>
@@ -128,16 +128,16 @@ export default function ProductsClient() {
         {isPending && <ProductGridSkeleton />}
 
         {!isPending && filtered.length === 0 && (
-          <div className="flex flex-col items-center gap-3 rounded-xl bg-card py-16 text-center shadow-sm">
-            <p className="text-base font-semibold text-secondary">ไม่พบสินค้าที่คุณค้นหา</p>
-            <p className="text-sm text-muted-foreground">
-              ลองปรับตัวกรอง หรือติดต่อทีมงานเพื่อสอบถามสินค้าที่ต้องการ
+          <div className="flex flex-col items-center gap-3 border border-rule bg-card py-16 text-center">
+            <p className="font-heading text-base font-semibold text-ink">ไม่พบสินค้าที่ตรงกับการค้นหา</p>
+            <p className="max-w-sm text-sm text-graphite">
+              ลองค้นหาด้วยรุ่นเครื่องพิมพ์ เช่น L3250 หรือบอกทีมงานให้ช่วยหา
             </p>
             <a
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 cursor-pointer rounded-full bg-line px-5 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-line-hover"
+              className="mt-2 cursor-pointer bg-line px-5 py-2.5 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
             >
               สอบถามผ่าน LINE
             </a>

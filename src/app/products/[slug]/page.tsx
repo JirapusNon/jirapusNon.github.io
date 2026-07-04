@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
 import { CONTACT } from "@/lib/constants";
 import { formatPrice, getBySlug, getRelated, products } from "@/lib/products";
-import { getBrandTheme, getStockBadge, getTypeBadge } from "@/lib/theme";
+import { getStockBadge, getTypeBadge } from "@/lib/theme";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -32,24 +32,26 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const related = getRelated(product);
   const lineMessage = encodeURIComponent(`สอบถามสินค้า: ${product.name} (รหัส ${product.id})`);
-  const brandTheme = getBrandTheme(product.brand);
   const typeBadge = getTypeBadge(product.type);
   const stockBadge = getStockBadge(product.inStock);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <nav className="mb-6 text-xs text-muted-foreground">
-        <Link href="/" className="cursor-pointer transition duration-200 hover:text-accent">หน้าแรก</Link>
+      <nav className="mb-6 text-xs text-graphite">
+        <Link href="/" className="cursor-pointer underline-offset-2 hover:text-accent hover:underline">
+          หน้าแรก
+        </Link>
         <span className="mx-1.5">/</span>
-        <Link href="/products" className="cursor-pointer transition duration-200 hover:text-accent">สินค้าทั้งหมด</Link>
+        <Link href="/products" className="cursor-pointer underline-offset-2 hover:text-accent hover:underline">
+          แคตตาล็อกสินค้า
+        </Link>
         <span className="mx-1.5">/</span>
-        <span className="text-secondary">{product.name}</span>
+        <span className="text-ink">{product.name}</span>
       </nav>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-muted/50 p-6 shadow-sm">
-            <div className={`absolute inset-x-0 top-0 h-1 ${brandTheme.accentBar}`} aria-hidden="true" />
+          <div className="relative aspect-square w-full overflow-hidden border border-rule bg-muted/30 p-6">
             <Image
               src={product.image}
               alt={product.name}
@@ -63,7 +65,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {product.compatiblePrinters.slice(0, 4).map((printer) => (
               <div
                 key={printer}
-                className="relative aspect-square overflow-hidden rounded-lg bg-muted/50 shadow-xs"
+                className="relative aspect-square overflow-hidden border border-rule-subtle bg-muted/30"
               >
                 <Image src={product.image} alt={`${product.name} - ${printer}`} fill sizes="120px" className="object-cover" />
               </div>
@@ -72,44 +74,56 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </div>
 
         <div>
-          <span className="text-sm font-medium text-muted-foreground">{product.brand}</span>
-          <h1 className="font-heading mt-1 text-2xl font-bold text-primary">{product.name}</h1>
+          <span className="spec-label">{product.id}</span>
+          <p className="mt-1 text-sm text-graphite">{product.brand}</p>
+          <h1 className="font-heading mt-2 text-2xl font-semibold text-ink sm:text-3xl">{product.name}</h1>
 
-          <div className="mt-3 flex flex-wrap gap-2">
-            <span className={`rounded-full px-3 py-1 text-xs font-medium ${typeBadge.bg} ${typeBadge.text}`}>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className={`px-2.5 py-1 text-xs font-medium uppercase tracking-wide ${typeBadge.bg} ${typeBadge.text}`}>
               {typeBadge.label}
             </span>
-            <span className={`rounded-full px-3 py-1 text-xs font-medium ${stockBadge.bg} ${stockBadge.text}`}>
+            <span className={`px-2.5 py-1 text-xs font-medium uppercase tracking-wide ${stockBadge.bg} ${stockBadge.text}`}>
               {stockBadge.label}
-            </span>
-            <span className="rounded-full bg-primary/85 px-3 py-1 text-xs font-semibold text-on-primary">
-              {product.brand}
             </span>
           </div>
 
-          <p className="mt-4 text-3xl font-bold text-accent">฿{formatPrice(product.price)}</p>
+          <p className="mt-6 font-heading text-3xl font-semibold text-ink">฿{formatPrice(product.price)}</p>
 
-          <p className="mt-4 text-sm leading-relaxed text-secondary">{product.description}</p>
+          <p className="mt-4 text-sm leading-relaxed text-graphite">{product.description}</p>
 
-          <dl className="mt-6 divide-y divide-border-subtle rounded-xl bg-muted/30 shadow-xs">
+          <dl className="mt-8 border border-rule">
             <SpecRow label="สี" value={product.color} />
             {product.volumeMl != null && <SpecRow label="ปริมาณหมึก" value={`${product.volumeMl} มล.`} />}
-            <SpecRow label="รหัสสินค้า" value={product.id} />
-            <SpecRow label="รองรับเครื่องพิมพ์" value={product.compatiblePrinters.join(", ")} />
+            <SpecRow label="รหัสสินค้า" value={product.id} highlight />
+            <SpecRow label="ยี่ห้อ" value={product.brand} />
           </dl>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6">
+            <p className="spec-label mb-2">รองรับเครื่องพิมพ์</p>
+            <ul className="flex flex-wrap gap-2">
+              {product.compatiblePrinters.map((printer) => (
+                <li
+                  key={printer}
+                  className="border border-rule px-2.5 py-1 text-xs text-secondary"
+                >
+                  {printer}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={`${CONTACT.lineUrl}?text=${lineMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex cursor-pointer items-center gap-2 rounded-full bg-line px-6 py-3 text-sm font-semibold text-white transition duration-200 hover:bg-line-hover"
+              className="flex cursor-pointer items-center gap-2 bg-line px-6 py-3 text-sm font-medium text-white transition duration-200 hover:bg-line-hover"
             >
-              สอบถาม/สั่งซื้อผ่าน LINE
+              สอบถามราคา/สต็อก
             </a>
             <a
               href={CONTACT.phoneHref}
-              className="flex cursor-pointer items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-secondary transition duration-200 hover:border-accent-400 hover:text-accent"
+              className="flex cursor-pointer items-center gap-2 border border-rule px-6 py-3 text-sm font-medium text-secondary transition duration-200 hover:border-accent hover:text-accent"
             >
               โทร {CONTACT.phone}
             </a>
@@ -118,9 +132,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       </div>
 
       {related.length > 0 && (
-        <section className="mt-16">
-          <h2 className="font-heading text-lg font-bold text-primary">สินค้าที่เกี่ยวข้อง</h2>
-          <div className="mt-4">
+        <section className="catalog-section mt-4">
+          <p className="spec-label">สินค้าที่เกี่ยวข้อง</p>
+          <h2 className="font-heading mt-2 text-xl font-semibold text-ink">
+            ใช้กับเครื่องพิมพ์รุ่นเดียวกัน
+          </h2>
+          <div className="mt-6">
             <ProductGrid products={related} />
           </div>
         </section>
@@ -129,11 +146,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   );
 }
 
-function SpecRow({ label, value }: { label: string; value: string }) {
+function SpecRow({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
   return (
-    <div className="flex justify-between gap-4 px-4 py-3 text-sm">
-      <dt className="text-muted-foreground">{label}</dt>
-      <dd className="text-right font-medium text-secondary">{value}</dd>
+    <div className="flex justify-between gap-4 border-b border-rule-subtle px-4 py-3 text-sm last:border-b-0">
+      <dt className="text-graphite">{label}</dt>
+      <dd className={`text-right font-medium ${highlight ? "font-heading text-ink" : "text-secondary"}`}>
+        {value}
+      </dd>
     </div>
   );
 }

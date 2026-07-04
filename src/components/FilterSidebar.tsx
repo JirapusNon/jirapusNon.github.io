@@ -34,13 +34,13 @@ function ClearFiltersControl({
       aria-label={`ล้างตัวกรองทั้งหมด ${count} รายการ`}
       className={
         compact
-          ? 'inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold text-accent transition duration-200 hover:bg-accent-50 hover:text-accent-hover'
-          : 'inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md border border-accent/20 bg-accent-50 px-2.5 py-1 text-xs font-semibold text-accent transition duration-200 hover:border-accent/35 hover:bg-accent-100'
+          ? 'inline-flex shrink-0 cursor-pointer items-center gap-1 px-2 py-1 text-xs font-medium text-accent transition duration-200 hover:text-accent-hover'
+          : 'inline-flex shrink-0 cursor-pointer items-center gap-1.5 border border-rule px-2.5 py-1 text-xs font-medium text-accent transition duration-200 hover:border-accent'
       }
     >
       <X className="h-3 w-3 shrink-0" aria-hidden="true" />
       ล้างตัวกรอง
-      <span className="rounded-full bg-accent px-1.5 py-px text-[10px] font-bold leading-none text-on-primary">
+      <span className="bg-accent px-1.5 py-px text-[10px] font-bold leading-none text-on-primary">
         {count}
       </span>
     </button>
@@ -60,18 +60,18 @@ export default function FilterSidebar({
   const content = (
     <div className="flex flex-col gap-5">
       {hasActiveFilters && (
-        <div className="hidden items-center justify-between gap-2 rounded-lg bg-accent-50/70 px-2.5 py-2 lg:flex">
-          <p className="text-xs text-accent-800">
+        <div className="hidden items-center justify-between gap-2 border border-rule bg-muted/40 px-2.5 py-2 lg:flex">
+          <p className="text-xs text-graphite">
             เลือก{' '}
-            <span className="font-semibold">{activeCount}</span> ตัวกรอง
+            <span className="font-medium text-ink">{activeCount}</span> ตัวกรอง
           </p>
           <ClearFiltersControl count={activeCount} onReset={onReset} compact />
         </div>
       )}
 
       <div>
-        <h3 className="mb-2 text-sm font-semibold text-primary">ประเภทสินค้า</h3>
-        <div className="grid grid-cols-2 gap-1.5">
+        <h3 className="spec-label mb-3">ประเภทสินค้า</h3>
+        <div className="grid grid-cols-1 gap-0.5 border-t border-rule">
           {inkTypes.map((type) => (
             <CheckboxOption
               key={type}
@@ -84,8 +84,8 @@ export default function FilterSidebar({
       </div>
 
       <div>
-        <h3 className="mb-2 text-sm font-semibold text-primary">ยี่ห้อเครื่องพิมพ์</h3>
-        <div className="grid grid-cols-2 gap-1.5">
+        <h3 className="spec-label mb-3">ยี่ห้อเครื่องพิมพ์</h3>
+        <div className="grid grid-cols-1 gap-0.5 border-t border-rule">
           {brands.map((brand) => (
             <CheckboxOption
               key={brand}
@@ -97,7 +97,7 @@ export default function FilterSidebar({
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-1.5 rounded-lg bg-accent-50 px-3 py-2 text-center text-xs font-medium text-accent-800">
+      <div className="flex items-center justify-center gap-1.5 border border-rule px-3 py-2 text-center text-xs text-graphite">
         <Truck className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
         จัดส่งฟรีทั่วประเทศ
       </div>
@@ -107,7 +107,7 @@ export default function FilterSidebar({
   return (
     <>
       <div className="mb-4 lg:hidden">
-        <div className="flex items-center gap-1 rounded-xl bg-card shadow-sm">
+        <div className="flex items-center gap-1 border border-rule bg-card">
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
@@ -116,7 +116,7 @@ export default function FilterSidebar({
             <span className="flex items-center gap-2">
               ตัวกรองสินค้า
               {hasActiveFilters && (
-                <span className="rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-bold text-on-primary">
+                <span className="bg-accent px-1.5 py-0.5 text-[10px] font-bold text-on-primary">
                   {activeCount}
                 </span>
               )}
@@ -138,7 +138,7 @@ export default function FilterSidebar({
           </button>
           {hasActiveFilters && (
             <>
-              <span className="h-5 w-px bg-border-subtle" aria-hidden="true" />
+              <span className="h-5 w-px bg-rule" aria-hidden="true" />
               <div className="pr-2">
                 <ClearFiltersControl count={activeCount} onReset={onReset} compact />
               </div>
@@ -146,11 +146,12 @@ export default function FilterSidebar({
           )}
         </div>
         {mobileOpen && (
-          <div className="mt-3 rounded-xl bg-card p-4 shadow-sm">{content}</div>
+          <div className="mt-3 border border-rule bg-card p-4">{content}</div>
         )}
       </div>
 
-      <aside className="sticky top-20 hidden h-fit w-80 shrink-0 rounded-xl bg-card p-5 shadow-sm lg:block">
+      <aside className="sticky top-[4.5rem] hidden h-fit w-72 shrink-0 border border-rule bg-card p-5 lg:block">
+        <p className="spec-label mb-4">ดัชนีแคตตาล็อก</p>
         {content}
       </aside>
     </>
@@ -167,12 +168,12 @@ function CheckboxOption({
   onChange: () => void;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1.5 text-sm text-secondary transition duration-200 hover:bg-muted/60">
+    <label className="flex cursor-pointer items-center gap-2 border-b border-rule-subtle px-1 py-2 text-sm text-secondary transition duration-200 hover:bg-muted/40">
       <input
         type="checkbox"
         checked={checked}
         onChange={onChange}
-        className="h-4 w-4 rounded border-navy-300 text-accent focus:ring-accent-400"
+        className="h-3.5 w-3.5 rounded-sm border-rule text-accent focus:ring-accent"
       />
       <span className={checked ? 'font-medium text-accent' : ''}>{label}</span>
     </label>

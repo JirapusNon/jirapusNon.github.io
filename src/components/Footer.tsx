@@ -4,29 +4,36 @@ import { CONTACT, SITE_NAME } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-primary text-accent-100">
+    <footer id="contact" className="border-t border-rule bg-paper">
+      <div className="cmyk-strip" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-sm font-bold text-on-primary">
+            <span className="flex h-8 w-8 items-center justify-center border border-ink text-sm font-bold text-ink">
               R
             </span>
-            <span className="font-heading text-base font-bold text-on-primary">{SITE_NAME}</span>
+            <span className="font-heading text-base font-semibold text-ink">{SITE_NAME}</span>
           </div>
-          <p className="text-sm text-accent-200">
-            ผู้จำหน่ายหมึกปริ้นเตอร์ครบทุกยี่ห้อ หมึกแท้ หมึกเทียบเท่า หมึกเติม และโทนเนอร์
-            สต็อกพร้อมส่ง จัดส่งรวดเร็วทั่วประเทศ
+          <p className="text-sm leading-relaxed text-graphite">
+            หมึกและอุปกรณ์สำนักงานครบทุกยี่ห้อ สต็อกพร้อมส่ง
+            ช่วย SME หา ink ตรงรุ่นเครื่องพิมพ์ได้เร็ว
           </p>
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-on-primary">ยี่ห้อเครื่องพิมพ์</h3>
-          <ul className="space-y-2 text-sm text-accent-200">
+          <h3 className="spec-label mb-3">ยี่ห้อเครื่องพิมพ์</h3>
+          <ul className="space-y-2 text-sm text-graphite">
             {brands.map((brand) => (
               <li key={brand}>
                 <Link
                   href={`/products?brand=${encodeURIComponent(brand)}`}
-                  className="cursor-pointer transition duration-200 hover:text-accent-300"
+                  className="cursor-pointer underline-offset-2 transition duration-200 hover:text-accent hover:underline"
                 >
                   หมึก {brand}
                 </Link>
@@ -36,13 +43,13 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-on-primary">ประเภทหมึก</h3>
-          <ul className="space-y-2 text-sm text-accent-200">
+          <h3 className="spec-label mb-3">ประเภทหมึก</h3>
+          <ul className="space-y-2 text-sm text-graphite">
             {inkTypes.map((type) => (
               <li key={type}>
                 <Link
                   href={`/products?type=${encodeURIComponent(type)}`}
-                  className="cursor-pointer transition duration-200 hover:text-accent-300"
+                  className="cursor-pointer underline-offset-2 transition duration-200 hover:text-accent hover:underline"
                 >
                   {type}
                 </Link>
@@ -52,11 +59,14 @@ export default function Footer() {
         </div>
 
         <div id="about">
-          <h3 className="mb-3 text-sm font-semibold text-on-primary">ติดต่อเรา</h3>
-          <ul className="space-y-2 text-sm text-accent-200">
+          <h3 className="spec-label mb-3">ติดต่อเรา</h3>
+          <ul className="space-y-2 text-sm text-graphite">
             <li>
               โทร:{" "}
-              <a href={CONTACT.phoneHref} className="cursor-pointer transition duration-200 hover:text-accent-300">
+              <a
+                href={CONTACT.phoneHref}
+                className="cursor-pointer underline-offset-2 transition duration-200 hover:text-accent hover:underline"
+              >
                 {CONTACT.phone}
               </a>
             </li>
@@ -66,7 +76,7 @@ export default function Footer() {
                 href={CONTACT.lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer transition duration-200 hover:text-accent-300"
+                className="cursor-pointer underline-offset-2 transition duration-200 hover:text-accent hover:underline"
               >
                 {CONTACT.lineId}
               </a>
@@ -78,7 +88,7 @@ export default function Footer() {
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-line text-xs font-bold text-white"
+              className="flex h-9 items-center justify-center border border-line px-3 text-xs font-medium text-line transition duration-200 hover:bg-line hover:text-white"
               aria-label="LINE"
             >
               LINE
@@ -87,7 +97,7 @@ export default function Footer() {
               href={CONTACT.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#1877F2] text-xs font-bold text-white"
+              className="flex h-9 items-center justify-center border border-graphite/30 px-3 text-xs font-medium text-graphite transition duration-200 hover:border-graphite hover:text-ink"
               aria-label="Facebook"
             >
               FB
@@ -96,7 +106,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-4 text-center text-xs text-accent-200/70">
+      <div className="border-t border-rule py-4 text-center text-xs text-graphite">
         © {new Date().getFullYear()} {SITE_NAME} สงวนลิขสิทธิ์
       </div>
     </footer>

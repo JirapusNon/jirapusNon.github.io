@@ -32,13 +32,15 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-card/90 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-40 bg-ink text-paper">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-base font-bold text-on-primary">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <span className="flex h-8 w-8 items-center justify-center border border-paper/20 text-sm font-bold text-paper">
             R
           </span>
-          <span className="font-heading text-lg font-bold text-primary">{SITE_NAME}</span>
+          <span className="font-heading text-base font-semibold tracking-tight text-paper sm:text-lg">
+            {SITE_NAME}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
@@ -46,7 +48,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="cursor-pointer text-sm font-medium text-secondary transition duration-200 hover:text-accent"
+              className="cursor-pointer text-sm text-paper/80 underline-offset-4 transition duration-200 hover:text-paper hover:underline"
             >
               {link.label}
             </Link>
@@ -57,10 +59,10 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            className="flex w-full max-w-md cursor-pointer items-center gap-2 rounded-lg bg-muted/70 px-4 py-2 text-left text-sm text-muted-foreground shadow-xs transition duration-200 hover:bg-muted"
+            className="flex w-full max-w-md cursor-pointer items-center gap-2 border border-paper/15 bg-paper/5 px-4 py-2 text-left text-sm text-paper/60 transition duration-200 hover:border-paper/30 hover:bg-paper/10"
           >
             <svg
-              className="h-4 w-4"
+              className="h-4 w-4 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -73,8 +75,8 @@ export default function Header() {
                 d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
               />
             </svg>
-            <span className="flex-1">ค้นหาสินค้า...</span>
-            <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-xs">
+            <span className="flex-1">ค้นหารุ่นเครื่องพิมพ์...</span>
+            <kbd className="border border-paper/20 px-1.5 py-0.5 text-[10px] text-paper/50">
               Ctrl K
             </kbd>
           </button>
@@ -84,20 +86,20 @@ export default function Header() {
           href={CONTACT.lineUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden shrink-0 cursor-pointer items-center gap-2 rounded-full bg-line px-4 py-2 text-sm font-semibold text-white transition duration-200 hover:bg-line-hover sm:flex"
+          className="hidden shrink-0 cursor-pointer items-center gap-2 bg-line px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-line-hover sm:flex"
         >
           <LineIcon className="h-5 w-5 shrink-0" />
-          ติดต่อสั่งซื้อ
+          สั่งซื้อ LINE
         </a>
 
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
-          className="ml-auto flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-muted/70 shadow-xs lg:hidden"
+          className="ml-auto flex h-9 w-9 cursor-pointer items-center justify-center border border-paper/15 lg:hidden"
           aria-label="เปิดเมนู"
         >
           <svg
-            className="h-5 w-5 text-secondary"
+            className="h-5 w-5 text-paper"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -122,10 +124,17 @@ export default function Header() {
         </button>
       </div>
 
+      <div className="cmyk-strip" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
       {menuOpen && (
-        <div className="border-t border-border px-4 py-4 lg:hidden">
+        <div className="border-t border-paper/10 px-4 py-4 lg:hidden">
           <div className="mb-4">
-            <SearchBar />
+            <SearchBar variant="dark" />
           </div>
           <nav className="flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
@@ -133,7 +142,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="cursor-pointer text-sm font-medium text-secondary"
+                className="cursor-pointer text-sm text-paper/80"
               >
                 {link.label}
               </Link>
@@ -142,10 +151,10 @@ export default function Header() {
               href={CONTACT.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-line px-4 py-2 text-sm font-semibold text-white"
+              className="mt-2 flex cursor-pointer items-center justify-center gap-2 bg-line px-4 py-2 text-sm font-medium text-white"
             >
               <LineIcon className="h-5 w-5 shrink-0" />
-              ติดต่อสั่งซื้อ
+              สั่งซื้อ LINE
             </a>
           </nav>
         </div>
@@ -153,11 +162,11 @@ export default function Header() {
 
       {paletteOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-primary/40 px-4 pt-24"
+          className="fixed inset-0 z-50 flex items-start justify-center bg-ink/60 px-4 pt-24"
           onClick={() => setPaletteOpen(false)}
         >
           <div
-            className="w-full max-w-xl rounded-2xl bg-card p-4 shadow-xl"
+            className="w-full max-w-xl border border-rule bg-card p-4 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <CommandPaletteForm
@@ -193,7 +202,7 @@ function CommandPaletteForm({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="พิมพ์ชื่อสินค้า ยี่ห้อ หรือรุ่นเครื่องพิมพ์..."
-        className="w-full border-b border-border pb-3 text-lg outline-none placeholder:text-navy-300 focus:border-accent"
+        className="w-full border-b border-rule pb-3 text-lg outline-none placeholder:text-navy-300 focus:border-accent"
       />
       <p className="mt-3 text-xs text-muted-foreground">
         กด Enter เพื่อค้นหา หรือ Esc เพื่อปิด

@@ -5,13 +5,15 @@ import { useState, type FormEvent } from "react";
 
 interface SearchBarProps {
   size?: "default" | "large";
+  variant?: "light" | "dark";
   placeholder?: string;
   className?: string;
 }
 
 export default function SearchBar({
   size = "default",
-  placeholder = "ค้นหาหมึกปริ้นเตอร์ ยี่ห้อ หรือรุ่นเครื่องพิมพ์...",
+  variant = "light",
+  placeholder = "ค้นหารุ่นเครื่องพิมพ์ ยี่ห้อ หรือรหัสสินค้า...",
   className = "",
 }: SearchBarProps) {
   const router = useRouter();
@@ -24,17 +26,20 @@ export default function SearchBar({
   }
 
   const isLarge = size === "large";
+  const isDark = variant === "dark";
 
   return (
     <form
       onSubmit={handleSubmit}
       role="search"
-      className={`flex w-full items-center gap-2 rounded-lg bg-card shadow-sm transition duration-200 focus-within:ring-2 focus-within:ring-accent/30 ${
-        isLarge ? "p-2 pl-5 shadow-md" : "p-1.5 pl-4"
-      } ${className}`}
+      className={`flex w-full items-center gap-2 border transition duration-200 focus-within:ring-2 focus-within:ring-accent/40 ${
+        isDark
+          ? "border-paper/15 bg-paper/5 focus-within:border-paper/30"
+          : "border-rule bg-card focus-within:border-accent"
+      } ${isLarge ? "p-2 pl-4" : "p-1.5 pl-3"} ${className}`}
     >
       <svg
-        className={isLarge ? "h-6 w-6 text-muted-foreground" : "h-5 w-5 text-muted-foreground"}
+        className={`shrink-0 ${isLarge ? "h-5 w-5" : "h-4 w-4"} ${isDark ? "text-paper/50" : "text-graphite"}`}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -53,15 +58,17 @@ export default function SearchBar({
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
         aria-label="ค้นหาสินค้า"
-        className={`min-w-0 flex-1 bg-transparent outline-none placeholder:text-navy-300 ${
-          isLarge ? "py-2 text-base sm:text-lg" : "py-1.5 text-sm"
-        }`}
+        className={`min-w-0 flex-1 bg-transparent outline-none ${
+          isDark ? "text-paper placeholder:text-paper/40" : "placeholder:text-navy-300"
+        } ${isLarge ? "py-2 text-base" : "py-1.5 text-sm"}`}
       />
       <button
         type="submit"
-        className={`shrink-0 cursor-pointer rounded-full bg-accent font-medium text-on-primary transition duration-200 hover:bg-accent-hover ${
-          isLarge ? "px-6 py-3 text-base" : "px-4 py-1.5 text-sm"
-        }`}
+        className={`shrink-0 cursor-pointer font-medium transition duration-200 ${
+          isDark
+            ? "bg-paper px-4 py-1.5 text-sm text-ink hover:bg-paper/90"
+            : "bg-accent px-4 py-1.5 text-sm text-on-primary hover:bg-accent-hover"
+        } ${isLarge ? "px-5 py-2.5 text-base" : ""}`}
       >
         ค้นหา
       </button>

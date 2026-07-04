@@ -1,66 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  /* Semantic tokens — Soft UI Evolution + Trust & Authority */
-  --background: #f1f5f9;
-  --foreground: #0f172a;
+  /* Supply Catalog tokens */
+  --background: #fafaf7;
+  --foreground: #141414;
 
-  --color-primary: #0f172a;
-  --color-on-primary: #ffffff;
-  --color-secondary: #475569;
-  --color-accent: #0369a1;
-  --color-accent-hover: #0284c7;
-  --color-muted: #e8edf3;
-  --color-muted-foreground: #64748b;
+  --color-paper: #fafaf7;
+  --color-ink: #141414;
+  --color-graphite: #5c5c5c;
+  --color-rule: #e5e2dc;
+  --color-cyan-ink: #00838f;
+  --color-cyan-ink-hover: #006974;
+  --color-stock: #2e7d32;
+
+  --color-primary: #141414;
+  --color-on-primary: #fafaf7;
+  --color-secondary: #5c5c5c;
+  --color-accent: #00838f;
+  --color-accent-hover: #006974;
+  --color-muted: #f3f2ee;
+  --color-muted-foreground: #5c5c5c;
   --color-card: #ffffff;
-  --color-border: #e2e8f0;
-  --color-border-subtle: #eef2f6;
+  --color-border: #e5e2dc;
+  --color-border-subtle: #eeebe5;
   --color-destructive: #dc2626;
-  --color-ring: #0369a1;
+  --color-ring: #00838f;
 
   --color-line: #059669;
   --color-line-hover: #047857;
 
-  /* Slate scale (legacy navy-* aliases) */
-  --color-navy-50: #f8fafc;
-  --color-navy-100: #f1f5f9;
-  --color-navy-200: #e2e8f0;
-  --color-navy-300: #cbd5e1;
-  --color-navy-400: #64748b;
-  --color-navy-500: #475569;
-  --color-navy-600: #334155;
-  --color-navy-700: #1e293b;
-  --color-navy-800: #0f172a;
-  --color-navy-900: #020617;
+  /* CMYK registration colors */
+  --color-cmyk-c: #00a0c6;
+  --color-cmyk-m: #d81b60;
+  --color-cmyk-y: #f9a825;
+  --color-cmyk-k: #141414;
 
-  /* Sky scale (legacy accent-* aliases) */
-  --color-accent-50: #f0f9ff;
-  --color-accent-100: #e0f2fe;
-  --color-accent-200: #bae6fd;
-  --color-accent-300: #7dd3fc;
-  --color-accent-400: #38bdf8;
-  --color-accent-500: #0ea5e9;
-  --color-accent-600: #0369a1;
-  --color-accent-700: #0284c7;
-  --color-accent-800: #075985;
-  --color-accent-900: #0c4a6e;
+  /* Legacy aliases mapped to new palette */
+  --color-navy-50: #fafaf7;
+  --color-navy-100: #f3f2ee;
+  --color-navy-200: #e5e2dc;
+  --color-navy-300: #b8b5ae;
+  --color-navy-400: #5c5c5c;
+  --color-navy-500: #5c5c5c;
+  --color-navy-600: #3d3d3d;
+  --color-navy-700: #2a2a2a;
+  --color-navy-800: #141414;
+  --color-navy-900: #0a0a0a;
+
+  --color-accent-50: #e0f4f5;
+  --color-accent-100: #b3e5ea;
+  --color-accent-200: #80d4dc;
+  --color-accent-300: #4dc3ce;
+  --color-accent-400: #26b5c2;
+  --color-accent-500: #00838f;
+  --color-accent-600: #00838f;
+  --color-accent-700: #006974;
+  --color-accent-800: #005560;
+  --color-accent-900: #003d45;
 
   --color-line-dark: var(--color-line-hover);
 
-  --font-heading: var(--font-sarabun), "Sarabun", sans-serif;
+  --font-heading: var(--font-chakra), "Chakra Petch", sans-serif;
   --font-body: var(--font-thai), "IBM Plex Sans Thai", sans-serif;
 
-  /* Soft elevation — no hard borders */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 10px 24px rgba(15, 23, 42, 0.08), 0 4px 8px rgba(15, 23, 42, 0.04);
-  --shadow-xl: 0 20px 40px rgba(15, 23, 42, 0.1);
+  --shadow-xs: 0 1px 2px rgba(20, 20, 20, 0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 20, 20, 0.06);
+  --shadow-md: 0 2px 8px rgba(20, 20, 20, 0.06);
+  --shadow-lg: 0 4px 16px rgba(20, 20, 20, 0.08);
+  --shadow-xl: 0 8px 24px rgba(20, 20, 20, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-graphite: var(--color-graphite);
+  --color-rule: var(--color-rule);
+  --color-cyan-ink: var(--color-cyan-ink);
+  --color-cyan-ink-hover: var(--color-cyan-ink-hover);
+  --color-stock: var(--color-stock);
 
   --color-primary: var(--color-primary);
   --color-on-primary: var(--color-on-primary);
@@ -74,6 +94,11 @@
   --color-border-subtle: var(--color-border-subtle);
   --color-destructive: var(--color-destructive);
   --color-ring: var(--color-ring);
+
+  --color-cmyk-c: var(--color-cmyk-c);
+  --color-cmyk-m: var(--color-cmyk-m);
+  --color-cmyk-y: var(--color-cmyk-y);
+  --color-cmyk-k: var(--color-cmyk-k);
 
   --color-navy-50: var(--color-navy-50);
   --color-navy-100: var(--color-navy-100);
@@ -117,14 +142,55 @@ body {
   font-family: var(--font-body);
 }
 
+.cmyk-strip {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+
+.cmyk-strip > span:nth-child(1) {
+  flex: 1;
+  background: var(--color-cmyk-c);
+}
+
+.cmyk-strip > span:nth-child(2) {
+  flex: 1;
+  background: var(--color-cmyk-m);
+}
+
+.cmyk-strip > span:nth-child(3) {
+  flex: 1;
+  background: var(--color-cmyk-y);
+}
+
+.cmyk-strip > span:nth-child(4) {
+  flex: 1;
+  background: var(--color-cmyk-k);
+}
+
+.catalog-section {
+  border-top: 1px solid var(--color-rule);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.spec-label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-graphite);
+}
+
 .surface-card {
   background: var(--color-card);
-  border-radius: 0.75rem;
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-rule);
+  border-radius: 0.25rem;
 }
 
 .surface-card:hover {
-  box-shadow: var(--shadow-md);
+  border-color: var(--color-cyan-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -147,7 +213,7 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 37%, #e2e8f0 63%);
+  background: linear-gradient(90deg, #e5e2dc 25%, #f3f2ee 37%, #e5e2dc 63%);
   background-size: 800px 100%;
   animation: shimmer 1.4s linear infinite;
 }
