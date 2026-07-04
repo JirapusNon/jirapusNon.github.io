@@ -316,6 +316,134 @@ body {
   color: #ffffff;
 }
 
+.hero-section {
+  background: linear-gradient(
+    165deg,
+    var(--color-surface-muted) 0%,
+    var(--color-card) 45%,
+    color-mix(in srgb, var(--color-accent-50) 40%, var(--color-card)) 100%
+  );
+}
+
+.hero-section-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at 85% 15%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 10% 85%,
+      color-mix(in srgb, var(--color-cmyk-c) 8%, transparent),
+      transparent 70%
+    );
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content {
+  animation: hero-fade-up 500ms ease-out both;
+}
+
+.hero-bento > * {
+  animation: hero-fade-up 500ms ease-out both;
+}
+
+.hero-bento > *:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.hero-bento > *:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.hero-bento > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.hero-bento > *:nth-child(4) {
+  animation-delay: 260ms;
+}
+
+.hero-product-card {
+  transform: translateZ(0);
+}
+
+@keyframes brands-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.brands-section-header,
+.brands-section-footer {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.brands-grid .brand-logo-card {
+  opacity: 0;
+  transform: translateY(18px) scale(0.96);
+}
+
+.brands-section--visible .brands-section-header {
+  animation: brands-fade-up 480ms ease-out both;
+}
+
+.brands-section--visible .brands-section-footer {
+  animation: brands-fade-up 480ms ease-out 420ms both;
+}
+
+.brands-section--visible .brands-grid .brand-logo-card {
+  animation: brands-fade-up 420ms ease-out both;
+  animation-delay: var(--brand-delay, 0ms);
+}
+
+.trust-stat-item {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+}
+
+.trust-stats-strip {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.trust-stats-section--visible .trust-stat-item {
+  animation: brands-fade-up 440ms ease-out both;
+  animation-delay: var(--stat-delay, 0ms);
+}
+
+.trust-stats-section--visible .trust-stats-strip {
+  animation: trust-strip-expand 600ms ease-out 280ms both;
+}
+
+@keyframes trust-strip-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 .site-header-bar {
   background: linear-gradient(
     180deg,

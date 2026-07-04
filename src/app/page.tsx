@@ -1,15 +1,13 @@
-import Image from 'next/image';
+import HeroSection from '@/components/HeroSection';
 import { Suspense } from 'react';
 import Link from 'next/link';
-import BrandLogoCard from '@/components/BrandLogoCard';
+import BrandsSection from '@/components/BrandsSection';
 import ProductCarousel from '@/components/ProductCarousel';
 import ProductsClient from '@/components/ProductsClient';
 import ProductGridSkeleton from '@/components/ProductSkeleton';
 import TrustStats from '@/components/TrustStats';
 import { CONTACT } from '@/lib/constants';
-import { brands, getFeatured } from '@/lib/products';
-import { getBrandLogoStyle } from '@/lib/brandLogo';
-import LineIcon from '@/components/LineIcon';
+import { getFeatured } from '@/lib/products';
 
 export default function Home() {
   const featured = getFeatured().slice(0, 8);
@@ -17,109 +15,11 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
-          <div>
-            <p className="spec-label">หมึกและอุปกรณ์สำนักงาน</p>
-            <h1 className="font-heading mt-3 text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
-              หมึกตรงรุ่น
-              <br />
-              สั่งง่าย ส่งไว
-            </h1>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-graphite sm:text-base">
-              ช่วย SME หาหมึกและอุปกรณ์ที่ตรงกับเครื่องพิมพ์ของคุณ
-              สต็อกพร้อมส่ง ส่งฟรีเมื่อสั่งครบ 1,000 บาท
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="#catalog" className="btn btn-primary">
-                ดูแคตตาล็อก
-              </Link>
-              <a
-                href={CONTACT.lineUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-line-solid shrink-0"
-              >
-                <LineIcon className="h-5 w-5 shrink-0" />
-                สั่งซื้อ LINE
-              </a>
-            </div>
-
-            <p className="mt-6 text-xs text-muted-foreground sm:text-sm">
-              ส่งฟรีทั่วประเทศ · รับประกันคุณภาพ · มีสินค้าพร้อมส่ง
-            </p>
-          </div>
-
-          {heroProducts.length > 0 && (
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {heroProducts.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.slug}`}
-                  className="group relative aspect-square cursor-pointer rounded-xl border border-border bg-muted p-4 shadow-sm transition duration-200 hover:border-accent-300 hover:shadow-md"
-                >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 25vw"
-                    className="object-contain p-2 transition duration-300 group-hover:scale-[1.02]"
-                  />
-                  <span className="absolute bottom-2 left-2 rounded-md bg-card/90 px-2 py-0.5 text-[10px] font-medium text-graphite backdrop-blur-sm">
-                    {product.brand}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+      <HeroSection products={heroProducts} />
 
       <TrustStats />
 
-      <section
-        id="brands"
-        className="catalog-section scroll-mt-20 bg-background"
-      >
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <p className="spec-label">แบรนด์ที่จำหน่าย</p>
-          <h2 className="font-heading mt-2 text-xl font-semibold text-ink sm:text-2xl">
-            ยี่ห้อเครื่องพิมพ์ที่เรารองรับ
-          </h2>
-          <p className="mt-2 max-w-lg text-sm text-graphite">
-            ครอบคลุมเครื่องพิมพ์ทุกยี่ห้อดังในไทย ทั้งหมึกแท้และเทียบเท่า
-          </p>
-
-          <div className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3">
-            {brands.map((brand) => {
-              const logo = getBrandLogoStyle(brand);
-              return (
-                <BrandLogoCard
-                  key={brand}
-                  href={`/?brand=${encodeURIComponent(brand)}#catalog`}
-                  label={brand}
-                  logoSrc={logo.image}
-                  monogram={logo.monogram}
-                  monogramBg={logo.bg}
-                />
-              );
-            })}
-          </div>
-
-          <p className="mt-8 text-sm text-graphite">
-            ไม่พบแบรนด์ที่ต้องการ?{' '}
-            <a
-              href={CONTACT.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer font-medium text-accent underline-offset-2 hover:underline"
-            >
-              ติดต่อทีมงานเพื่อสอบถาม
-            </a>
-          </p>
-        </div>
-      </section>
+      <BrandsSection />
 
       <section className="catalog-section bg-card">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
