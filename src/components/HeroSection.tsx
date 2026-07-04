@@ -23,14 +23,7 @@ const TRUST_POINTS = [
 
 export default function HeroSection() {
   return (
-    <section className="hero-section relative overflow-hidden border-b border-border">
-      <div className="cmyk-strip relative z-10" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-
+    <section className="hero-section hero-section--overlap relative overflow-hidden border-b border-border">
       <div className="hero-section-mesh" aria-hidden="true" />
       <div className="hero-section-glow" aria-hidden="true" />
 
