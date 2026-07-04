@@ -43,13 +43,13 @@ export default function HeroSection({ products }: HeroSectionProps) {
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14 lg:px-8 lg:py-24">
         <div className="hero-content">
-          <div className="hero-animate hero-animate-1 hero-eyebrow inline-flex items-center gap-2 rounded-full border border-accent-200/80 bg-card/90 px-3 py-1">
+          <div className="hero-animate hero-animate-1 hero-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
             <span className="hero-eyebrow-dot h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
             <span className="spec-label !text-accent-700">หมึกและอุปกรณ์สำนักงาน</span>
           </div>
 
           <h1 className="font-heading mt-5 text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
-            <span className="hero-animate hero-animate-2 hero-headline-accent inline-block text-accent">
+            <span className="hero-animate hero-animate-2 hero-headline-accent inline-block text-accent-600">
               หมึกตรงรุ่น
             </span>
             <br />
@@ -174,7 +174,7 @@ function HeroProductCard({
             <span className="rounded-md bg-card/90 px-2 py-0.5 text-[10px] font-medium text-graphite shadow-xs sm:text-xs">
               {product.brand}
             </span>
-            <span className="text-sm font-semibold tabular-nums text-accent sm:text-base">
+            <span className="text-sm font-semibold tabular-nums text-accent-600 sm:text-base">
               ฿{formatPrice(product.price)}
             </span>
           </div>
