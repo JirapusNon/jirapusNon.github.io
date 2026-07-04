@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="page-canvas mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <nav className="mb-4 text-xs text-graphite">
         <Link href="/" className="cursor-pointer underline-offset-2 hover:text-accent hover:underline">
           หน้าแรก

@@ -107,7 +107,7 @@ export default function FilterSidebar({
   return (
     <>
       <div className="mb-4 lg:hidden">
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-card shadow-xs">
+        <div className="surface-card flex items-center gap-1 !rounded-lg">
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
@@ -146,11 +146,11 @@ export default function FilterSidebar({
           )}
         </div>
         {mobileOpen && (
-          <div className="mt-3 rounded-lg border border-border bg-card p-4 shadow-xs">{content}</div>
+          <div className="surface-card mt-3 p-4 !rounded-lg">{content}</div>
         )}
       </div>
 
-      <aside className="sticky top-[4.5rem] hidden h-fit w-72 shrink-0 rounded-xl border border-border bg-card p-5 shadow-xs lg:block">
+      <aside className="surface-card sticky top-[4.5rem] hidden h-fit w-72 shrink-0 p-5 lg:block">
         <p className="spec-label mb-4">ดัชนีแคตตาล็อก</p>
         {content}
       </aside>

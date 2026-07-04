@@ -1,6 +1,8 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import { useState, type AnimationEvent, type CSSProperties } from "react";
 
 interface BrandLogoCardProps {
   href: string;
@@ -19,25 +21,34 @@ export default function BrandLogoCard({
   monogramBg,
   style,
 }: BrandLogoCardProps) {
+  const [revealed, setRevealed] = useState(false);
+
+  function handleAnimationEnd(event: AnimationEvent<HTMLAnchorElement>) {
+    if (event.animationName === 'brands-fade-up') {
+      setRevealed(true);
+    }
+  }
+
   return (
     <Link
       href={href}
       aria-label={`ดูสินค้า ${label}`}
       style={style}
-      className="brand-logo-card group flex aspect-[5/3] cursor-pointer items-center justify-center rounded-xl border border-border bg-card p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent-200 hover:shadow-md sm:p-6"
+      className={`brand-logo-card group${revealed ? ' brand-logo-card--revealed' : ''}`}
+      onAnimationEnd={handleAnimationEnd}
     >
-      <span className="relative h-12 w-full max-w-[140px] sm:h-14 sm:max-w-[160px] lg:h-16 lg:max-w-[180px]">
+      <span className="brand-logo-card__logo">
         {logoSrc ? (
           <Image
             src={logoSrc}
-            alt={`โลโก้ ${label}`}
+            alt=""
             fill
-            sizes="(max-width: 640px) 140px, 180px"
-            className="object-contain opacity-80 transition duration-300 group-hover:scale-105 group-hover:opacity-100"
+            sizes="(max-width: 640px) 28vw, 140px"
+            className="brand-logo-card__image object-contain"
           />
         ) : (
           <span
-            className={`mx-auto flex h-12 w-12 items-center justify-center rounded-lg text-sm font-semibold tracking-wide text-white sm:h-14 sm:w-14 sm:text-base ${monogramBg}`}
+            className={`brand-logo-card__monogram flex h-12 w-12 items-center justify-center rounded-2xl text-sm font-semibold tracking-wide text-white sm:h-14 sm:w-14 ${monogramBg}`}
           >
             {monogram}
           </span>

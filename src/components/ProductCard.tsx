@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-md">
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200/70 hover:shadow-md">
       <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
         <span />
         <span />

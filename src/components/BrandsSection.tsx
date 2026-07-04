@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import Link from 'next/link';
 import BrandLogoCard from '@/components/BrandLogoCard';
-import { CONTACT } from '@/lib/constants';
 import { brands } from '@/lib/products';
 import { getBrandLogoStyle } from '@/lib/brandLogo';
 
@@ -33,49 +31,46 @@ export default function BrandsSection() {
     <section
       ref={sectionRef}
       id="brands"
-      className={`brands-section catalog-section scroll-mt-20 bg-background ${
+      className={`brands-section catalog-section scroll-mt-20 section-surface-cyan ${
         visible ? 'brands-section--visible' : ''
       }`}
     >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="brands-section-header">
-          <p className="spec-label">แบรนด์ที่จำหน่าย</p>
-          <h2 className="font-heading mt-2 text-xl font-semibold text-ink sm:text-2xl">
+      <div className="brands-section-mesh" aria-hidden="true" />
+      <div className="brands-section-glow" aria-hidden="true" />
+
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="brands-section-header max-w-2xl">
+          <div className="brands-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
+            <span className="brands-eyebrow-dot h-1.5 w-1.5 rounded-full bg-cmyk-c" aria-hidden="true" />
+            <span className="spec-label !text-cmyk-c">แบรนด์ที่จำหน่าย</span>
+          </div>
+          <h2 className="font-heading mt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-[1.75rem]">
             ยี่ห้อเครื่องพิมพ์ที่เรารองรับ
           </h2>
-          <p className="mt-2 max-w-lg text-sm text-graphite">
-            ครอบคลุมเครื่องพิมพ์ทุกยี่ห้อดังในไทย ทั้งหมึกแท้และเทียบเท่า
+          <p className="mt-2 max-w-lg text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
+            เลือกแบรนด์เพื่อดูหมึกที่ตรงรุ่น — ครอบคลุมเครื่องพิมพ์ยอดนิยมในไทย
+            ทั้งหมึกแท้และเทียบเท่า
           </p>
         </div>
 
-        <div className="brands-grid mt-10 grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3">
-          {brands.map((brand, index) => {
-            const logo = getBrandLogoStyle(brand);
-            return (
-              <BrandLogoCard
-                key={brand}
-                href={`/?brand=${encodeURIComponent(brand)}#catalog`}
-                label={brand}
-                logoSrc={logo.image}
-                monogram={logo.monogram}
-                monogramBg={logo.bg}
-                style={{ '--brand-delay': `${index * 45}ms` } as CSSProperties}
-              />
-            );
-          })}
+        <div className="brands-showcase mt-10 lg:mt-12">
+          <div className="brands-grid">
+            {brands.map((brand, index) => {
+              const logo = getBrandLogoStyle(brand);
+              return (
+                <BrandLogoCard
+                  key={brand}
+                  href={`/?brand=${encodeURIComponent(brand)}#catalog`}
+                  label={brand}
+                  logoSrc={logo.image}
+                  monogram={logo.monogram}
+                  monogramBg={logo.bg}
+                  style={{ '--brand-delay': `${index * 40}ms` } as CSSProperties}
+                />
+              );
+            })}
+          </div>
         </div>
-
-        <p className="brands-section-footer mt-8 text-sm text-graphite">
-          ไม่พบแบรนด์ที่ต้องการ?{' '}
-          <a
-            href={CONTACT.lineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer font-medium text-accent underline-offset-2 hover:underline"
-          >
-            ติดต่อทีมงานเพื่อสอบถาม
-          </a>
-        </p>
       </div>
     </section>
   );

@@ -11,17 +11,15 @@ import { getFeatured } from '@/lib/products';
 
 export default function Home() {
   const featured = getFeatured().slice(0, 8);
-  const heroProducts = featured.slice(0, 4);
-
   return (
     <div className="flex flex-col">
-      <HeroSection products={heroProducts} />
+      <HeroSection />
 
       <TrustStats />
 
       <BrandsSection />
 
-      <section className="catalog-section bg-card">
+      <section className="catalog-section section-surface-accent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="spec-label">สินค้าแนะนำ</p>
           <h2 className="font-heading mt-2 text-xl font-semibold text-ink sm:text-2xl">
@@ -36,7 +34,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="catalog" className="catalog-section scroll-mt-20 bg-background">
+      <section id="catalog" className="catalog-section scroll-mt-20 section-surface-canvas">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
@@ -63,13 +61,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="catalog-section bg-primary">
+      <section className="catalog-section section-cta">
         <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="spec-label text-accent-300">ต้องการความช่วยเหลือ?</p>
-          <h2 className="font-heading mt-2 text-xl font-semibold text-on-primary sm:text-2xl">
+          <p className="spec-label">ต้องการความช่วยเหลือ?</p>
+          <h2 className="font-heading mt-2 text-xl font-semibold sm:text-2xl">
             บอกรุ่นเครื่องพิมพ์ เราหาให้
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-on-primary/75">
+          <p className="mx-auto mt-2 max-w-md text-sm">
             ไม่แน่ใจว่าหมึกรุ่นไหนใช้ได้? ส่งรุ่นเครื่องพิมพ์มา
             ทีมงานช่วยเช็กสต็อกและราคาให้
           </p>

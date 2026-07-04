@@ -12,6 +12,8 @@ import {
   type Brand,
 } from '@/lib/products';
 
+const SEARCH_PLACEHOLDER = 'ค้นหาสินค้า, รุ่น, แบรนด์...';
+
 const QUICK_BRANDS: Brand[] = ['HP', 'Canon', 'Epson', 'Brother'];
 
 interface HeaderSearchProps {
@@ -104,7 +106,7 @@ function SearchTrigger({
           }`}
         />
         <span className="min-w-0 flex-1 truncate">
-          ค้นหารุ่นเครื่องพิมพ์ หรือรหัสหมึก...
+          <TypewriterPlaceholder text={SEARCH_PLACEHOLDER} surface={surface} />
         </span>
         <kbd
           className={`hidden shrink-0 rounded border px-1.5 py-0.5 font-mono text-[10px] tracking-wide sm:inline ${
@@ -156,18 +158,28 @@ function InlineSearch({
         <SearchIcon
           className={`h-4 w-4 shrink-0 ${isLight ? 'text-graphite' : 'text-on-primary/40'}`}
         />
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="รุ่นเครื่องพิมพ์ หรือรหัสหมึก..."
-          aria-label="ค้นหาสินค้า"
-          className={`min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none ${
-            isLight
-              ? 'text-ink placeholder:text-navy-300'
-              : 'text-on-primary placeholder:text-on-primary/35'
-          }`}
-        />
+        <div className="relative min-w-0 flex-1">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder=""
+            aria-label="ค้นหาสินค้า"
+            className={`w-full bg-transparent py-1.5 text-sm outline-none ${
+              isLight
+                ? 'text-ink'
+                : 'text-on-primary'
+            }`}
+          />
+          {!value && (
+            <span
+              className="pointer-events-none absolute inset-y-0 left-0 flex items-center truncate"
+              aria-hidden="true"
+            >
+              <TypewriterPlaceholder text={SEARCH_PLACEHOLDER} surface={surface} />
+            </span>
+          )}
+        </div>
         <button type="submit" className="btn btn-accent shrink-0 px-3.5 py-1.5 text-sm">
           ค้นหา
         </button>
@@ -364,6 +376,72 @@ function SearchPalette({
       </div>
     </div>
   );
+}
+
+function TypewriterPlaceholder({
+  text,
+  surface,
+}: {
+  text: string;
+  surface: 'light' | 'dark';
+}) {
+  const display = useTypewriter(text);
+  const isLight = surface === 'light';
+
+  return (
+    <span
+      className={
+        isLight ? 'text-graphite group-hover:text-secondary' : 'text-on-primary/55 group-hover:text-on-primary/75'
+      }
+    >
+      {display}
+      <span className="typewriter-cursor ml-px inline-block h-[1em] w-px align-[-0.1em] bg-current" />
+    </span>
+  );
+}
+
+function useTypewriter(text: string) {
+  const [display, setDisplay] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = globalThis.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setDisplay(text);
+      setDeleting(false);
+      return;
+    }
+
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!deleting && display.length < text.length) {
+      timeout = setTimeout(
+        () => setDisplay(text.slice(0, display.length + 1)),
+        75
+      );
+    } else if (!deleting && display.length === text.length) {
+      timeout = setTimeout(() => setDeleting(true), 2200);
+    } else if (deleting && display.length > 0) {
+      timeout = setTimeout(
+        () => setDisplay(text.slice(0, display.length - 1)),
+        40
+      );
+    } else {
+      timeout = setTimeout(() => setDeleting(false), 600);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [display, deleting, reducedMotion, text]);
+
+  return display;
 }
 
 function SearchIcon({ className }: { className?: string }) {

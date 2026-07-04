@@ -20,13 +20,16 @@ export default function Header() {
     <header className="site-header sticky top-0 z-40">
       <div className="site-header-bar">
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2.5 sm:gap-4 sm:px-6 lg:px-8">
-          <Link href="/" className="site-header-logo group flex shrink-0 items-center gap-2.5">
+          <Link
+            href="/"
+            className="site-header-logo group flex shrink-0 items-center gap-2.5"
+          >
             <span className="logo-mark flex h-8 w-8 items-center justify-center rounded-md text-sm font-bold">
               R
             </span>
             <span className="flex min-w-0 flex-col leading-none">
               <span className="font-heading text-[15px] font-semibold tracking-tight text-on-primary sm:text-base">
-                {SITE_NAME.split(' ')[0]}
+                {SITE_NAME}
               </span>
               <span className="mt-0.5 hidden text-[10px] font-medium tracking-wide text-on-primary/55 sm:block">
                 หมึกและอุปกรณ์สำนักงาน
@@ -34,9 +37,16 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center lg:ml-2 lg:flex" aria-label="เมนูหลัก">
+          <nav
+            className="hidden items-center lg:ml-2 lg:flex"
+            aria-label="เมนูหลัก"
+          >
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="header-nav-link">
+              <Link
+                key={link.href}
+                href={link.href}
+                className="header-nav-link"
+              >
                 {link.label}
               </Link>
             ))}
@@ -86,7 +96,10 @@ export default function Header() {
               onNavigate={() => setMenuOpen(false)}
             />
           </div>
-          <nav className="flex flex-col border-t border-on-primary/10 pt-3" aria-label="เมนูมือถือ">
+          <nav
+            className="flex flex-col border-t border-on-primary/10 pt-3"
+            aria-label="เมนูมือถือ"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
