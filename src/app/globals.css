@@ -325,6 +325,19 @@ body {
   );
 }
 
+.hero-section-mesh {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-ink) 5%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
 .hero-section-glow {
   pointer-events: none;
   position: absolute;
@@ -340,12 +353,25 @@ body {
       color-mix(in srgb, var(--color-cmyk-c) 8%, transparent),
       transparent 70%
     );
+  animation: hero-glow-drift 10s ease-in-out infinite;
+}
+
+@keyframes hero-glow-drift {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-0.5%, 0.75%);
+  }
 }
 
 @keyframes hero-fade-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -353,29 +379,155 @@ body {
   }
 }
 
-.hero-content {
+@keyframes hero-underline-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hero-status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 35%, transparent);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.hero-animate {
+  opacity: 0;
+  animation: hero-fade-up 520ms ease-out both;
+}
+
+.hero-animate-1 { animation-delay: 0ms; }
+.hero-animate-2 { animation-delay: 70ms; }
+.hero-animate-3 { animation-delay: 160ms; }
+.hero-animate-4 { animation-delay: 240ms; }
+.hero-animate-5 { animation-delay: 320ms; }
+
+.hero-trust-item {
+  opacity: 0;
+  animation: hero-fade-up 480ms ease-out both;
+}
+
+.hero-trust-item-1 { animation-delay: 400ms; }
+.hero-trust-item-2 { animation-delay: 460ms; }
+.hero-trust-item-3 { animation-delay: 520ms; }
+
+.hero-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4375rem 0.875rem 0.4375rem 0.4375rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-xs);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.hero-trust-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-trust-chip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.hero-trust-chip__label {
+  padding-right: 0.125rem;
+}
+
+.hero-trust-chip--shipping {
+  border-color: color-mix(in srgb, var(--color-cmyk-c) 28%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-cmyk-c) 10%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-chip__icon--shipping {
+  background: var(--color-cmyk-c);
+  color: #ffffff;
+}
+
+.hero-trust-chip--warranty {
+  border-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-accent) 12%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-chip__icon--warranty {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.hero-trust-chip--stock {
+  border-color: color-mix(in srgb, var(--color-cmyk-y) 32%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-cmyk-y) 10%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-chip__icon--stock {
+  background: var(--color-cmyk-y);
+  color: #ffffff;
+}
+
+.hero-headline-accent {
+  position: relative;
+}
+
+.hero-headline-accent::after {
+  content: "";
+  position: absolute;
+  bottom: 0.08em;
+  left: 0;
+  width: 100%;
+  height: 0.11em;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: hero-underline-draw 560ms ease-out 280ms both;
+}
+
+.hero-eyebrow-dot {
+  animation: hero-status-pulse 2.4s ease-in-out infinite;
+  animation-delay: 600ms;
+}
+
+.hero-bento-item {
+  opacity: 0;
   animation: hero-fade-up 500ms ease-out both;
 }
 
-.hero-bento > * {
-  animation: hero-fade-up 500ms ease-out both;
-}
-
-.hero-bento > *:nth-child(1) {
-  animation-delay: 80ms;
-}
-
-.hero-bento > *:nth-child(2) {
-  animation-delay: 140ms;
-}
-
-.hero-bento > *:nth-child(3) {
-  animation-delay: 200ms;
-}
-
-.hero-bento > *:nth-child(4) {
-  animation-delay: 260ms;
-}
+.hero-bento-item-1 { animation-delay: 180ms; }
+.hero-bento-item-2 { animation-delay: 260ms; }
+.hero-bento-item-3 { animation-delay: 340ms; }
+.hero-bento-item-4 { animation-delay: 420ms; }
 
 .hero-product-card {
   transform: translateZ(0);
