@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-border-subtle bg-card">
+      <section className="border-b border-border bg-card">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
           <div>
             <p className="spec-label">หมึกและอุปกรณ์สำนักงาน</p>
@@ -57,7 +57,7 @@ export default function Home() {
                 <Link
                   key={product.id}
                   href={`/products/${product.slug}`}
-                  className="group relative aspect-square cursor-pointer rounded-xl border border-border bg-muted/30 p-4 shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-sm"
+                  className="group relative aspect-square cursor-pointer rounded-xl border border-border bg-muted p-4 shadow-sm transition duration-200 hover:border-accent-300 hover:shadow-md"
                 >
                   <Image
                     src={product.image}
@@ -163,12 +163,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="catalog-section border-b border-border-subtle bg-card">
+      <section className="catalog-section bg-primary">
         <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="font-heading text-xl font-semibold text-ink sm:text-2xl">
+          <p className="spec-label text-accent-300">ต้องการความช่วยเหลือ?</p>
+          <h2 className="font-heading mt-2 text-xl font-semibold text-on-primary sm:text-2xl">
             บอกรุ่นเครื่องพิมพ์ เราหาให้
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-graphite">
+          <p className="mx-auto mt-2 max-w-md text-sm text-on-primary/75">
             ไม่แน่ใจว่าหมึกรุ่นไหนใช้ได้? ส่งรุ่นเครื่องพิมพ์มา
             ทีมงานช่วยเช็กสต็อกและราคาให้
           </p>
@@ -181,7 +182,7 @@ export default function Home() {
             >
               แชท LINE
             </a>
-            <a href={CONTACT.phoneHref} className="btn btn-secondary">
+            <a href={CONTACT.phoneHref} className="btn btn-secondary-on-dark">
               โทร {CONTACT.phone}
             </a>
           </div>

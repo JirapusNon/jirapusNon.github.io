@@ -1,43 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  /* Supply Catalog — soft professional B2B palette */
-  --background: #f8fafc;
+  /*
+   * RNK — Unified slate + emerald system
+   * Canvas: slate-100 | Surface: white | Anchor: slate-900 | Accent: emerald-700
+   * CMYK strip = only multicolor brand element
+   */
+  --background: #f1f5f9;
   --foreground: #0f172a;
 
   --color-paper: #ffffff;
   --color-ink: #0f172a;
   --color-graphite: #64748b;
   --color-rule: #e2e8f0;
-  --color-cyan-ink: #0369a1;
-  --color-cyan-ink-hover: #075985;
-  --color-stock: #15803d;
+  --color-cyan-ink: #0e7490;
+  --color-cyan-ink-hover: #0c6378;
+  --color-stock: #047857;
 
   --color-primary: #0f172a;
   --color-on-primary: #ffffff;
   --color-secondary: #475569;
-  --color-accent: #0369a1;
-  --color-accent-hover: #075985;
+  --color-accent: #047857;
+  --color-accent-hover: #065f46;
   --color-muted: #f1f5f9;
   --color-muted-foreground: #64748b;
   --color-card: #ffffff;
   --color-border: #e2e8f0;
   --color-border-subtle: #f1f5f9;
   --color-destructive: #dc2626;
-  --color-ring: #0369a1;
+  --color-ring: #047857;
 
-  --color-line: #059669;
-  --color-line-hover: #047857;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+
+  --color-line: #047857;
+  --color-line-hover: #065f46;
   --color-line-soft: #ecfdf5;
   --color-line-border: #a7f3d0;
 
-  /* CMYK registration — muted for subtle brand accent */
-  --color-cmyk-c: #7dd3fc;
-  --color-cmyk-m: #f9a8d4;
-  --color-cmyk-y: #fde68a;
-  --color-cmyk-k: #94a3b8;
+  /* CMYK — registration strip & ink identity only */
+  --color-cmyk-c: #0891b2;
+  --color-cmyk-m: #db2777;
+  --color-cmyk-y: #d97706;
+  --color-cmyk-k: #0f172a;
+  /* K on dark surfaces — true black (#0f172a) vanishes on navy header/footer */
+  --color-cmyk-k-on-dark: #94a3b8;
 
-  /* Legacy aliases mapped to new palette */
   --color-navy-50: #f8fafc;
   --color-navy-100: #f1f5f9;
   --color-navy-200: #e2e8f0;
@@ -49,18 +57,24 @@
   --color-navy-800: #1e293b;
   --color-navy-900: #0f172a;
 
-  --color-accent-50: #f0f9ff;
-  --color-accent-100: #e0f2fe;
-  --color-accent-200: #bae6fd;
-  --color-accent-300: #7dd3fc;
-  --color-accent-400: #38bdf8;
-  --color-accent-500: #0ea5e9;
-  --color-accent-600: #0284c7;
-  --color-accent-700: #0369a1;
-  --color-accent-800: #075985;
-  --color-accent-900: #0c4a6e;
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;
+  --color-accent-600: #059669;
+  --color-accent-700: #047857;
+  --color-accent-800: #065f46;
+  --color-accent-900: #064e3b;
 
   --color-line-dark: var(--color-line-hover);
+
+  --color-footer-bg: #0f172a;
+  --color-footer-surface: #1e293b;
+  --color-footer-text: #e2e8f0;
+  --color-footer-muted: #94a3b8;
+  --color-footer-border: #334155;
 
   --font-heading: var(--font-thai), "IBM Plex Sans Thai", sans-serif;
   --font-body: var(--font-thai), "IBM Plex Sans Thai", sans-serif;
@@ -70,11 +84,11 @@
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
 
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
-  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.07), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.09), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
 }
 
 @theme inline {
@@ -102,10 +116,14 @@
   --color-destructive: var(--color-destructive);
   --color-ring: var(--color-ring);
 
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+
   --color-cmyk-c: var(--color-cmyk-c);
   --color-cmyk-m: var(--color-cmyk-m);
   --color-cmyk-y: var(--color-cmyk-y);
   --color-cmyk-k: var(--color-cmyk-k);
+  --color-cmyk-k-on-dark: var(--color-cmyk-k-on-dark);
 
   --color-navy-50: var(--color-navy-50);
   --color-navy-100: var(--color-navy-100);
@@ -135,6 +153,12 @@
   --color-line-border: var(--color-line-border);
   --color-line-dark: var(--color-line-hover);
 
+  --color-footer-bg: var(--color-footer-bg);
+  --color-footer-surface: var(--color-footer-surface);
+  --color-footer-text: var(--color-footer-text);
+  --color-footer-muted: var(--color-footer-muted);
+  --color-footer-border: var(--color-footer-border);
+
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
@@ -153,9 +177,8 @@ body {
 
 .cmyk-strip {
   display: flex;
-  height: 2px;
+  height: 3px;
   width: 100%;
-  opacity: 0.7;
 }
 
 .cmyk-strip > span:nth-child(1) {
@@ -178,8 +201,18 @@ body {
   background: var(--color-cmyk-k);
 }
 
+/* K plate must stay visible on navy header/footer (contrast ~5:1) */
+.site-header .cmyk-strip > span:nth-child(4),
+.bg-footer-bg .cmyk-strip > span:nth-child(4) {
+  background: var(--color-cmyk-k-on-dark);
+}
+
+.cmyk-strip-thin {
+  height: 2px;
+}
+
 .catalog-section {
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--color-border);
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
 }
@@ -187,10 +220,10 @@ body {
 .spec-label {
   font-family: var(--font-body);
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-muted-foreground);
+  color: var(--color-accent);
 }
 
 .surface-card {
@@ -206,7 +239,6 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* Reusable button styles */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -227,7 +259,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: var(--color-navy-700);
+  background: var(--color-navy-800);
 }
 
 .btn-secondary {
@@ -270,6 +302,112 @@ body {
 
 .btn-line-solid:hover {
   background: var(--color-line-hover);
+}
+
+.btn-secondary-on-dark {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.btn-secondary-on-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.site-header-bar {
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    color-mix(in srgb, var(--color-primary) 88%, var(--color-navy-800)) 100%
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--color-on-primary) 10%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-header-logo .logo-mark {
+  background: var(--color-accent);
+  color: var(--color-on-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 200ms ease;
+}
+
+.site-header-logo:hover .logo-mark {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.header-nav-link {
+  position: relative;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--color-on-primary) 72%, transparent);
+  transition: color 200ms ease;
+}
+
+.header-nav-link:hover,
+.header-nav-link:focus-visible {
+  color: var(--color-on-primary);
+  outline: none;
+}
+
+.header-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to right,
+    var(--color-cmyk-c),
+    var(--color-cmyk-m),
+    var(--color-cmyk-y),
+    var(--color-cmyk-k-on-dark)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.header-nav-link:hover::after,
+.header-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.header-mobile-panel {
+  background: var(--color-navy-800);
+  border-top: 1px solid color-mix(in srgb, var(--color-on-primary) 10%, transparent);
+}
+
+.header-mobile-link {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+  transition: color 200ms ease;
+}
+
+.header-mobile-link:hover {
+  color: var(--color-on-primary);
+}
+
+@keyframes search-palette-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-palette-panel {
+  animation: search-palette-in 220ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

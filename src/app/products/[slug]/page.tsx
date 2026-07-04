@@ -51,7 +51,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <div className="grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-border bg-muted/30 p-6 shadow-xs">
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-border bg-muted p-6 shadow-sm">
             <Image
               src={product.image}
               alt={product.name}
@@ -87,7 +87,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </span>
           </div>
 
-          <p className="mt-6 font-heading text-3xl font-semibold text-ink">฿{formatPrice(product.price)}</p>
+          <p className="mt-6 font-heading text-3xl font-semibold text-accent">฿{formatPrice(product.price)}</p>
 
           <p className="mt-4 text-sm leading-relaxed text-graphite">{product.description}</p>
 

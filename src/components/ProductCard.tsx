@@ -14,10 +14,17 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-sm">
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-md">
+      <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square w-full cursor-pointer bg-muted/40 p-5"
+        className="relative block aspect-square w-full cursor-pointer bg-muted p-5"
       >
         <Image
           src={product.image}
@@ -54,7 +61,7 @@ export default function ProductCard({ product }: { product: Product }) {
             รองรับ: {product.compatiblePrinters.slice(0, 2).join(', ')}
             {product.compatiblePrinters.length > 2 ? ' ฯลฯ' : ''}
           </p>
-          <span className="mt-2 font-heading text-base font-semibold text-ink sm:text-lg">
+          <span className="mt-2 font-heading text-base font-semibold text-accent sm:text-lg">
             ฿{formatPrice(product.price)}
           </span>
         </Link>
@@ -63,7 +70,7 @@ export default function ProductCard({ product }: { product: Product }) {
           href={`${CONTACT.lineUrl}?text=${lineMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn btn-line mt-3 w-full py-2.5"
+          className="btn btn-line-solid mt-3 w-full py-2.5"
         >
           <LineIcon className="h-4 w-4 shrink-0" />
           สอบถาม / สั่งซื้อ

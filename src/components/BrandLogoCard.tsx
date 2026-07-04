@@ -20,7 +20,7 @@ export default function BrandLogoCard({
     <Link
       href={href}
       aria-label={`ดูสินค้า ${label}`}
-      className="group flex aspect-[5/3] cursor-pointer items-center justify-center rounded-xl border border-border bg-card p-5 shadow-xs transition duration-200 hover:border-accent-200 hover:shadow-sm sm:p-6"
+      className="group flex aspect-[5/3] cursor-pointer items-center justify-center rounded-xl border border-border bg-card p-5 shadow-sm transition duration-200 hover:border-accent hover:shadow-md sm:p-6"
     >
       <span className="relative h-12 w-full max-w-[140px] sm:h-14 sm:max-w-[160px] lg:h-16 lg:max-w-[180px]">
         {logoSrc ? (
