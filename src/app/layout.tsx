@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import { IBM_Plex_Sans_Thai, Sarabun } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const bodyFont = IBM_Plex_Sans_Thai({
+  variable: "--font-thai",
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const headingFont = Sarabun({
+  variable: "--font-sarabun",
+  subsets: ["thai", "latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "RNK หมึกปริ้นเตอร์ | หมึกพิมพ์ครบทุกรุ่น ราคาคุ้มค่า",
+    template: "%s | RNK หมึกปริ้นเตอร์",
+  },
+  description:
+    "จำหน่ายหมึกปริ้นเตอร์ทุกยี่ห้อ Epson, Canon, HP, Brother ทั้งหมึกแท้ หมึกเทียบเท่า หมึกเติม และโทนเนอร์ สต็อกพร้อมส่ง จัดส่งรวดเร็ว รับประกันคุณภาพ",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="th"
+      className={`${bodyFont.variable} ${headingFont.variable} h-full scroll-smooth antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
