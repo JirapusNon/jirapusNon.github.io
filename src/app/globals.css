@@ -246,6 +246,100 @@ body {
   padding-bottom: 3.5rem;
 }
 
+.section-intro {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-intro > p {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.section-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.section-kicker__line {
+  width: 3rem;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--section-kicker-line) 50%,
+    var(--section-kicker-line)
+  );
+}
+
+.section-kicker__line:last-child {
+  background: linear-gradient(
+    to left,
+    transparent,
+    var(--section-kicker-line) 50%,
+    var(--section-kicker-line)
+  );
+}
+
+.section-kicker__label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4375rem;
+}
+
+.section-kicker__text {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--section-kicker-text);
+}
+
+.section-kicker__mark {
+  width: 1.75rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--section-kicker-accent);
+}
+
+.section-kicker--cyan {
+  --section-kicker-text: color-mix(in srgb, var(--color-cmyk-c) 82%, var(--color-ink));
+  --section-kicker-accent: color-mix(in srgb, var(--color-cmyk-c) 72%, var(--color-ink));
+  --section-kicker-line: color-mix(in srgb, var(--color-border) 88%, var(--color-cmyk-c));
+}
+
+.section-kicker--accent {
+  --section-kicker-text: var(--color-accent-700);
+  --section-kicker-accent: var(--color-accent);
+  --section-kicker-line: color-mix(in srgb, var(--color-border) 88%, var(--color-accent));
+}
+
+@media (max-width: 639px) {
+  .section-kicker {
+    gap: 0.75rem;
+  }
+
+  .section-kicker__line {
+    width: 2rem;
+  }
+
+  .section-kicker__text {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .section-kicker__mark {
+    width: 1.5rem;
+  }
+}
+
 /* Section surfaces — CMYK rhythm, neutral base (not header/footer) */
 .section-surface-light {
   background: var(--color-card);
@@ -1844,25 +1938,6 @@ body {
     );
 }
 
-.brands-eyebrow {
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
-  border-color: color-mix(
-    in srgb,
-    var(--color-cmyk-c) 35%,
-    var(--color-border)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-card) 88%,
-    var(--color-cmyk-c-soft)
-  ) !important;
-}
-
-.brands-eyebrow-dot {
-  animation: hero-status-pulse 2.4s ease-in-out infinite;
-}
-
 .brands-showcase {
   position: relative;
 }
@@ -2059,26 +2134,6 @@ body {
     );
 }
 
-.featured-eyebrow {
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-color: color-mix(
-    in srgb,
-    var(--color-accent-200) 55%,
-    var(--color-border)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-card) 88%,
-    var(--color-accent-soft)
-  ) !important;
-}
-
-.featured-eyebrow-dot {
-  animation: hero-status-pulse 2.4s ease-in-out infinite;
-}
-
 .featured-section-header {
   opacity: 0;
   transform: translateY(14px);
@@ -2250,26 +2305,6 @@ body {
       color-mix(in srgb, var(--color-accent) 10%, transparent),
       transparent 70%
     );
-}
-
-.catalog-eyebrow {
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-color: color-mix(
-    in srgb,
-    var(--color-cmyk-c) 35%,
-    var(--color-border)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-card) 88%,
-    var(--color-cmyk-c-soft)
-  ) !important;
-}
-
-.catalog-eyebrow-dot {
-  animation: hero-status-pulse 2.4s ease-in-out infinite;
 }
 
 .catalog-block-header {

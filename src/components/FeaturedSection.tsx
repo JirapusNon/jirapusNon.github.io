@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ProductCarousel from '@/components/ProductCarousel';
+import SectionKicker from '@/components/SectionKicker';
 import type { Product } from '@/lib/products';
 
 interface FeaturedSectionProps {
@@ -44,18 +45,12 @@ export default function FeaturedSection({ products }: FeaturedSectionProps) {
       <div className="featured-section-glow" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="featured-section-header max-w-2xl">
-          <div className="featured-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
-            <span
-              className="featured-eyebrow-dot h-1.5 w-1.5 rounded-full bg-accent"
-              aria-hidden="true"
-            />
-            <span className="spec-label !text-accent-700">สินค้าแนะนำ</span>
-          </div>
+        <div className="featured-section-header section-intro">
+          <SectionKicker variant="accent">สินค้าแนะนำ</SectionKicker>
           <h2 className="font-heading mt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-[1.75rem]">
             รุ่นที่ SME สั่งบ่อย
           </h2>
-          <p className="mt-2 max-w-lg text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
+          <p className="mt-2 text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
             หมึกและอุปกรณ์ที่ลูกค้าเลือกซื้อมากที่สุด — สต็อกพร้อมส่ง
             สั่งซ้ำได้ทันที
           </p>

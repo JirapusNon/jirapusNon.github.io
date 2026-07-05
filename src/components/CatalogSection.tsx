@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import SectionKicker from '@/components/SectionKicker';
 
 interface CatalogSectionProps {
   children: ReactNode;
@@ -40,18 +41,12 @@ export default function CatalogSection({ children }: CatalogSectionProps) {
       <div className="catalog-block-glow" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="catalog-block-header max-w-2xl">
-          <div className="catalog-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
-            <span
-              className="catalog-eyebrow-dot h-1.5 w-1.5 rounded-full bg-cmyk-c"
-              aria-hidden="true"
-            />
-            <span className="spec-label !text-cmyk-c">แคตตาล็อก</span>
-          </div>
+        <div className="catalog-block-header section-intro">
+          <SectionKicker variant="cyan">แคตตาล็อก</SectionKicker>
           <h2 className="font-heading mt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-[1.75rem]">
             เลือกหมึกตรงรุ่นเครื่องพิมพ์
           </h2>
-          <p className="mt-2 max-w-lg text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
+          <p className="mt-2 text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
             ค้นหาด้วยรุ่นเครื่องพิมพ์ ยี่ห้อ หรือรหัสสินค้า — กรองและสั่งซื้อได้ทันที
           </p>
         </div>
