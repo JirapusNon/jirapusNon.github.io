@@ -14,8 +14,6 @@ export default function Home() {
     <div className="flex flex-col">
       <HeroSection />
 
-      <TrustStats />
-
       <BrandsSection />
 
       <FeaturedSection products={featured} />
@@ -25,6 +23,8 @@ export default function Home() {
           <ProductsClient />
         </Suspense>
       </CatalogSection>
+
+      <TrustStats />
     </div>
   );
 }

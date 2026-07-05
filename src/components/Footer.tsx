@@ -175,16 +175,24 @@ export default function Footer() {
             © {new Date().getFullYear()} {SITE_NAME} | All rights reserved.
           </p>
 
-          <p className="site-footer__tax-id">
-            <span>เลขประจำตัวผู้เสียภาษี: {BUSINESS.taxId}</span>
+          <div
+            className="site-footer__legal-trust"
+            aria-label="ข้อมูลนิติบุคคลและการจดทะเบียน"
+          >
+            <p className="site-footer__tax-id">
+              <span className="site-footer__tax-label">
+                เลขประจำตัวผู้เสียภาษี
+              </span>
+              <span className="site-footer__tax-number">{BUSINESS.taxId}</span>
+            </p>
             <Image
               src="/ink-images/dbd.png"
               alt="จดทะเบียนพาณิชย์อิเล็กทรอนิกส์กับกรมพัฒนาธุรกิจการค้า"
-              width={104}
-              height={50}
+              width={125}
+              height={60}
               className="site-footer__tax-badge"
             />
-          </p>
+          </div>
         </div>
       </div>
     </footer>

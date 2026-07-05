@@ -49,25 +49,27 @@ export default function HeroSection() {
             รับประกันคุณภาพ
           </p>
 
-          <div className="hero-animate hero-animate-5 mt-8 flex flex-wrap gap-3">
-            <Link
-              href="#catalog"
-              className="btn btn-primary px-6 shadow-sm hover:shadow-md"
-            >
-              ดูแคตตาล็อก
-            </Link>
-            <a
-              href={CONTACT.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
-            >
-              <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อผ่าน LINE
-            </a>
+          <div className="hero-animate hero-animate-5 mt-8">
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="#catalog"
+                className="btn btn-primary px-6 shadow-sm hover:shadow-md"
+              >
+                ดูแคตตาล็อก
+              </Link>
+              <a
+                href={CONTACT.lineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
+              >
+                <LineIcon className="h-5 w-5 shrink-0" />
+                สั่งซื้อผ่าน LINE
+              </a>
+            </div>
           </div>
 
-          <ul className="hero-trust-list mt-8 flex flex-wrap gap-2.5 sm:gap-3">
+          <ul className="hero-trust-list mt-6 flex flex-wrap gap-2.5 sm:gap-3">
             {TRUST_POINTS.map((point, index) => (
               <li
                 key={point.label}
@@ -163,6 +165,25 @@ function StockIcon({ className }: { className?: string }) {
         strokeLinejoin="round"
         strokeWidth={2}
         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.75}
+        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
       />
     </svg>
   );

@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderSearch from './HeaderSearch';
-import LineIcon from './LineIcon';
-import { CONTACT, SITE_NAME } from '@/lib/constants';
+import HeaderContactMenu from './HeaderContactMenu';
+import { SITE_NAME } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/products', label: 'สินค้า' },
@@ -56,7 +56,7 @@ export default function Header() {
             href="/"
             className="site-header-logo group flex shrink-0 items-center gap-2.5"
           >
-            <span className="logo-mark flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold">
+            <span className="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--color-accent-600)_0%,var(--color-cmyk-c)_100%)] text-sm font-bold text-on-primary">
               R
             </span>
             <span className="flex min-w-0 flex-col leading-none">
@@ -64,7 +64,7 @@ export default function Header() {
                 {SITE_NAME}
               </span>
               <span className="mt-0.5 hidden text-[10px] font-medium tracking-wide text-graphite sm:block">
-                หมึกและอุปกรณ์สำนักงาน
+                ผู้แทนจำหน่ายหมึกพิมพ์
               </span>
             </span>
           </Link>
@@ -89,15 +89,9 @@ export default function Header() {
           </div>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            <a
-              href={CONTACT.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-line-solid hidden shrink-0 shadow-sm hover:shadow-md sm:flex"
-            >
-              <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อผ่าน LINE
-            </a>
+            <div className="hidden shrink-0 sm:block">
+              <HeaderContactMenu />
+            </div>
 
             <button
               type="button"
@@ -133,15 +127,7 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <a
-            href={CONTACT.lineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-line-solid mt-4 w-full shadow-sm"
-          >
-            <LineIcon className="h-5 w-5 shrink-0" />
-            สั่งซื้อผ่าน LINE
-          </a>
+          <HeaderContactMenu mode="list" onNavigate={() => setMenuOpen(false)} />
         </div>
       )}
     </header>
