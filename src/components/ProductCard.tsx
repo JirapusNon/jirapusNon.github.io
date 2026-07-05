@@ -25,23 +25,25 @@ export default function ProductCard({
         featured ? ' product-card--featured' : ''
       }`}
     >
-      <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
+      {featured && (
+        <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      )}
 
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square w-full cursor-pointer bg-muted p-5"
+        className="product-card__media relative block aspect-square w-full cursor-pointer bg-muted p-5"
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-contain p-2 transition duration-300 group-hover:scale-[1.02]"
+          className="product-card__image object-contain p-2"
         />
         <div className="absolute left-3 top-3 flex flex-col gap-1">
           <span
@@ -57,19 +59,19 @@ export default function ProductCard({
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col border-t border-border-subtle p-4">
+      <div className="product-card__body flex flex-1 flex-col border-t border-border-subtle p-4">
         <Link
           href={`/products/${product.slug}`}
           className="flex flex-1 cursor-pointer flex-col gap-1"
         >
-          <h3 className="line-clamp-2 text-sm font-medium text-ink sm:text-base">
+          <h3 className="product-card__title line-clamp-2 text-sm font-medium text-ink sm:text-base">
             {product.name}
           </h3>
           <p className="line-clamp-1 text-xs text-graphite">
             รองรับ: {product.compatiblePrinters.slice(0, 2).join(', ')}
             {product.compatiblePrinters.length > 2 ? ' ฯลฯ' : ''}
           </p>
-          <span className="mt-2 font-heading text-base font-semibold text-accent sm:text-lg">
+          <span className="product-card__price mt-2 font-heading text-base font-semibold text-accent sm:text-lg">
             ฿{formatPrice(product.price)}
           </span>
         </Link>

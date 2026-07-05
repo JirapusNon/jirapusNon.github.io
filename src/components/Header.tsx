@@ -10,8 +10,8 @@ import { CONTACT, SITE_NAME } from '@/lib/constants';
 const NAV_LINKS = [
   { href: '/products', label: 'สินค้า' },
   { href: '/#brands', label: 'หมวดหมู่' },
-  { href: '/#about', label: 'เกี่ยวกับเรา' },
-  { href: '/#contact', label: 'ติดต่อ' },
+  { href: '/contact#about', label: 'เกี่ยวกับเรา' },
+  { href: '/contact', label: 'ติดต่อ' },
 ];
 
 export default function Header() {
@@ -51,9 +51,6 @@ export default function Header() {
       </div>
 
       <div className="site-header-bar">
-        <div className="site-header-mesh" aria-hidden="true" />
-        <div className="site-header-glow" aria-hidden="true" />
-
         <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-4 py-2.5 sm:gap-4 sm:px-6 lg:px-8">
           <Link
             href="/"

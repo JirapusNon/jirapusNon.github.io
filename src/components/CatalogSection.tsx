@@ -33,13 +33,10 @@ export default function CatalogSection({ children }: CatalogSectionProps) {
     <section
       ref={sectionRef}
       id="catalog"
-      className={`catalog-block catalog-section scroll-mt-20 section-surface-canvas ${
+      className={`catalog-block catalog-section scroll-mt-20 section-surface-muted ${
         visible ? 'catalog-block--visible' : ''
       }`}
     >
-      <div className="catalog-block-mesh" aria-hidden="true" />
-      <div className="catalog-block-glow" aria-hidden="true" />
-
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="catalog-block-header section-intro">
           <SectionKicker variant="cyan">แคตตาล็อก</SectionKicker>

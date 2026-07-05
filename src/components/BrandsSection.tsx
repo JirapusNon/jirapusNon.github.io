@@ -32,13 +32,10 @@ export default function BrandsSection() {
     <section
       ref={sectionRef}
       id="brands"
-      className={`brands-section catalog-section scroll-mt-20 section-surface-cyan ${
+      className={`brands-section catalog-section scroll-mt-20 section-surface-muted ${
         visible ? 'brands-section--visible' : ''
       }`}
     >
-      <div className="brands-section-mesh" aria-hidden="true" />
-      <div className="brands-section-glow" aria-hidden="true" />
-
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="brands-section-header section-intro">
           <SectionKicker variant="cyan">แบรนด์ที่จำหน่าย</SectionKicker>

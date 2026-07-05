@@ -5,8 +5,10 @@ import CatalogSection from '@/components/CatalogSection';
 import FeaturedSection from '@/components/FeaturedSection';
 import ProductsClient from '@/components/ProductsClient';
 import ProductGridSkeleton from '@/components/ProductSkeleton';
+import AboutSectionHome from '@/components/AboutSectionHome';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import TrustStats from '@/components/TrustStats';
-import { CONTACT } from '@/lib/constants';
+import { BUSINESS, CONTACT } from '@/lib/constants';
 import { getFeatured } from '@/lib/products';
 
 export default function Home() {
@@ -27,6 +29,10 @@ export default function Home() {
         </Suspense>
       </CatalogSection>
 
+      <TestimonialsSection />
+
+      <AboutSectionHome />
+
       <section className="catalog-section section-cta">
         <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
           <p className="spec-label">ต้องการความช่วยเหลือ?</p>
@@ -35,7 +41,7 @@ export default function Home() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm">
             ไม่แน่ใจว่าหมึกรุ่นไหนใช้ได้? ส่งรุ่นเครื่องพิมพ์มา
-            ทีมงานช่วยเช็กสต็อกและราคาให้
+            ทีมงานช่วยเช็กสต็อกและราคาให้ — {BUSINESS.responseTime}
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { brands, inkTypes } from "@/lib/products";
-import { CONTACT, SITE_NAME } from "@/lib/constants";
+import { BUSINESS, CONTACT, SITE_NAME } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-footer-bg text-footer-text">
+    <footer className="bg-footer-bg text-footer-text">
       <div className="cmyk-strip" aria-hidden="true">
         <span />
         <span />
@@ -23,8 +23,11 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-sm leading-relaxed text-footer-muted">
-            หมึกและอุปกรณ์สำนักงานครบทุกยี่ห้อ สต็อกพร้อมส่ง
-            ช่วย SME หา ink ตรงรุ่นเครื่องพิมพ์ได้เร็ว
+            {BUSINESS.legalName} — จำหน่ายหมึกและอุปกรณ์สำนักงานครบทุกยี่ห้อ
+            สต็อกพร้อมส่งจากคลังใน{CONTACT.addressShort}
+          </p>
+          <p className="mt-3 text-xs text-footer-muted">
+            ออกใบกำกับภาษีได้ · {BUSINESS.paymentMethods.join(' · ')}
           </p>
         </div>
 
@@ -60,7 +63,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div id="contact">
           <h3 className="spec-label mb-3 text-accent-300">ติดต่อเรา</h3>
           <ul className="space-y-2 text-sm text-footer-muted">
             <li>
@@ -83,7 +86,18 @@ export default function Footer() {
                 {CONTACT.lineId}
               </a>
             </li>
+            <li>
+              อีเมล:{" "}
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="cursor-pointer text-footer-text underline-offset-2 transition duration-200 hover:text-on-primary hover:underline"
+              >
+                {CONTACT.email}
+              </a>
+            </li>
             <li>{CONTACT.address}</li>
+            <li>{BUSINESS.hours}</li>
+            <li>{BUSINESS.shippingPartners.join(' · ')}</li>
           </ul>
           <div className="mt-4 flex gap-3">
             <a
@@ -109,7 +123,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-footer-border bg-footer-surface py-4 text-center text-xs text-footer-muted">
-        © {new Date().getFullYear()} {SITE_NAME} สงวนลิขสิทธิ์
+        © {new Date().getFullYear()} {BUSINESS.legalName} · {SITE_NAME} สงวนลิขสิทธิ์
       </div>
     </footer>
   );

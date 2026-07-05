@@ -37,13 +37,10 @@ export default function FeaturedSection({ products }: FeaturedSectionProps) {
     <section
       ref={sectionRef}
       id="featured"
-      className={`featured-section catalog-section scroll-mt-20 section-surface-accent ${
+      className={`featured-section catalog-section scroll-mt-20 section-surface-light ${
         visible ? 'featured-section--visible' : ''
       }`}
     >
-      <div className="featured-section-mesh" aria-hidden="true" />
-      <div className="featured-section-glow" aria-hidden="true" />
-
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="featured-section-header section-intro">
           <SectionKicker variant="accent">สินค้าแนะนำ</SectionKicker>
