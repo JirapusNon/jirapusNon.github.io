@@ -96,7 +96,7 @@ export default function Header() {
               className="btn btn-line-solid hidden shrink-0 shadow-sm hover:shadow-md sm:flex"
             >
               <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อ LINE
+              สั่งซื้อผ่าน LINE
             </a>
 
             <button
@@ -140,7 +140,7 @@ export default function Header() {
             className="btn btn-line-solid mt-4 w-full shadow-sm"
           >
             <LineIcon className="h-5 w-5 shrink-0" />
-            สั่งซื้อ LINE
+            สั่งซื้อผ่าน LINE
           </a>
         </div>
       )}

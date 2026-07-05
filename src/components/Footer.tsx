@@ -88,17 +88,31 @@ export default function Footer() {
                 </h2>
 
                 <p className="site-footer__identity-line">
-                  <span className="site-footer__company-name">{BUSINESS.legalName}</span>
-                  <span className="site-footer__identity-sep" aria-hidden="true">
-                    ·
+                  <span className="site-footer__company-name">
+                    {BUSINESS.legalName}
                   </span>
-                  <span className="site-footer__address">{CONTACT.address}</span>
+                  <span
+                    className="site-footer__identity-sep"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="site-footer__address">
+                    ศูนย์รวมจำหน่ายหมึกพิมพ์ครบวงจร
+                  </span>
+                  <span className="site-footer__address site-footer__address--block">
+                    {CONTACT.address}
+                  </span>
                 </p>
 
-                <dl className="site-footer__channels" aria-label="ช่องทางติดต่อ">
+                <dl
+                  className="site-footer__channels"
+                  aria-label="ช่องทางติดต่อ"
+                >
                   {CONTACT_DETAILS.map((item) => (
                     <div key={item.id} className="site-footer__channel-row">
-                      <dt className="site-footer__channel-icon" aria-hidden="true">
+                      <dt
+                        className="site-footer__channel-icon"
+                        aria-hidden="true"
+                      >
                         <item.Icon className="h-4 w-4" />
                       </dt>
                       <dd>
@@ -123,7 +137,10 @@ export default function Footer() {
                 </dl>
               </div>
 
-              <aside className="site-footer__social-panel" aria-label="ติดต่อและโซเชียลมีเดีย">
+              <aside
+                className="site-footer__social-panel"
+                aria-label="ติดต่อและโซเชียลมีเดีย"
+              >
                 <p className="site-footer__social-label">ติดต่อเรา</p>
 
                 <ul className="site-footer__social">

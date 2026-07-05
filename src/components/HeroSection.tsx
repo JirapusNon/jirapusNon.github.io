@@ -33,29 +33,20 @@ export default function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="hero-content max-w-2xl">
-          <div className="hero-animate hero-animate-1 hero-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
-            <span
-              className="hero-eyebrow-dot h-1.5 w-1.5 rounded-full bg-accent"
-              aria-hidden="true"
-            />
-            <span className="spec-label !text-accent-700">
-              หมึกและอุปกรณ์สำนักงาน
-            </span>
-          </div>
-
           <h1 className="font-heading mt-5 text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
             <span className="hero-animate hero-animate-2 hero-headline-accent inline-block text-accent-600">
-              หมึกตรงรุ่น
+              จำหน่ายหมึกพิมพ์
             </span>
             <br />
             <span className="hero-animate hero-animate-3 inline-block text-navy-800">
-              สั่งง่าย ส่งไว
+              ทุกรุ่น ทุกยี่ห้อ ครบวงจร
             </span>
           </h1>
 
           <p className="hero-animate hero-animate-4 mt-5 max-w-lg text-base leading-relaxed text-secondary sm:text-lg">
-            ช่วย SME หาหมึกและอุปกรณ์ที่ตรงกับเครื่องพิมพ์ของคุณ สต็อกพร้อมส่ง
-            ส่งฟรีเมื่อสั่งครบ 1,000 บาท
+            บริษัท อาร์ เอ็น เค โปรดักส์ จำกัด ผู้แทนจำหน่ายหมึกพิมพ์
+            หมึกแท้และหมึกรีเมนู ทุกรุ่น ทุกยี่ห้อ ราคาคุ้มค่า สินค้าพร้อมส่ง
+            รับประกันคุณภาพ
           </p>
 
           <div className="hero-animate hero-animate-5 mt-8 flex flex-wrap gap-3">
@@ -72,7 +63,7 @@ export default function HeroSection() {
               className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
             >
               <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อ LINE
+              สั่งซื้อผ่าน LINE
             </a>
           </div>
 

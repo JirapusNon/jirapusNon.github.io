@@ -9,9 +9,9 @@ interface BrandLogoStyle {
 const BRAND_LOGOS: Record<Brand, BrandLogoStyle> = {
   HP: { monogram: "HP", bg: "bg-[#0096D6]", image: "/brands/hp.svg" },
   Canon: { monogram: "CN", bg: "bg-[#BF0000]", image: "/brands/canon.svg" },
-  Epson: { monogram: "EP", bg: "bg-[#003DA5]", image: "/brands/epson.svg" },
+  Epson: { monogram: "EP", bg: "bg-[#003DA5]", image: "/ink-images/epson_logo.svg" },
   Brother: { monogram: "BR", bg: "bg-[#003865]", image: "/brands/brother.svg" },
-  Samsung: { monogram: "SS", bg: "bg-[#1428A0]", image: "/brands/samsung.svg" },
+  Samsung: { monogram: "SS", bg: "bg-[#1428A0]", image: "/ink-images/samsung_logo.svg" },
   Ricoh: { monogram: "RC", bg: "bg-[#D71920]", image: "/brands/ricoh.svg" },
   "Fuji Xerox": { monogram: "FX", bg: "bg-[#E2231A]", image: "/brands/fujixerox.svg" },
   Lexmark: { monogram: "LM", bg: "bg-[#ED1C24]", image: "/brands/lexmark.svg" },

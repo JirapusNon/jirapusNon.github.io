@@ -10,8 +10,7 @@ export const CONTACT = {
   messengerUrl: 'https://m.me/rnkink',
   instagramUrl: 'https://instagram.com/rnkink',
   email: 'sales@rnkproducts.co.th',
-  address:
-    '123 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110',
+  address: '123 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110',
   addressShort: 'กรุงเทพฯ',
   mapUrl: 'https://maps.google.com/?q=RNK+Products+Bangkok',
 };
@@ -54,7 +53,7 @@ export const BUSINESS = {
 } as const;
 
 export const FOOTER = {
-  heading: 'ติดต่อสอบถามเรื่องหมึกพิมพ์ เช็คราคาสินค้าและสต็อค',
+  heading: 'ติดต่อสอบถามเรื่องหมึกพิมพ์',
   tagline:
     'บริษัท อาร์เอ็นเค โปรดักส์ จำกัด ผู้แทนจำหน่าย หมึกแท้และหมึกรีเมนูทุกรุ่น',
   lineButton: 'แชท LINE',

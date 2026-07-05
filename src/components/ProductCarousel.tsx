@@ -5,7 +5,7 @@ import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
 const COPIES = 3;
-const AUTO_PLAY_MS = 5000;
+const AUTO_PLAY_MS = 2000;
 
 function getSetWidth(el: HTMLElement): number {
   return el.scrollWidth / COPIES;
