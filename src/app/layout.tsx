@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ContactFab from "@/components/ContactFab";
 
 const bodyFont = IBM_Plex_Sans_Thai({
   variable: "--font-thai",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <ScrollToTop />
+        <ContactFab />
       </body>
     </html>
   );

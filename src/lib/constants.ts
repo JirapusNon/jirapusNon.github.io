@@ -7,6 +7,8 @@ export const CONTACT = {
   phone: '02-123-4567',
   phoneHref: 'tel:021234567',
   facebookUrl: 'https://facebook.com/rnkink',
+  messengerUrl: 'https://m.me/rnkink',
+  instagramUrl: 'https://instagram.com/rnkink',
   email: 'sales@rnkproducts.co.th',
   address:
     '123 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110',
@@ -16,6 +18,7 @@ export const CONTACT = {
 
 export const BUSINESS = {
   legalName: 'บริษัท อาร์เอ็นเค โปรดักส์ จำกัด',
+  taxId: '1102034750678',
   foundedYear: 2010,
   hours: 'จันทร์–เสาร์ 08:30–17:30',
   responseTime: 'ตอบ LINE ภายใน 30 นาที (เวลาทำการ)',
@@ -48,6 +51,24 @@ export const BUSINESS = {
   },
   paymentMethods: ['โอนธนาคาร', 'PromptPay', 'เงินสด (รับที่ร้าน)'],
   shippingPartners: ['Kerry Express', 'Flash Express', 'ไปรษณีย์ไทย'],
+} as const;
+
+export const FOOTER = {
+  heading: 'ติดต่อสอบถามเรื่องหมึกพิมพ์ เช็คราคาสินค้าและสต็อค',
+  tagline:
+    'บริษัท อาร์เอ็นเค โปรดักส์ จำกัด ผู้แทนจำหน่าย หมึกแท้และหมึกรีเมนูทุกรุ่น',
+  lineButton: 'แชท LINE',
+  contactButton: 'ข้อมูลติดต่อเพิ่มเติม',
+} as const;
+
+export const HOME_CTA = {
+  label: 'ติดต่อเรา',
+  title: 'ยินดีให้คำปรึกษา',
+  description: 'ติดต่อสอบถาม เช็คราคาสินค้าและสต็อก',
+  services: ['ให้คำปรึกษา', 'เช็คราคา', 'เช็คสต็อก'] as const,
+  lineButton: 'แชท LINE',
+  phoneButton: 'โทรสอบถาม',
+  contactButton: 'ข้อมูลติดต่อเพิ่มเติม',
 } as const;
 
 export const STORE = {
