@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
 const COPIES = 3;
+const AUTO_PLAY_MS = 5000;
 
 function getSetWidth(el: HTMLElement): number {
   return el.scrollWidth / COPIES;
@@ -57,13 +58,29 @@ function getItemStep(el: HTMLElement, productCount: number): number {
   return productCount > 0 ? setWidth / productCount : el.clientWidth;
 }
 
-export default function ProductCarousel({ products }: { products: Product[] }) {
+export default function ProductCarousel({
+  products,
+  featured = false,
+}: {
+  products: Product[];
+  featured?: boolean;
+}) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const dragMoved = useRef(false);
   const dragStartX = useRef(0);
   const dragStartScrollLeft = useRef(0);
   const animationFrame = useRef<number | null>(null);
+  const autoPlayEnabledRef = useRef(true);
+  const autoPlayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const stopAutoPlay = useCallback(() => {
+    autoPlayEnabledRef.current = false;
+    if (autoPlayTimerRef.current !== null) {
+      clearInterval(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = null;
+    }
+  }, []);
 
   const applyNormalize = useCallback((adjustDragOrigin = false) => {
     const el = scrollRef.current;
@@ -88,15 +105,47 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
     return () => window.removeEventListener("resize", init);
   }, [products]);
 
-  function scroll(direction: "left" | "right") {
-    const el = scrollRef.current;
-    if (!el) return;
-    const step = getItemStep(el, products.length);
-    const target = el.scrollLeft + (direction === "left" ? -step : step);
-    animateScrollTo(el, target, 600, animationFrame, () => applyNormalize());
+  const scroll = useCallback(
+    (direction: "left" | "right") => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const step = getItemStep(el, products.length);
+      const target = el.scrollLeft + (direction === "left" ? -step : step);
+      animateScrollTo(el, target, 600, animationFrame, () => applyNormalize());
+    },
+    [applyNormalize, products.length]
+  );
+
+  useEffect(() => {
+    if (products.length === 0) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) {
+      autoPlayEnabledRef.current = false;
+      return;
+    }
+
+    autoPlayTimerRef.current = setInterval(() => {
+      if (!autoPlayEnabledRef.current || isDragging.current) return;
+      if (animationFrame.current !== null) return;
+      scroll("right");
+    }, AUTO_PLAY_MS);
+
+    return () => {
+      if (autoPlayTimerRef.current !== null) {
+        clearInterval(autoPlayTimerRef.current);
+        autoPlayTimerRef.current = null;
+      }
+    };
+  }, [products.length, scroll]);
+
+  function handleNavClick(direction: "left" | "right") {
+    stopAutoPlay();
+    scroll(direction);
   }
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+    stopAutoPlay();
     const el = scrollRef.current;
     if (!el) return;
     if (animationFrame.current !== null) {
@@ -124,6 +173,10 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
     applyNormalize();
   }
 
+  function handleUserScroll() {
+    applyNormalize(isDragging.current);
+  }
+
   function handleClickCapture(e: React.MouseEvent<HTMLDivElement>) {
     if (dragMoved.current) {
       e.preventDefault();
@@ -135,50 +188,86 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
 
   return (
-    <div className="relative">
-      <div
-        ref={scrollRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={endDrag}
-        onMouseLeave={endDrag}
-        onClickCapture={handleClickCapture}
-        onDragStart={(e) => e.preventDefault()}
-        onScroll={() => applyNormalize(isDragging.current)}
-        className="flex cursor-grab gap-3 overflow-x-auto pb-2 active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {Array.from({ length: COPIES }, (_, copyIndex) =>
-          products.map((product) => (
-            <div
-              key={`${copyIndex}-${product.id}`}
-              className="w-[47%] shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]"
-            >
-              <ProductCard product={product} />
-            </div>
-          ))
-        )}
+    <div className={featured ? 'featured-carousel' : 'relative'}>
+      {featured ? (
+        <button
+          type="button"
+          onClick={() => handleNavClick('left')}
+          aria-label="เลื่อนดูสินค้าก่อนหน้า"
+          className="featured-carousel__nav featured-carousel__nav--prev"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+      ) : null}
+
+      <div className={featured ? 'featured-carousel__viewport' : undefined}>
+        <div
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={endDrag}
+          onMouseLeave={endDrag}
+          onClickCapture={handleClickCapture}
+          onDragStart={(e) => e.preventDefault()}
+          onTouchStart={stopAutoPlay}
+          onWheel={stopAutoPlay}
+          onScroll={handleUserScroll}
+          className={
+            featured
+              ? 'featured-carousel__track flex cursor-grab gap-3 overflow-x-auto pb-1 active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+              : 'flex cursor-grab gap-3 overflow-x-auto pb-2 active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+          }
+        >
+          {Array.from({ length: COPIES }, (_, copyIndex) =>
+            products.map((product) => (
+              <div
+                key={`${copyIndex}-${product.id}`}
+                className="w-[47%] shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]"
+              >
+                <ProductCard product={product} featured={featured} />
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => scroll("left")}
-        aria-label="เลื่อนดูสินค้าก่อนหน้า"
-        className="absolute -left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
-      >
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        onClick={() => scroll("right")}
-        aria-label="เลื่อนดูสินค้าถัดไป"
-        className="absolute -right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
-      >
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+      {featured ? (
+        <button
+          type="button"
+          onClick={() => handleNavClick('right')}
+          aria-label="เลื่อนดูสินค้าถัดไป"
+          className="featured-carousel__nav featured-carousel__nav--next"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      ) : (
+        <>
+          <button
+            type="button"
+            onClick={() => handleNavClick('left')}
+            aria-label="เลื่อนดูสินค้าก่อนหน้า"
+            className="absolute -left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('right')}
+            aria-label="เลื่อนดูสินค้าถัดไป"
+            className="absolute -right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-card p-2 text-graphite shadow-sm transition duration-200 hover:border-accent-200 hover:text-accent sm:flex"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
     </div>
   );
 }

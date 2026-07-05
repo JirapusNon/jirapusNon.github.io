@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LineIcon from '@/components/LineIcon';
-import HeroInkVisual from '@/components/HeroInkVisual';
 import { CONTACT } from '@/lib/constants';
 
 const TRUST_POINTS = [
@@ -27,8 +26,8 @@ export default function HeroSection() {
       <div className="hero-section-mesh" aria-hidden="true" />
       <div className="hero-section-glow" aria-hidden="true" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-14 lg:px-8 lg:py-24">
-        <div className="hero-content">
+      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="hero-content max-w-2xl">
           <div className="hero-animate hero-animate-1 hero-eyebrow inline-flex items-center gap-2 rounded-full border px-3 py-1">
             <span
               className="hero-eyebrow-dot h-1.5 w-1.5 rounded-full bg-accent"
@@ -92,8 +91,6 @@ export default function HeroSection() {
             ))}
           </ul>
         </div>
-
-        <HeroInkVisual />
       </div>
     </section>
   );

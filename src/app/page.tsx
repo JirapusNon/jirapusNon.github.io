@@ -1,8 +1,8 @@
 import HeroSection from '@/components/HeroSection';
 import { Suspense } from 'react';
-import Link from 'next/link';
 import BrandsSection from '@/components/BrandsSection';
-import ProductCarousel from '@/components/ProductCarousel';
+import CatalogSection from '@/components/CatalogSection';
+import FeaturedSection from '@/components/FeaturedSection';
 import ProductsClient from '@/components/ProductsClient';
 import ProductGridSkeleton from '@/components/ProductSkeleton';
 import TrustStats from '@/components/TrustStats';
@@ -19,47 +19,13 @@ export default function Home() {
 
       <BrandsSection />
 
-      <section className="catalog-section section-surface-accent">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="spec-label">สินค้าแนะนำ</p>
-          <h2 className="font-heading mt-2 text-xl font-semibold text-ink sm:text-2xl">
-            รุ่นที่ SME สั่งบ่อย
-          </h2>
-          <p className="mt-1 text-sm text-graphite">
-            หมึกและอุปกรณ์ที่ลูกค้าเลือกซื้อมากที่สุด
-          </p>
-          <div className="mt-8">
-            <ProductCarousel products={featured} />
-          </div>
-        </div>
-      </section>
+      <FeaturedSection products={featured} />
 
-      <section id="catalog" className="catalog-section scroll-mt-20 section-surface-canvas">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="spec-label">แคตตาล็อก</p>
-              <h2 className="font-heading mt-2 text-xl font-semibold text-ink sm:text-2xl">
-                เลือกหมึกตรงรุ่นเครื่องพิมพ์
-              </h2>
-              <p className="mt-1 text-sm text-graphite">
-                ค้นหาด้วยรุ่นเครื่องพิมพ์ ยี่ห้อ หรือรหัสสินค้า
-              </p>
-            </div>
-            <Link
-              href="/products"
-              className="hidden shrink-0 cursor-pointer text-sm font-medium text-accent underline-offset-2 hover:underline sm:block"
-            >
-              ดูทั้งหมด
-            </Link>
-          </div>
-          <div className="mt-8">
-            <Suspense fallback={<ProductGridSkeleton />}>
-              <ProductsClient />
-            </Suspense>
-          </div>
-        </div>
-      </section>
+      <CatalogSection>
+        <Suspense fallback={<ProductGridSkeleton />}>
+          <ProductsClient />
+        </Suspense>
+      </CatalogSection>
 
       <section className="catalog-section section-cta">
         <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">

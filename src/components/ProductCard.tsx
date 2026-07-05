@@ -6,7 +6,13 @@ import LineIcon from '@/components/LineIcon';
 import { CONTACT } from '@/lib/constants';
 import { getStockBadge, getTypeBadge } from '@/lib/theme';
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  featured = false,
+}: {
+  product: Product;
+  featured?: boolean;
+}) {
   const typeBadge = getTypeBadge(product.type);
   const stockBadge = getStockBadge(product.inStock);
   const lineMessage = encodeURIComponent(
@@ -14,7 +20,11 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition duration-200 hover:border-accent-200/70 hover:shadow-md">
+    <article
+      className={`product-card group flex flex-col overflow-hidden${
+        featured ? ' product-card--featured' : ''
+      }`}
+    >
       <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
         <span />
         <span />
@@ -48,11 +58,9 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div className="flex flex-1 flex-col border-t border-border-subtle p-4">
-        <span className="spec-label">{product.id}</span>
-
         <Link
           href={`/products/${product.slug}`}
-          className="mt-1 flex flex-1 cursor-pointer flex-col gap-1"
+          className="flex flex-1 cursor-pointer flex-col gap-1"
         >
           <h3 className="line-clamp-2 text-sm font-medium text-ink sm:text-base">
             {product.name}
