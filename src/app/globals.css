@@ -678,7 +678,7 @@ body {
 }
 
 .section-intro > p {
-  max-width: 36rem;
+  max-width: 40rem;
   margin-inline: auto;
 }
 
@@ -4993,7 +4993,8 @@ body {
 .header-contact__item-icon--line {
   background: color-mix(in srgb, var(--color-line) 10%, var(--color-card));
   color: var(--color-line);
-  border: 1px solid color-mix(in srgb, var(--color-line-border) 85%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--color-line-border) 85%, transparent);
 }
 
 .header-contact__item-icon--phone {
@@ -5003,8 +5004,10 @@ body {
     color-mix(in srgb, var(--color-navy-200) 45%, var(--color-card)) 100%
   );
   color: var(--color-navy-800);
-  border: 1px solid color-mix(in srgb, var(--color-navy-300) 75%, var(--color-border));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-on-primary) 65%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--color-navy-300) 75%, var(--color-border));
+  box-shadow: inset 0 1px 0
+    color-mix(in srgb, var(--color-on-primary) 65%, transparent);
 }
 
 .header-contact__item--phone:hover .header-contact__item-icon--phone {
@@ -5015,7 +5018,8 @@ body {
   );
   color: var(--color-on-primary);
   border-color: var(--color-navy-800);
-  box-shadow: 0 2px 6px color-mix(in srgb, var(--color-navy-900) 18%, transparent);
+  box-shadow: 0 2px 6px
+    color-mix(in srgb, var(--color-navy-900) 18%, transparent);
 }
 
 .header-contact__item-text {

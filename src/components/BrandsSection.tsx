@@ -32,19 +32,18 @@ export default function BrandsSection() {
     <section
       ref={sectionRef}
       id="brands"
-      className={`brands-section catalog-section scroll-mt-20 section-surface-muted ${
-        visible ? 'brands-section--visible' : ''
-      }`}
+      className={`brands-section catalog-section scroll-mt-20 section-surface-muted ${visible ? 'brands-section--visible' : ''
+        }`}
     >
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="brands-section-header section-intro">
-          <SectionKicker variant="cyan">แบรนด์ที่จำหน่าย</SectionKicker>
+          <SectionKicker variant="cyan">แบรนด์ชั้นนำ</SectionKicker>
           <h2 className="font-heading mt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-[1.75rem]">
-            ยี่ห้อเครื่องพิมพ์ที่เรารองรับ
+            แบรนด์สินค้าที่เราจำหน่าย
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
-            เลือกแบรนด์เพื่อดูหมึกที่ตรงรุ่น — ครอบคลุมเครื่องพิมพ์ยอดนิยมในไทย
-            ทั้งหมึกแท้และเทียบเท่า
+            เลือกแบรนด์เพื่อค้นหาหมึกที่ตรงรุ่น รองรับเครื่องพิมพ์ยอดนิยมในไทย
+            ทั้งหมึกแท้และหมึกเทียบเท่า
           </p>
         </div>
 
@@ -60,7 +59,9 @@ export default function BrandsSection() {
                   logoSrc={logo.image}
                   monogram={logo.monogram}
                   monogramBg={logo.bg}
-                  style={{ '--brand-delay': `${index * 40}ms` } as CSSProperties}
+                  style={
+                    { '--brand-delay': `${index * 40}ms` } as CSSProperties
+                  }
                 />
               );
             })}

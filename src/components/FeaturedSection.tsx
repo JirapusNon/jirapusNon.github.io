@@ -37,19 +37,18 @@ export default function FeaturedSection({ products }: FeaturedSectionProps) {
     <section
       ref={sectionRef}
       id="featured"
-      className={`featured-section catalog-section scroll-mt-20 section-surface-light ${
-        visible ? 'featured-section--visible' : ''
-      }`}
+      className={`featured-section catalog-section scroll-mt-20 section-surface-light ${visible ? 'featured-section--visible' : ''
+        }`}
     >
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="featured-section-header section-intro">
           <SectionKicker variant="accent">สินค้าแนะนำ</SectionKicker>
           <h2 className="font-heading mt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-[1.75rem]">
-            รุ่นที่ SME สั่งบ่อย
+            สินค้าขายดี การันตีคุณภาพ
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
-            หมึกและอุปกรณ์ที่ลูกค้าเลือกซื้อมากที่สุด — สต็อกพร้อมส่ง
-            สั่งซ้ำได้ทันที
+            คัดสรรหมึกและรวมรุ่นยอดฮิตที่คุ้มค่าที่สุด
+            ตอบโจทย์ทั้งใช้งานในบ้านและสำนักงาน
           </p>
         </div>
 

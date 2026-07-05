@@ -16,7 +16,13 @@ interface FilterSidebarProps {
   onReset: () => void;
 }
 
-function FilterClearButton({ count, onReset }: { count: number; onReset: () => void }) {
+function FilterClearButton({
+  count,
+  onReset,
+}: {
+  count: number;
+  onReset: () => void;
+}) {
   if (count === 0) return null;
 
   return (
@@ -68,7 +74,7 @@ export default function FilterSidebar({
 
       <FilterCollapsibleGroup
         id="filter-brands"
-        title="ยี่ห้อเครื่องพิมพ์"
+        title="แบรนด์ / ยี่ห้อเครื่องพิมพ์"
         open={brandsOpen}
         onToggle={() => setBrandsOpen((value) => !value)}
         activeCount={filters.brands.length}
@@ -86,8 +92,11 @@ export default function FilterSidebar({
       </FilterCollapsibleGroup>
 
       <div className="catalog-filter-shipping flex items-center justify-center gap-1.5 rounded-lg border border-border bg-accent-50/50 px-3 py-2 text-center text-xs text-graphite">
-        <Truck className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
-        จัดส่งฟรีทั่วประเทศ
+        <Truck
+          className="h-3.5 w-3.5 shrink-0 text-accent"
+          aria-hidden="true"
+        />
+        บริการจัดส่งฟรีทั่วประเทศ
       </div>
 
       <FilterClearButton count={activeCount} onReset={onReset} />
@@ -105,10 +114,15 @@ export default function FilterSidebar({
             aria-expanded={mobileOpen}
           >
             <span className="flex items-center gap-2.5 text-sm font-semibold text-ink">
-              <SlidersHorizontal className="h-4 w-4 shrink-0 text-cmyk-c" aria-hidden="true" />
+              <SlidersHorizontal
+                className="h-4 w-4 shrink-0 text-cmyk-c"
+                aria-hidden="true"
+              />
               ตัวกรองสินค้า
               {hasActiveFilters && (
-                <span className="catalog-filter-mobile__badge">{activeCount}</span>
+                <span className="catalog-filter-mobile__badge">
+                  {activeCount}
+                </span>
               )}
             </span>
             <svg
@@ -138,8 +152,12 @@ export default function FilterSidebar({
             <SlidersHorizontal className="h-4 w-4" />
           </div>
           <div>
-            <p className="font-heading text-sm font-semibold text-ink">ตัวกรองสินค้า</p>
-            <p className="mt-0.5 text-xs text-graphite">เลือกประเภทและยี่ห้อที่ต้องการ</p>
+            <p className="font-heading text-sm font-semibold text-ink">
+              ตัวกรองสินค้า
+            </p>
+            <p className="mt-0.5 text-xs text-graphite">
+              เลือกประเภทและยี่ห้อที่ต้องการ
+            </p>
           </div>
         </div>
         {content}
@@ -180,7 +198,10 @@ function FilterCollapsibleGroup({
             <span className="catalog-filter-group__count">{activeCount}</span>
           ) : null}
         </span>
-        <ChevronDown className="catalog-filter-group__chevron" aria-hidden="true" />
+        <ChevronDown
+          className="catalog-filter-group__chevron"
+          aria-hidden="true"
+        />
       </button>
 
       <div
@@ -210,7 +231,13 @@ function CheckboxOption({
         onChange={onChange}
         className="catalog-filter-checkbox"
       />
-      <span className={checked ? 'catalog-filter-option__label catalog-filter-option__label--checked' : 'catalog-filter-option__label'}>
+      <span
+        className={
+          checked
+            ? 'catalog-filter-option__label catalog-filter-option__label--checked'
+            : 'catalog-filter-option__label'
+        }
+      >
         {label}
       </span>
     </label>

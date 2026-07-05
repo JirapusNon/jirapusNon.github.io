@@ -55,7 +55,7 @@ export default function HeroSection() {
                 href="#catalog"
                 className="btn btn-primary px-6 shadow-sm hover:shadow-md"
               >
-                ดูแคตตาล็อก
+                ดูสินค้าทั้งหมด
               </Link>
               <a
                 href={CONTACT.lineUrl}
