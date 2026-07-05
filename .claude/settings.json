@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sf http://localhost:3000 -o /dev/null)",
+      "Bash(git checkout *)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"b2b printer ink distributor catalog professional\" --design-system -p \"RNK Products\")",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"primary secondary button hierarchy CTA gradient\" --domain ux -n 8)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"hero CTA button style outline gradient\" --domain style -n 6)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"modern soft tonal secondary button glassmorphism icon\" --domain style -n 6)"
+    ]
+  }
+}

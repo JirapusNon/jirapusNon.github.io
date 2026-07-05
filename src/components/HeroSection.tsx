@@ -1,4 +1,5 @@
-import Link from 'next/link';
+'use client';
+
 import LineIcon from '@/components/LineIcon';
 import { CONTACT } from '@/lib/constants';
 
@@ -25,13 +26,24 @@ const TRUST_POINTS = [
   },
 ] as const;
 
+function scrollToCatalog(event: React.MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  document
+    .getElementById('catalog')
+    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  if (globalThis.location.hash !== '#catalog') {
+    globalThis.history.pushState(null, '', '#catalog');
+  }
+}
+
 export default function HeroSection() {
   return (
     <section className="hero-section hero-section--overlap relative overflow-hidden border-b border-border">
       <div className="hero-section-mesh" aria-hidden="true" />
       <div className="hero-section-glow" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
         <div className="hero-content max-w-2xl">
           <h1 className="font-heading mt-5 text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
             <span className="hero-animate hero-animate-2 hero-headline-accent inline-block text-accent-600">
@@ -51,12 +63,14 @@ export default function HeroSection() {
 
           <div className="hero-animate hero-animate-5 mt-8">
             <div className="flex flex-wrap gap-3">
-              <Link
+              <a
                 href="#catalog"
-                className="btn btn-primary px-6 shadow-sm hover:shadow-md"
+                onClick={scrollToCatalog}
+                className="btn btn-tonal-navy px-6 shadow-sm hover:shadow-md"
               >
                 ดูสินค้าทั้งหมด
-              </Link>
+                <ArrowRightIcon className="btn-tonal-navy__icon h-4 w-4 shrink-0" />
+              </a>
               <a
                 href={CONTACT.lineUrl}
                 target="_blank"
@@ -165,6 +179,25 @@ function StockIcon({ className }: { className?: string }) {
         strokeLinejoin="round"
         strokeWidth={2}
         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+      />
+    </svg>
+  );
+}
+
+function ArrowRightIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.75}
+        d="M9 5l7 7-7 7"
       />
     </svg>
   );
