@@ -83,7 +83,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <ul className="hero-trust-list mt-6 flex flex-wrap gap-2.5 sm:gap-3">
+          <ul className="hero-trust-list mt-4 flex flex-wrap gap-2.5 sm:gap-3">
             {TRUST_POINTS.map((point, index) => (
               <li
                 key={point.label}

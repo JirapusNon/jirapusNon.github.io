@@ -6,7 +6,29 @@
       "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"b2b printer ink distributor catalog professional\" --design-system -p \"RNK Products\")",
       "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"primary secondary button hierarchy CTA gradient\" --domain ux -n 8)",
       "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"hero CTA button style outline gradient\" --domain style -n 6)",
-      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"modern soft tonal secondary button glassmorphism icon\" --domain style -n 6)"
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"modern soft tonal secondary button glassmorphism icon\" --domain style -n 6)",
+      "Bash(xargs -I{} sh -c 'echo \"--- {} ---\"; head -5 \"{}\"')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(npx --yes chromium-cli --help)",
+      "Bash(command -v playwright)",
+      "Bash(python3 -c \"import playwright\")",
+      "Bash(pip3 show *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(node check.js)",
+      "Bash(node measure.js)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/ -o /tmp/home.html)",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0r0kkp8._.css\")",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0r0kkp8._.css\" -o /tmp/served.css)",
+      "Bash(ps -p 57507 -o pid,ppid,command)",
+      "Bash(nohup npm run dev -- -p 3010)",
+      "Bash(echo \"started pid $!\")",
+      "Bash(curl -s \"http://localhost:3000/\" -o /tmp/home2.html)",
+      "Bash(curl -sv \"http://localhost:3000/\" -o /tmp/home2.html)",
+      "Bash(rm -f /tmp/rnk-dev-verify.log)",
+      "Bash(nohup npm run dev)",
+      "Bash(node check2.js)",
+      "Bash(node check3.js)"
     ]
   }
 }

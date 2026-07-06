@@ -82,7 +82,7 @@ export default function ProductCard({
           rel="noopener noreferrer"
           className="btn btn-line-solid mt-3 w-full py-2.5"
         >
-          <LineIcon className="h-4 w-4 shrink-0" />
+          <LineIcon className="h-3.5 w-3.5 shrink-0 md:h-4 md:w-4" />
           สอบถาม / สั่งซื้อ
         </a>
       </div>
