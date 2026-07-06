@@ -43,6 +43,15 @@ export default function HeroSection() {
       <div className="hero-section-mesh" aria-hidden="true" />
       <div className="hero-section-glow" aria-hidden="true" />
 
+      <div className="hero-shapes hidden xl:block" aria-hidden="true">
+        <span className="hero-shape hero-shape--hexagon" />
+        <span className="hero-shape hero-shape--pentagon-a" />
+        <span className="hero-shape hero-shape--pentagon-b" />
+        <span className="hero-shape hero-shape--triangle" />
+        <span className="hero-shape hero-shape--circle hero-shape--circle-a" />
+        <span className="hero-shape hero-shape--circle hero-shape--circle-b" />
+      </div>
+
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
         <div className="hero-content max-w-2xl">
           <h1 className="font-heading mt-5 text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
