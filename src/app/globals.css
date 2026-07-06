@@ -1241,22 +1241,39 @@ body {
 }
 
 @keyframes hero-shape-drift {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(5px, -12px) rotate(2.5deg) scale(1.02);
   }
   50% {
-    transform: translateY(-14px) rotate(3deg);
+    transform: translate(-6px, -18px) rotate(5deg) scale(0.98);
+  }
+  75% {
+    transform: translate(-9px, -6px) rotate(2deg) scale(1.015);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
 }
 
 @keyframes hero-shape-bob {
-  0%,
-  100% {
-    transform: translateY(0);
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
   }
-  50% {
-    transform: translateY(-10px);
+  33% {
+    transform: translate(-6px, -13px) scale(1.08);
+    opacity: 1;
+  }
+  66% {
+    transform: translate(5px, -6px) scale(0.92);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
   }
 }
 
@@ -2589,6 +2606,65 @@ body {
 
 .brands-section {
   position: relative;
+  overflow: hidden;
+}
+
+.section-flanking-shapes {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.section-flanking-shape {
+  position: absolute;
+  animation: hero-shape-drift ease-in-out infinite;
+}
+
+.section-flanking-shape--circle {
+  animation-name: hero-shape-bob;
+  border-radius: 9999px;
+}
+
+.brands-shape--triangle {
+  left: 5%;
+  top: 1.75rem;
+  width: 4rem;
+  height: 3.5rem;
+  animation-duration: 11s;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  background: color-mix(in srgb, var(--color-cmyk-c) 22%, var(--color-card));
+}
+
+.brands-shape--pentagon {
+  left: 13%;
+  top: 7rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  animation-duration: 8.5s;
+  animation-delay: 0.5s;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  background: color-mix(in srgb, var(--color-navy-400) 20%, var(--color-card));
+}
+
+.brands-shape--hexagon {
+  right: 6%;
+  top: 2.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  animation-duration: 12s;
+  animation-delay: 0.8s;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: color-mix(in srgb, var(--color-cmyk-c) 24%, var(--color-card));
+}
+
+.brands-shape--circle {
+  right: 15%;
+  top: 8rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation-duration: 6.5s;
+  animation-delay: 0.3s;
+  background: var(--color-accent-400);
 }
 
 .brands-showcase {
@@ -2761,6 +2837,54 @@ body {
 /* ── Featured products section ── */
 .featured-section {
   position: relative;
+  overflow: hidden;
+}
+
+.featured-shape--pentagon {
+  left: 6%;
+  top: 2rem;
+  width: 4.25rem;
+  height: 4.25rem;
+  animation-duration: 10s;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  background: color-mix(in srgb, var(--color-accent) 20%, var(--color-card));
+}
+
+.featured-shape--circle-a {
+  left: 16%;
+  top: 7.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  animation-duration: 6s;
+  animation-delay: 0.4s;
+  background: color-mix(in srgb, var(--color-cmyk-c) 60%, var(--color-card));
+}
+
+.featured-shape--triangle {
+  right: 5%;
+  top: 1.5rem;
+  width: 4rem;
+  height: 3.5rem;
+  animation-duration: 12.5s;
+  animation-delay: 0.7s;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  background: color-mix(in srgb, var(--color-cmyk-y) 24%, var(--color-card));
+}
+
+.featured-shape--circle-b {
+  right: 14%;
+  top: 7.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  animation-duration: 7.5s;
+  animation-delay: 0.2s;
+  background: var(--color-accent-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-flanking-shape {
+    animation: none;
+  }
 }
 
 .featured-section-header {

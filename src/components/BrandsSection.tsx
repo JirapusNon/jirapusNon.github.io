@@ -35,6 +35,16 @@ export default function BrandsSection() {
       className={`brands-section catalog-section scroll-mt-20 section-surface-muted ${visible ? 'brands-section--visible' : ''
         }`}
     >
+      <div
+        className="section-flanking-shapes hidden lg:block"
+        aria-hidden="true"
+      >
+        <span className="section-flanking-shape brands-shape--triangle" />
+        <span className="section-flanking-shape brands-shape--pentagon" />
+        <span className="section-flanking-shape brands-shape--hexagon" />
+        <span className="section-flanking-shape section-flanking-shape--circle brands-shape--circle" />
+      </div>
+
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="brands-section-header section-intro">
           <SectionKicker variant="cyan">แบรนด์ชั้นนำ</SectionKicker>
