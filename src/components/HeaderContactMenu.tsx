@@ -51,12 +51,6 @@ export default function HeaderContactMenu({
       }
     }
 
-    function onPointerDown(event: PointerEvent) {
-      if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
     const timeoutId = window.setTimeout(() => {
       document.addEventListener('keydown', onKeyDown);
       document.addEventListener('pointerdown', onPointerDown);
