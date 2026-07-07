@@ -40,16 +40,6 @@ export default function FeaturedSection({ products }: FeaturedSectionProps) {
       className={`featured-section catalog-section scroll-mt-20 section-surface-light ${visible ? 'featured-section--visible' : ''
         }`}
     >
-      <div
-        className="section-flanking-shapes hidden lg:block"
-        aria-hidden="true"
-      >
-        <span className="section-flanking-shape featured-shape--pentagon" />
-        <span className="section-flanking-shape section-flanking-shape--circle featured-shape--circle-a" />
-        <span className="section-flanking-shape featured-shape--triangle" />
-        <span className="section-flanking-shape section-flanking-shape--circle featured-shape--circle-b" />
-      </div>
-
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="featured-section-header section-intro">
           <SectionKicker variant="accent">สินค้าแนะนำ</SectionKicker>

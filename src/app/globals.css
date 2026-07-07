@@ -1183,7 +1183,7 @@ body {
   right: 8%;
   width: 11rem;
   height: 11rem;
-  animation-duration: 18s;
+  animation-duration: 11s;
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   background: color-mix(in srgb, var(--color-cmyk-c) 22%, var(--color-card));
 }
@@ -1193,7 +1193,7 @@ body {
   right: 36%;
   width: 8rem;
   height: 8rem;
-  animation-duration: 15s;
+  animation-duration: 9s;
   animation-delay: 0.6s;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   background: color-mix(in srgb, var(--color-accent) 20%, var(--color-card));
@@ -1204,7 +1204,7 @@ body {
   right: 12%;
   width: 12.5rem;
   height: 12.5rem;
-  animation-duration: 20s;
+  animation-duration: 13s;
   animation-delay: 1.1s;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   background: color-mix(in srgb, var(--color-cmyk-y) 20%, var(--color-card));
@@ -1215,7 +1215,7 @@ body {
   right: 2%;
   width: 6.5rem;
   height: 5.6rem;
-  animation-duration: 16s;
+  animation-duration: 10s;
   animation-delay: 0.3s;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
   background: color-mix(in srgb, var(--color-navy-400) 24%, var(--color-card));
@@ -1226,7 +1226,7 @@ body {
   right: 60%;
   width: 2.5rem;
   height: 2.5rem;
-  animation-duration: 13s;
+  animation-duration: 8s;
   background: color-mix(in srgb, var(--color-accent-400) 55%, var(--color-card));
 }
 
@@ -1235,7 +1235,7 @@ body {
   right: 46%;
   width: 1.5rem;
   height: 1.5rem;
-  animation-duration: 12s;
+  animation-duration: 7s;
   animation-delay: 0.9s;
   background: color-mix(in srgb, var(--color-cmyk-c) 48%, var(--color-card));
 }
@@ -1245,24 +1245,32 @@ body {
   100% {
     transform: translate(0, 0) rotate(0deg);
   }
+  25% {
+    transform: translate(-16px, -22px) rotate(-3deg);
+  }
   50% {
-    transform: translate(-5px, -14px) rotate(1.2deg);
+    transform: translate(-24px, -34px) rotate(4deg);
+  }
+  75% {
+    transform: translate(-10px, -18px) rotate(-2deg);
   }
 }
 
 @keyframes hero-shape-bob {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translate(0, 0);
   }
-  50% {
-    transform: translateY(-9px);
+  33% {
+    transform: translate(6px, -20px);
+  }
+  66% {
+    transform: translate(-6px, -30px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-shape,
-  .section-flanking-shape {
+  .hero-shape {
     animation: none !important;
   }
 }
@@ -2593,64 +2601,6 @@ body {
   overflow: hidden;
 }
 
-.section-flanking-shapes {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-}
-
-.section-flanking-shape {
-  position: absolute;
-  animation: hero-shape-drift ease-in-out infinite;
-}
-
-.section-flanking-shape--circle {
-  animation-name: hero-shape-bob;
-  border-radius: 9999px;
-}
-
-.brands-shape--triangle {
-  left: 5%;
-  top: 1.75rem;
-  width: 4rem;
-  height: 3.5rem;
-  animation-duration: 16s;
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  background: color-mix(in srgb, var(--color-cmyk-c) 22%, var(--color-card));
-}
-
-.brands-shape--pentagon {
-  left: 13%;
-  top: 7rem;
-  width: 3.25rem;
-  height: 3.25rem;
-  animation-duration: 14s;
-  animation-delay: 0.5s;
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  background: color-mix(in srgb, var(--color-accent) 20%, var(--color-card));
-}
-
-.brands-shape--hexagon {
-  right: 6%;
-  top: 2.5rem;
-  width: 4.5rem;
-  height: 4.5rem;
-  animation-duration: 18s;
-  animation-delay: 0.8s;
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-  background: color-mix(in srgb, var(--color-cmyk-y) 20%, var(--color-card));
-}
-
-.brands-shape--circle {
-  right: 15%;
-  top: 8rem;
-  width: 1.375rem;
-  height: 1.375rem;
-  animation-duration: 12s;
-  animation-delay: 0.3s;
-  background: color-mix(in srgb, var(--color-accent-400) 55%, var(--color-card));
-}
-
 .brands-showcase {
   position: relative;
 }
@@ -2822,47 +2772,6 @@ body {
 .featured-section {
   position: relative;
   overflow: hidden;
-}
-
-.featured-shape--pentagon {
-  left: 6%;
-  top: 2rem;
-  width: 4.25rem;
-  height: 4.25rem;
-  animation-duration: 16s;
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  background: color-mix(in srgb, var(--color-accent) 20%, var(--color-card));
-}
-
-.featured-shape--circle-a {
-  left: 16%;
-  top: 7.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  animation-duration: 12s;
-  animation-delay: 0.4s;
-  background: color-mix(in srgb, var(--color-cmyk-c) 48%, var(--color-card));
-}
-
-.featured-shape--triangle {
-  right: 5%;
-  top: 1.5rem;
-  width: 4rem;
-  height: 3.5rem;
-  animation-duration: 18s;
-  animation-delay: 0.7s;
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  background: color-mix(in srgb, var(--color-cmyk-y) 22%, var(--color-card));
-}
-
-.featured-shape--circle-b {
-  right: 14%;
-  top: 6.75rem;
-  width: 1.375rem;
-  height: 1.375rem;
-  animation-duration: 13s;
-  animation-delay: 0.2s;
-  background: color-mix(in srgb, var(--color-accent-400) 55%, var(--color-card));
 }
 
 .featured-section-header {
