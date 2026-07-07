@@ -70,29 +70,65 @@ export default function HeroSection() {
             รับประกันคุณภาพ
           </p>
 
-          <div className="hero-animate hero-animate-5 mt-8">
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#catalog"
-                onClick={scrollToCatalog}
-                className="btn btn-tonal-navy px-6 shadow-sm hover:shadow-md"
-              >
-                ดูสินค้าทั้งหมด
-                <ArrowRightIcon className="btn-tonal-navy__icon h-4 w-4 shrink-0" />
-              </a>
-              <a
-                href={CONTACT.lineUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
-              >
-                <LineIcon className="h-5 w-5 shrink-0" />
-                สั่งซื้อผ่าน LINE
-              </a>
-            </div>
+          {/* Desktop/tablet: CTA row right after the copy, as before */}
+          <div className="hero-animate hero-animate-5 mt-8 hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
+            <a
+              href="#catalog"
+              onClick={scrollToCatalog}
+              className="btn btn-tonal-navy px-6 shadow-sm hover:shadow-md"
+            >
+              ดูสินค้าทั้งหมด
+              <ArrowRightIcon className="btn-tonal-navy__icon h-4 w-4 shrink-0" />
+            </a>
+            <a
+              href={CONTACT.lineUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
+            >
+              <LineIcon className="h-5 w-5 shrink-0" />
+              สั่งซื้อผ่าน LINE
+            </a>
           </div>
 
-          <ul className="hero-trust-list mt-4 flex flex-wrap gap-2.5 sm:gap-3">
+          {/* Mobile: soft badge cards instead of a plain text row */}
+          <div className="hero-animate hero-animate-6 mt-8 grid grid-cols-2 gap-2 sm:hidden">
+            {TRUST_POINTS.map((point) => (
+              <div
+                key={point.label}
+                className={`hero-trust-card hero-trust-card--${point.variant}`}
+              >
+                <span className="hero-trust-card__icon">
+                  <point.Icon className="h-4 w-4" />
+                </span>
+                <span className="hero-trust-card__label">{point.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile: CTAs after the trust badges, LINE as primary */}
+          <div className="hero-animate hero-animate-7 mt-5 flex flex-col items-center gap-3 sm:hidden">
+            <a
+              href={CONTACT.lineUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-line-solid w-full justify-center px-6 shadow-sm hover:shadow-md"
+            >
+              <LineIcon className="h-5 w-5 shrink-0" />
+              สั่งซื้อผ่าน LINE
+            </a>
+            <a
+              href="#catalog"
+              onClick={scrollToCatalog}
+              className="hero-secondary-link inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-navy-700"
+            >
+              ดูสินค้าทั้งหมด
+              <ArrowRightIcon className="h-3.5 w-3.5 shrink-0" />
+            </a>
+          </div>
+
+          {/* Desktop/tablet: original chip list */}
+          <ul className="hero-trust-list mt-4 hidden flex-wrap gap-2.5 sm:flex sm:gap-3">
             {TRUST_POINTS.map((point, index) => (
               <li
                 key={point.label}

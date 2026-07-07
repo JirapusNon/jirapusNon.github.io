@@ -1426,6 +1426,118 @@ body {
   color: #ffffff;
 }
 
+.hero-animate-6 {
+  animation-delay: 380ms;
+}
+
+.hero-animate-7 {
+  animation-delay: 460ms;
+}
+
+.hero-secondary-link {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-navy-700) 35%, transparent);
+  text-underline-offset: 3px;
+  transition: color 200ms ease;
+}
+
+.hero-secondary-link:hover {
+  color: var(--color-accent-600);
+}
+
+.hero-trust-card {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  box-shadow: var(--shadow-xs);
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.hero-trust-card:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+.hero-trust-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.hero-trust-card__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.hero-trust-card--shipping {
+  border-color: color-mix(in srgb, var(--color-cmyk-c) 40%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-cmyk-c) 14%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-card--shipping .hero-trust-card__icon {
+  background: var(--color-cmyk-c);
+  color: #ffffff;
+}
+
+.hero-trust-card--warranty {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-accent) 16%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-card--warranty .hero-trust-card__icon {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.hero-trust-card--stock {
+  border-color: color-mix(in srgb, var(--color-cmyk-y) 42%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-cmyk-y) 16%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-card--stock .hero-trust-card__icon {
+  background: var(--color-cmyk-y);
+  color: #ffffff;
+}
+
+.hero-trust-card--invoice {
+  border-color: color-mix(in srgb, var(--color-navy-700) 35%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-navy-200) 45%, var(--color-card)),
+    var(--color-card)
+  );
+}
+
+.hero-trust-card--invoice .hero-trust-card__icon {
+  background: var(--color-navy-800);
+  color: #ffffff;
+}
+
 .hero-headline-accent {
   position: relative;
 }
