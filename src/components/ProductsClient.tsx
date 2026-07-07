@@ -223,6 +223,13 @@ export default function ProductsClient() {
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+      {/* Mobile/tablet: search hoisted to the top so it's the first control */}
+      <CatalogSearchField
+        query={query}
+        setQuery={setQuery}
+        wrapperClassName="catalog-search relative w-full lg:hidden"
+      />
+
       <FilterSidebar
         filters={{ brands: selectedBrands, types: selectedTypes }}
         onToggleBrand={handleToggleBrand}
@@ -267,39 +274,11 @@ export default function ProductsClient() {
               </button>
             ) : null}
           </div>
-          <div className="catalog-search relative w-full sm:max-w-xs">
-            <svg
-              className="catalog-search__icon absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-graphite"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
-              />
-            </svg>
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="ค้นหาสินค้า, รุ่น, แบรนด์..."
-              className="catalog-search__input w-full rounded-full border py-2.5 pl-10 pr-9 text-sm outline-none transition duration-200"
-            />
-            {query ? (
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                aria-label="ล้างคำค้นหา"
-                className="catalog-search__clear absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-graphite transition duration-200 hover:text-ink"
-              >
-                ✕
-              </button>
-            ) : null}
-          </div>
+          <CatalogSearchField
+            query={query}
+            setQuery={setQuery}
+            wrapperClassName="catalog-search relative hidden w-full sm:max-w-xs lg:block"
+          />
         </div>
 
         <div
@@ -330,6 +309,52 @@ export default function ProductsClient() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function CatalogSearchField({
+  query,
+  setQuery,
+  wrapperClassName,
+}: {
+  query: string;
+  setQuery: (value: string) => void;
+  wrapperClassName: string;
+}) {
+  return (
+    <div className={wrapperClassName}>
+      <svg
+        className="catalog-search__icon absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-graphite"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+        />
+      </svg>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="ค้นหาสินค้า, รุ่น, แบรนด์..."
+        className="catalog-search__input w-full rounded-full border py-2.5 pl-10 pr-9 text-sm outline-none transition duration-200"
+      />
+      {query ? (
+        <button
+          type="button"
+          onClick={() => setQuery('')}
+          aria-label="ล้างคำค้นหา"
+          className="catalog-search__clear absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-graphite transition duration-200 hover:text-ink"
+        >
+          ✕
+        </button>
+      ) : null}
     </div>
   );
 }

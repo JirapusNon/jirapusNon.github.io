@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
@@ -66,6 +66,7 @@ export default function ProductCarousel({
   featured?: boolean;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const isDragging = useRef(false);
   const dragMoved = useRef(false);
   const dragStartX = useRef(0);
@@ -92,18 +93,31 @@ export default function ProductCarousel({
     }
   }, []);
 
+  const updateActiveIndex = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el || products.length === 0) return;
+    const step = getItemStep(el, products.length);
+    if (step <= 0) return;
+    const index =
+      ((Math.round(el.scrollLeft / step) % products.length) +
+        products.length) %
+      products.length;
+    setActiveIndex(index);
+  }, [products.length]);
+
   useLayoutEffect(() => {
     const el = scrollRef.current;
     if (!el || products.length === 0) return;
 
     const init = () => {
       el.scrollLeft = getSetWidth(el);
+      updateActiveIndex();
     };
 
     init();
     window.addEventListener("resize", init);
     return () => window.removeEventListener("resize", init);
-  }, [products]);
+  }, [products, updateActiveIndex]);
 
   const scroll = useCallback(
     (direction: "left" | "right") => {
@@ -175,6 +189,7 @@ export default function ProductCarousel({
 
   function handleUserScroll() {
     applyNormalize(isDragging.current);
+    updateActiveIndex();
   }
 
   function handleClickCapture(e: React.MouseEvent<HTMLDivElement>) {
@@ -244,7 +259,20 @@ export default function ProductCarousel({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      ) : (
+      ) : null}
+
+      {featured ? (
+        <div className="featured-carousel__dots" aria-hidden="true">
+          {products.map((product, index) => (
+            <span
+              key={product.id}
+              className={`featured-carousel__dot${index === activeIndex ? ' featured-carousel__dot--active' : ''}`}
+            />
+          ))}
+        </div>
+      ) : null}
+
+      {!featured ? (
         <>
           <button
             type="button"
@@ -267,7 +295,7 @@ export default function ProductCarousel({
             </svg>
           </button>
         </>
-      )}
+      ) : null}
     </div>
   );
 }

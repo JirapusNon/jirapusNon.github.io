@@ -49,22 +49,24 @@ export default function BrandsSection() {
 
         <div className="brands-showcase mt-10 lg:mt-12">
           <div className="brands-grid">
-            {brands.map((brand, index) => {
-              const logo = getBrandLogoStyle(brand);
-              return (
-                <BrandLogoCard
-                  key={brand}
-                  href={`/?brand=${encodeURIComponent(brand)}#catalog`}
-                  label={brand}
-                  logoSrc={logo.image}
-                  monogram={logo.monogram}
-                  monogramBg={logo.bg}
-                  style={
-                    { '--brand-delay': `${index * 40}ms` } as CSSProperties
-                  }
-                />
-              );
-            })}
+            {brands
+              .filter((brand) => getBrandLogoStyle(brand).image)
+              .map((brand, index) => {
+                const logo = getBrandLogoStyle(brand);
+                return (
+                  <BrandLogoCard
+                    key={brand}
+                    href={`/?brand=${encodeURIComponent(brand)}#catalog`}
+                    label={brand}
+                    logoSrc={logo.image}
+                    monogram={logo.monogram}
+                    monogramBg={logo.bg}
+                    style={
+                      { '--brand-delay': `${index * 40}ms` } as CSSProperties
+                    }
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

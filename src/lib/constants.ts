@@ -19,7 +19,7 @@ export const BUSINESS = {
   legalName: 'บริษัท อาร์เอ็นเค โปรดักส์ จำกัด',
   taxId: '1102034750678',
   foundedYear: 2010,
-  hours: 'จันทร์–เสาร์ 08:30–17:30',
+  hours: 'จ. - ศ. 08:00 - 18:00',
   responseTime: 'ตอบ LINE ภายใน 30 นาที (เวลาทำการ)',
   aboutImage: '/products/photos/cannon2.jpg',
   storeImage: '/ink-images/store.jpeg',
