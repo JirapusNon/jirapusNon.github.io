@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Thai } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +10,12 @@ const bodyFont = IBM_Plex_Sans_Thai({
   variable: "--font-thai",
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const dataFont = IBM_Plex_Mono({
+  variable: "--font-data",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${bodyFont.variable} h-full scroll-smooth antialiased`}
+      className={`${bodyFont.variable} ${dataFont.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Header />

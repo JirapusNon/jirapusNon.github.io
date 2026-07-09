@@ -69,10 +69,7 @@ export default function TrustBadges() {
       {TRUST_SERVICES.map((service) => {
         const Icon = ICONS[service.id];
         return (
-          <li
-            key={service.id}
-            className={`trust-badge trust-badge--${service.tone}`}
-          >
+          <li key={service.id} className={`trust-badge trust-badge--${service.tone}`}>
             <span className={`trust-badge__icon trust-badge__icon--${service.tone}`}>
               <Icon className="h-5 w-5" />
             </span>

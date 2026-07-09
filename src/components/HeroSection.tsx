@@ -70,8 +70,29 @@ export default function HeroSection() {
             รับประกันคุณภาพ
           </p>
 
-          {/* Desktop/tablet: CTA row right after the copy, as before */}
-          <div className="hero-animate hero-animate-5 mt-8 hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
+          {/* Desktop/tablet: trust chips above the CTA row */}
+          <ul className="hero-trust-list mt-8 hidden flex-wrap gap-2.5 sm:flex sm:gap-3">
+            {TRUST_POINTS.map((point, index) => (
+              <li
+                key={point.label}
+                className={`hero-animate hero-trust-item hero-trust-item-${index + 1}`}
+              >
+                <span
+                  className={`hero-trust-chip hero-trust-chip--${point.variant}`}
+                >
+                  <span
+                    className={`hero-trust-chip__icon hero-trust-chip__icon--${point.variant}`}
+                  >
+                    <point.Icon className="h-4 w-4" />
+                  </span>
+                  <span className="hero-trust-chip__label">{point.label}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Desktop/tablet: CTA row below the trust chips */}
+          <div className="hero-animate hero-animate-5 mt-4 hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
             <a
               href="#catalog"
               onClick={scrollToCatalog}
@@ -126,27 +147,6 @@ export default function HeroSection() {
               <ArrowRightIcon className="h-3.5 w-3.5 shrink-0" />
             </a>
           </div>
-
-          {/* Desktop/tablet: original chip list */}
-          <ul className="hero-trust-list mt-4 hidden flex-wrap gap-2.5 sm:flex sm:gap-3">
-            {TRUST_POINTS.map((point, index) => (
-              <li
-                key={point.label}
-                className={`hero-animate hero-trust-item hero-trust-item-${index + 1}`}
-              >
-                <span
-                  className={`hero-trust-chip hero-trust-chip--${point.variant}`}
-                >
-                  <span
-                    className={`hero-trust-chip__icon hero-trust-chip__icon--${point.variant}`}
-                  >
-                    <point.Icon className="h-4 w-4" />
-                  </span>
-                  <span className="hero-trust-chip__label">{point.label}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
