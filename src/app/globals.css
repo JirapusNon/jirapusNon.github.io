@@ -3933,10 +3933,6 @@ body {
   animation-delay: 180ms;
 }
 
-.about-section--visible .contact-reveal--4 {
-  animation-delay: 270ms;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .contact-reveal {
     opacity: 1;
@@ -4775,95 +4771,11 @@ body {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   box-shadow: var(--shadow-md);
+  transition: transform 300ms ease;
 }
 
-.contact-hero-photo__caption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
-  background: color-mix(in srgb, var(--color-card) 92%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.contact-hero-photo__caption-label {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent-700);
-}
-
-.contact-hero-photo__caption-text {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--color-secondary);
-  text-align: right;
-}
-
-/* Credential stat strip */
-.contact-stat-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 2.25rem;
-  overflow: hidden;
-  border-radius: var(--radius-xl);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 16%, var(--color-border));
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--color-accent) 7%, var(--color-card)),
-    var(--color-card) 60%,
-    color-mix(in srgb, var(--color-cmyk-c) 5%, var(--color-card))
-  );
-}
-
-.contact-stat {
-  padding: 1.125rem 1rem;
-  text-align: center;
-}
-
-.contact-stat + .contact-stat {
-  border-left: 1px solid color-mix(in srgb, var(--color-accent) 14%, var(--color-border));
-}
-
-.contact-stat__value {
-  font-family: var(--font-mono);
-  font-size: clamp(1.5rem, 3.4vw, 2.125rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-accent-700);
-}
-
-.contact-stat__value--text {
-  font-family: var(--font-heading);
-  letter-spacing: -0.01em;
-}
-
-.contact-stat__label {
-  margin-top: 0.4375rem;
-  font-size: 0.75rem;
-  line-height: 1.35;
-  color: var(--color-graphite);
-}
-
-@media (min-width: 640px) {
-  .contact-stat {
-    padding: 1.375rem 1.25rem;
-  }
-
-  .contact-stat__label {
-    font-size: 0.8125rem;
-  }
+.contact-hero-photo:hover .contact-hero-photo__badge {
+  transform: translateY(-2px);
 }
 
 /* Story / values + company facts */
@@ -4900,23 +4812,58 @@ body {
   margin: 0 0 0.75rem;
 }
 
+/* Company facts — icon-led rows in a soft tinted card, instead of a plain
+   dt/dd list, so the "ข้อมูลบริษัท" block reads with the same visual
+   language as the trust badges (circular tinted icon + label). */
 .contact-facts {
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
   margin: 0;
-  border: 1px solid var(--color-border);
+  padding: 0;
+  list-style: none;
+}
+
+.contact-facts__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem;
   border-radius: var(--radius-lg);
-  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  transition: border-color 180ms ease, background-color 180ms ease;
 }
 
-.contact-facts__cell {
-  padding: 0.875rem 1rem;
+.contact-facts__row:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  background: var(--color-accent-50);
 }
 
-.contact-facts__cell + .contact-facts__cell {
-  border-top: 1px solid var(--color-border-subtle);
+.contact-facts__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--color-accent-50);
+  color: var(--color-accent-700);
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
-.contact-facts__cell dt {
+.contact-facts__row:hover .contact-facts__icon {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.contact-facts__body {
+  min-width: 0;
+}
+
+.contact-facts__label {
+  margin: 0;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -4924,11 +4871,12 @@ body {
   color: var(--color-graphite);
 }
 
-.contact-facts__cell dd {
-  margin: 0.3125rem 0 0;
+.contact-facts__value {
+  margin: 0.25rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--color-ink);
+  word-break: break-word;
 }
 
 .contact-feature-grid {

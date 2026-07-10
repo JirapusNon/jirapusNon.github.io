@@ -9,9 +9,8 @@ import { SITE_NAME } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/products', label: 'สินค้า' },
-  { href: '/#brands', label: 'หมวดหมู่' },
-  { href: '/contact#about', label: 'เกี่ยวกับเรา' },
-  { href: '/contact', label: 'ติดต่อ' },
+  { href: '/#brands', label: 'แบรนด์' },
+  { href: '/contact', label: 'เกี่ยวกับเรา' },
 ];
 
 export default function Header() {

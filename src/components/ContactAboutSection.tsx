@@ -3,19 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { Award } from 'lucide-react';
+import { Award, Building2, Clock, Hash, MapPin, Phone } from 'lucide-react';
 import BackButton from '@/components/BackButton';
 import TrustBadges from '@/components/TrustBadges';
 import LineIcon from '@/components/LineIcon';
 import { BUSINESS, CONTACT } from '@/lib/constants';
 
 const yearsInBusiness = new Date().getFullYear() - BUSINESS.foundedYear;
-
-const STATS = [
-  { value: `${yearsInBusiness}+`, label: 'ปีในวงการหมึกพิมพ์' },
-  { value: '10', label: 'แบรนด์ชั้นนำ ครบทุกยี่ห้อ' },
-  { value: 'ทั่วไทย', label: 'จัดส่ง & ออกใบกำกับภาษี', text: true },
-];
 
 export default function ContactAboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -112,45 +106,25 @@ export default function ContactAboutSection() {
             </div>
 
             <figure className="contact-hero-lead__media">
-              <div className="contact-hero-photo">
+              <div className="contact-hero-photo group">
                 <Image
                   src={BUSINESS.storeImage}
                   alt={BUSINESS.storeImageAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 520px"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   priority
                 />
                 <span className="contact-hero-photo__badge">
                   <Award className="h-4 w-4 shrink-0" aria-hidden="true" />
                   ก่อตั้งปี {BUSINESS.foundedYear}
                 </span>
-                <figcaption className="contact-hero-photo__caption">
-                  <span className="contact-hero-photo__caption-label">หน้าร้าน</span>
-                  <span className="contact-hero-photo__caption-text">
-                    พร้อมส่ง · {CONTACT.addressShort}
-                  </span>
-                </figcaption>
               </div>
             </figure>
           </div>
 
-          {/* Credential stat strip */}
-          <dl className="contact-stat-strip contact-reveal contact-reveal--2">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="contact-stat">
-                <dt
-                  className={`contact-stat__value${stat.text ? ' contact-stat__value--text' : ''}`}
-                >
-                  {stat.value}
-                </dt>
-                <dd className="contact-stat__label">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-
           {/* Story + values + company facts */}
-          <div className="contact-detail contact-reveal contact-reveal--3">
+          <div className="contact-detail contact-reveal contact-reveal--2">
             <div className="contact-detail__main">
               <div className="about-section-prose">
                 {BUSINESS.about.map((paragraph) => (
@@ -170,48 +144,73 @@ export default function ContactAboutSection() {
 
             <aside className="contact-detail__aside" aria-label="ข้อมูลองค์กร">
               <p className="contact-facts__title spec-label">ข้อมูลบริษัท</p>
-              <dl className="contact-facts">
-                <div className="contact-facts__cell">
-                  <dt>ชื่อนิติบุคคล</dt>
-                  <dd>{BUSINESS.legalName}</dd>
-                </div>
-                <div className="contact-facts__cell">
-                  <dt>เลขทะเบียน</dt>
-                  <dd className="font-mono">{BUSINESS.taxId}</dd>
-                </div>
-                <div className="contact-facts__cell">
-                  <dt>เวลาทำการ</dt>
-                  <dd>{BUSINESS.hours}</dd>
-                </div>
-                <div className="contact-facts__cell">
-                  <dt>ที่ตั้ง</dt>
-                  <dd>{CONTACT.address}</dd>
-                </div>
-                <div className="contact-facts__cell">
-                  <dt>ติดต่อ</dt>
-                  <dd>
-                    <a href={CONTACT.phoneHref} className="about-meta-link">
-                      {CONTACT.phone}
-                    </a>
-                    <span className="about-fact-sheet__sep" aria-hidden="true">
-                      ·
-                    </span>
-                    <a
-                      href={CONTACT.lineUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="about-meta-link"
-                    >
-                      {CONTACT.lineId}
-                    </a>
-                  </dd>
-                </div>
-              </dl>
+              <ul className="contact-facts">
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <Building2 className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">ชื่อนิติบุคคล</p>
+                    <p className="contact-facts__value">{BUSINESS.legalName}</p>
+                  </div>
+                </li>
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <Hash className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">เลขทะเบียนนิติบุคคล</p>
+                    <p className="contact-facts__value font-mono">{BUSINESS.taxId}</p>
+                  </div>
+                </li>
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <Clock className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">เวลาทำการ</p>
+                    <p className="contact-facts__value">{BUSINESS.hours}</p>
+                  </div>
+                </li>
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <MapPin className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">ที่ตั้ง</p>
+                    <p className="contact-facts__value">{CONTACT.address}</p>
+                  </div>
+                </li>
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">ติดต่อ</p>
+                    <p className="contact-facts__value">
+                      <a href={CONTACT.phoneHref} className="about-meta-link">
+                        {CONTACT.phone}
+                      </a>
+                      <span className="about-fact-sheet__sep" aria-hidden="true">
+                        ·
+                      </span>
+                      <a
+                        href={CONTACT.lineUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="about-meta-link"
+                      >
+                        {CONTACT.lineId}
+                      </a>
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </aside>
           </div>
 
           {/* Supported services */}
-          <div className="about-section-trust contact-reveal contact-reveal--4">
+          <div className="about-section-trust contact-reveal contact-reveal--3">
             <p className="about-section-trust__label spec-label">บริการที่รองรับ</p>
             <TrustBadges />
           </div>
