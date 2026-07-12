@@ -15,7 +15,7 @@ export default function ProductGrid({ products, columns = 4 }: ProductGridProps)
   return (
     <div className={`grid grid-cols-1 gap-3 sm:gap-4 ${colsClass}`}>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} layout="list" />
+        <ProductCard key={product.id} product={product} layout="list" actionMenu />
       ))}
     </div>
   );
