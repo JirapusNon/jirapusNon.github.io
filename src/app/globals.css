@@ -3163,26 +3163,62 @@ body {
 }
 
 /* ── Action-menu card: clickable affordance + choice menu ── */
-.product-card__hint {
+.product-card__media--soft {
+  background:
+    radial-gradient(
+      120% 90% at 50% 0%,
+      color-mix(in srgb, var(--color-cyan-ink) 7%, var(--color-surface)) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      160deg,
+      var(--color-surface) 0%,
+      color-mix(in srgb, var(--color-accent) 7%, var(--color-muted)) 100%
+    );
+}
+
+.product-card__price-row {
+  position: relative;
+  margin-top: 0.875rem;
+}
+
+.product-card__price-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border) 12%,
+    var(--color-border) 88%,
+    transparent 100%
+  );
+}
+
+.product-card__cart {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.125rem;
+  height: 2.125rem;
   flex-shrink: 0;
   border-radius: 9999px;
-  color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: #ffffff;
+  background: linear-gradient(140deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  box-shadow: 0 3px 9px color-mix(in srgb, var(--color-accent) 26%, transparent);
   transition:
-    background-color 220ms var(--card-ease),
-    color 220ms var(--card-ease),
-    transform 220ms var(--card-ease);
+    transform 220ms var(--card-ease),
+    box-shadow 220ms var(--card-ease),
+    filter 220ms var(--card-ease);
 }
 
-.product-card:hover .product-card__hint {
-  background: var(--color-accent);
-  color: #ffffff;
-  transform: translateX(2px);
+.product-card:hover .product-card__cart {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-accent) 34%, transparent);
+  filter: brightness(1.04);
 }
 
 .product-card__menu {
@@ -3296,7 +3332,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .product-card__hint {
+  .product-card__cart {
     transition: none;
   }
 

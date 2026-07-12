@@ -60,7 +60,9 @@ export default function ProductCard({
     };
   }, [open]);
 
-  const mediaClass = `product-card__media relative block cursor-pointer bg-muted ${
+  const mediaClass = `product-card__media relative block cursor-pointer ${
+    actionMenu ? 'product-card__media--soft' : 'bg-muted'
+  } ${
     isList
       ? 'w-28 shrink-0 self-stretch p-3 sm:aspect-square sm:w-full sm:self-auto sm:p-5'
       : 'aspect-square w-full p-5'
@@ -203,7 +205,10 @@ export default function ProductCard({
           }`}
         >
           {badgeInline}
-          <h3 className="product-card__title line-clamp-2 text-sm font-medium text-ink sm:text-base">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-graphite">
+            {product.brand}
+          </span>
+          <h3 className="product-card__title mt-0.5 line-clamp-2 text-sm font-semibold text-ink sm:text-base">
             {product.name}
           </h3>
           <p
@@ -214,11 +219,11 @@ export default function ProductCard({
             {product.description}
           </p>
 
-          <span className="mt-auto flex items-center justify-between gap-2 border-t border-border-subtle pt-2.5 mt-2.5">
-            <span className="product-card__price font-heading text-base font-semibold text-accent sm:text-lg">
+          <span className="product-card__price-row mt-auto flex items-center justify-between gap-2 pt-3">
+            <span className="product-card__price font-heading text-base font-bold text-accent sm:text-lg">
               ฿{formatPrice(product.price)}
             </span>
-            <span className="product-card__hint" aria-hidden="true">
+            <span className="product-card__cart" aria-hidden="true">
               <CartIcon className="h-4 w-4" />
             </span>
           </span>
