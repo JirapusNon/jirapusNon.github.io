@@ -5,7 +5,8 @@ import CatalogSection from '@/components/CatalogSection';
 import FeaturedSection from '@/components/FeaturedSection';
 import ProductsClient from '@/components/ProductsClient';
 import ProductGridSkeleton from '@/components/ProductSkeleton';
-import TrustStats from '@/components/TrustStats';
+import HelpFindSection from '@/components/HelpFindSection';
+// import TrustStats from '@/components/TrustStats'; // temporarily hidden
 import { getFeatured } from '@/lib/products';
 
 export default function Home() {
@@ -24,7 +25,9 @@ export default function Home() {
         </Suspense>
       </CatalogSection>
 
-      <TrustStats />
+      <HelpFindSection />
+
+      {/* Stats strip temporarily hidden — restore <TrustStats /> when ready */}
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import { MapPin, Navigation } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import ContactAboutSection from '@/components/ContactAboutSection';
-import { CONTACT, STORE } from '@/lib/constants';
+import { CONTACT } from '@/lib/constants';
 
 const MAP_QUERY = encodeURIComponent(`RNK Products, ${CONTACT.address}`);
 const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${MAP_QUERY}&z=16&output=embed`;
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`;
 
 export const metadata: Metadata = {
   title: 'ติดต่อเรา',
@@ -49,20 +48,7 @@ export default function ContactPage() {
               <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
               เปิดใน Google Maps
             </a>
-            <a
-              href={DIRECTIONS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              <Navigation className="h-4 w-4 shrink-0" aria-hidden="true" />
-              ดูวิธีเดินทางแบบละเอียด
-            </a>
           </div>
-
-          <p className="store-map-card__meta">
-            {STORE.parking} · {STORE.visitNote}
-          </p>
         </div>
       </div>
     </div>

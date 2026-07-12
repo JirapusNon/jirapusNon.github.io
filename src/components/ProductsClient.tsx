@@ -11,7 +11,8 @@ import {
   type InkType,
   type Product,
 } from '@/lib/products';
-import { CONTACT } from '@/lib/constants';
+import { BUSINESS, CONTACT } from '@/lib/constants';
+import LineIcon from '@/components/LineIcon';
 
 const FILTER_DEBOUNCE_MS = 350;
 const FADE_MS = 420;
@@ -288,21 +289,72 @@ export default function ProductsClient() {
           aria-busy={isResultsAnimating || isWaitingToApply}
         >
           {displayedProducts.length === 0 ? (
-            <div className="catalog-empty flex flex-col items-center gap-3 py-16 text-center">
-              <p className="font-heading text-base font-semibold text-ink">
+            <div className="catalog-empty" role="status">
+              <span className="catalog-empty__spark" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+              </span>
+
+              <span className="catalog-empty__icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.75}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
+                </svg>
+              </span>
+
+              <h3 className="catalog-empty__title font-heading">
                 ไม่พบสินค้าที่ตรงกับการค้นหา
+              </h3>
+
+              <p className="catalog-empty__desc">
+                ลองค้นด้วยรุ่นเครื่องพิมพ์ เช่น{' '}
+                <span className="catalog-empty__code">L3250</span>{' '}
+                หรือให้ทีมงานช่วยหาให้ — ส่งรุ่นเครื่องมา
+                เราเช็กหมึกที่ตรงรุ่นให้ทันที
               </p>
-              <p className="max-w-sm text-sm text-graphite">
-                ลองค้นหาด้วยรุ่นเครื่องพิมพ์ เช่น L3250 หรือบอกทีมงานให้ช่วยหา
+
+              <div className="catalog-empty__actions">
+                <a
+                  href={CONTACT.lineUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-line-solid"
+                >
+                  <LineIcon className="h-4 w-4" />
+                  ให้ทีมงานช่วยหา
+                </a>
+                <a
+                  href={CONTACT.phoneHref}
+                  className="btn btn-secondary catalog-empty__call"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.75}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M2.5 5.5c0 8.008 6.492 14.5 14.5 14.5.69 0 1.36-.096 2-.276a1.5 1.5 0 0 0 1.09-1.44v-2.19a1.5 1.5 0 0 0-1.2-1.47l-2.02-.404a1.5 1.5 0 0 0-1.5.62l-.5.7a11.06 11.06 0 0 1-4.83-4.83l.7-.5a1.5 1.5 0 0 0 .62-1.5l-.404-2.02A1.5 1.5 0 0 0 6.906 3.5H4.716A1.5 1.5 0 0 0 3.276 4.59c-.18.64-.276 1.31-.276 2Z" />
+                  </svg>
+                  โทรสอบถาม
+                </a>
+              </div>
+
+              <p className="catalog-empty__note">
+                <span className="catalog-empty__pulse" aria-hidden="true" />
+                {BUSINESS.responseTime}
               </p>
-              <a
-                href={CONTACT.lineUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-line-solid mt-2"
-              >
-                สอบถามผ่าน LINE
-              </a>
             </div>
           ) : (
             <ProductGrid products={displayedProducts} columns={3} />
