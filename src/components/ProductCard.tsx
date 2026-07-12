@@ -9,9 +9,11 @@ import { getStockBadge, getTypeBadge } from '@/lib/theme';
 export default function ProductCard({
   product,
   featured = false,
+  layout = 'grid',
 }: {
   product: Product;
   featured?: boolean;
+  layout?: 'grid' | 'list';
 }) {
   const typeBadge = getTypeBadge(product.type);
   const stockBadge = getStockBadge(product.inStock);
@@ -19,11 +21,15 @@ export default function ProductCard({
     `สอบถามสินค้า: ${product.name} (รหัส ${product.id})`
   );
 
+  // `list` renders a horizontal card (image left, details right) on mobile for
+  // readability, then reflows to the standard vertical card at >=640px.
+  const isList = layout === 'list';
+
   return (
     <article
-      className={`product-card group flex flex-col overflow-hidden${
-        featured ? ' product-card--featured' : ''
-      }`}
+      className={`product-card group flex overflow-hidden ${
+        isList ? 'flex-row sm:flex-col' : 'flex-col'
+      }${featured ? ' product-card--featured' : ''}`}
     >
       {featured && (
         <div className="cmyk-strip cmyk-strip-thin" aria-hidden="true">
@@ -36,30 +42,63 @@ export default function ProductCard({
 
       <Link
         href={`/products/${product.slug}`}
-        className="product-card__media relative block aspect-square w-full cursor-pointer bg-muted p-5"
+        className={`product-card__media relative block cursor-pointer bg-muted ${
+          isList
+            ? 'w-28 shrink-0 self-stretch p-3 sm:aspect-square sm:w-full sm:self-auto sm:p-5'
+            : 'aspect-square w-full p-5'
+        }`}
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          sizes={
+            isList
+              ? '(max-width: 640px) 112px, (max-width: 1024px) 33vw, 25vw'
+              : '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+          }
           className="product-card__image object-contain p-2"
         />
-        <div className="absolute left-3 top-3 flex flex-col gap-1">
+        <div
+          className={`absolute left-2 top-2 flex-col gap-1 sm:left-3 sm:top-3 sm:flex ${
+            isList ? 'hidden' : 'flex'
+          }`}
+        >
           <span
-            className={`rounded-md px-2 py-0.5 text-[10px] font-medium tracking-wide ${typeBadge.bg} ${typeBadge.text}`}
+            className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium tracking-wide sm:px-2 ${typeBadge.bg} ${typeBadge.text}`}
           >
             {typeBadge.label}
           </span>
           <span
-            className={`rounded-md px-2 py-0.5 text-[10px] font-medium tracking-wide ${stockBadge.bg} ${stockBadge.text}`}
+            className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium tracking-wide sm:px-2 ${stockBadge.bg} ${stockBadge.text}`}
           >
             {stockBadge.label}
           </span>
         </div>
       </Link>
 
-      <div className="product-card__body flex flex-1 flex-col border-t border-border-subtle p-4">
+      <div
+        className={`product-card__body flex flex-1 flex-col p-3 sm:p-4 ${
+          isList
+            ? 'border-l border-border-subtle sm:border-l-0 sm:border-t'
+            : 'border-t border-border-subtle'
+        }`}
+      >
+        {isList && (
+          <div className="mb-1.5 flex flex-wrap gap-1 sm:hidden">
+            <span
+              className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium tracking-wide ${typeBadge.bg} ${typeBadge.text}`}
+            >
+              {typeBadge.label}
+            </span>
+            <span
+              className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium tracking-wide ${stockBadge.bg} ${stockBadge.text}`}
+            >
+              {stockBadge.label}
+            </span>
+          </div>
+        )}
+
         <Link
           href={`/products/${product.slug}`}
           className="flex flex-1 cursor-pointer flex-col gap-1"

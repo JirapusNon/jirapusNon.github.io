@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import ContactFab from "@/components/ContactFab";
+import ScrollRestoration from "@/components/ScrollRestoration";
 
 const bodyFont = IBM_Plex_Sans_Thai({
   variable: "--font-thai",
@@ -35,9 +36,11 @@ export default function RootLayout({
   return (
     <html
       lang="th"
+      data-scroll-behavior="smooth"
       className={`${bodyFont.variable} ${dataFont.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <ScrollRestoration />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
