@@ -239,9 +239,9 @@ export default function ProductCarousel({
             products.map((product) => (
               <div
                 key={`${copyIndex}-${product.id}`}
-                className="w-[47%] shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]"
+                className="w-full shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]"
               >
-                <ProductCard product={product} featured={featured} />
+                <ProductCard product={product} actionMenu />
               </div>
             ))
           )}
