@@ -7,8 +7,12 @@ import ProductCard from "./ProductCard";
 const COPIES = 3;
 const AUTO_PLAY_MS = 2000;
 
-function getSetWidth(el: HTMLElement): number {
-  return el.scrollWidth / COPIES;
+function getSetWidth(el: HTMLElement, productCount: number): number {
+  // One product set spans exactly `productCount` card steps. Deriving the set
+  // width from the measured card step (rather than scrollWidth / COPIES) keeps
+  // the loop's wrap points aligned to card boundaries, so cards never drift and
+  // rest flush against the viewport frame instead of skewing to one side.
+  return getItemStep(el) * productCount;
 }
 
 function normalizeScroll(el: HTMLElement, setWidth: number): number {
@@ -50,12 +54,31 @@ function animateScrollTo(
   frameRef.current = requestAnimationFrame(step);
 }
 
-function getItemStep(el: HTMLElement, productCount: number): number {
+function getItemStep(el: HTMLElement): number {
   const first = el.children[0] as HTMLElement | undefined;
   const second = el.children[1] as HTMLElement | undefined;
   if (first && second) return second.offsetLeft - first.offsetLeft;
-  const setWidth = getSetWidth(el);
-  return productCount > 0 ? setWidth / productCount : el.clientWidth;
+  // Fallback before items are measurable: approximate one viewport of content.
+  return el.clientWidth;
+}
+
+// How far (px, signed) the card nearest the frame's left edge sits from that
+// edge. offsetLeft/step math is integer-rounded, but real card widths are
+// fractional, so a card at rest can land a pixel or two inside the frame and
+// get its border clipped. Adding this drift to scrollLeft lands the card
+// pixel-flush against the viewport frame instead.
+function getFrameDrift(el: HTMLElement): number {
+  const frameLeft = el.getBoundingClientRect().left + el.clientLeft;
+  let drift = 0;
+  let nearest = Infinity;
+  for (const child of el.children) {
+    const d = (child as HTMLElement).getBoundingClientRect().left - frameLeft;
+    if (Math.abs(d) < nearest) {
+      nearest = Math.abs(d);
+      drift = d;
+    }
+  }
+  return drift;
 }
 
 export default function ProductCarousel({
@@ -83,20 +106,23 @@ export default function ProductCarousel({
     }
   }, []);
 
-  const applyNormalize = useCallback((adjustDragOrigin = false) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const setWidth = getSetWidth(el);
-    const delta = normalizeScroll(el, setWidth);
-    if (adjustDragOrigin && delta !== 0) {
-      dragStartScrollLeft.current += delta;
-    }
-  }, []);
+  const applyNormalize = useCallback(
+    (adjustDragOrigin = false) => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const setWidth = getSetWidth(el, products.length);
+      const delta = normalizeScroll(el, setWidth);
+      if (adjustDragOrigin && delta !== 0) {
+        dragStartScrollLeft.current += delta;
+      }
+    },
+    [products.length]
+  );
 
   const updateActiveIndex = useCallback(() => {
     const el = scrollRef.current;
     if (!el || products.length === 0) return;
-    const step = getItemStep(el, products.length);
+    const step = getItemStep(el);
     if (step <= 0) return;
     const index =
       ((Math.round(el.scrollLeft / step) % products.length) +
@@ -110,7 +136,8 @@ export default function ProductCarousel({
     if (!el || products.length === 0) return;
 
     const init = () => {
-      el.scrollLeft = getSetWidth(el);
+      el.scrollLeft = getSetWidth(el, products.length);
+      el.scrollLeft = Math.round(el.scrollLeft + getFrameDrift(el));
       updateActiveIndex();
     };
 
@@ -123,11 +150,16 @@ export default function ProductCarousel({
     (direction: "left" | "right") => {
       const el = scrollRef.current;
       if (!el) return;
-      const step = getItemStep(el, products.length);
-      const target = el.scrollLeft + (direction === "left" ? -step : step);
+      const step = getItemStep(el);
+      // Fold any accumulated sub-pixel drift into the target so every rest
+      // lands exactly on a card boundary — no clipped edge cards.
+      const drift = getFrameDrift(el);
+      const target = Math.round(
+        el.scrollLeft + drift + (direction === "left" ? -step : step)
+      );
       animateScrollTo(el, target, 600, animationFrame, () => applyNormalize());
     },
-    [applyNormalize, products.length]
+    [applyNormalize]
   );
 
   useEffect(() => {
@@ -183,8 +215,15 @@ export default function ProductCarousel({
   }
 
   function endDrag() {
+    if (!isDragging.current) return;
     isDragging.current = false;
     applyNormalize();
+    const el = scrollRef.current;
+    if (el && animationFrame.current === null) {
+      const target = Math.round(el.scrollLeft + getFrameDrift(el));
+      animateScrollTo(el, target, 260, animationFrame, () => applyNormalize());
+    }
+    updateActiveIndex();
   }
 
   function handleUserScroll() {
@@ -231,7 +270,7 @@ export default function ProductCarousel({
           onScroll={handleUserScroll}
           className={
             featured
-              ? 'featured-carousel__track flex cursor-grab gap-3 overflow-x-auto pb-1 active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+              ? 'featured-carousel__track flex cursor-grab gap-3 overflow-x-auto active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
               : 'flex cursor-grab gap-3 overflow-x-auto pb-2 active:cursor-grabbing sm:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
           }
         >
@@ -239,7 +278,11 @@ export default function ProductCarousel({
             products.map((product) => (
               <div
                 key={`${copyIndex}-${product.id}`}
-                className="w-full shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]"
+                className={
+                  featured
+                    ? 'w-full shrink-0 select-none sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3rem)/4)]'
+                    : 'w-full shrink-0 select-none sm:w-[31.5%] lg:w-[23.5%]'
+                }
               >
                 <ProductCard product={product} actionMenu />
               </div>

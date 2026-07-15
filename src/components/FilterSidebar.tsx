@@ -1,6 +1,12 @@
 'use client';
 
-import { ChevronDown, SlidersHorizontal, Truck, X } from 'lucide-react';
+import {
+  ChevronDown,
+  PanelLeftClose,
+  SlidersHorizontal,
+  Truck,
+  X,
+} from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { brands, inkTypes, type Brand, type InkType } from '@/lib/products';
 
@@ -14,6 +20,8 @@ interface FilterSidebarProps {
   onToggleBrand: (brand: Brand) => void;
   onToggleType: (type: InkType) => void;
   onReset: () => void;
+  collapsed: boolean;
+  onToggleCollapsed: (collapsed: boolean) => void;
 }
 
 function FilterClearButton({
@@ -44,6 +52,8 @@ export default function FilterSidebar({
   onToggleBrand,
   onToggleType,
   onReset,
+  collapsed,
+  onToggleCollapsed,
 }: FilterSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [typesOpen, setTypesOpen] = useState(true);
@@ -98,7 +108,6 @@ export default function FilterSidebar({
         />
         บริการจัดส่งฟรีทั่วประเทศ
       </div>
-
       <FilterClearButton count={activeCount} onReset={onReset} />
     </div>
   );
@@ -146,22 +155,52 @@ export default function FilterSidebar({
         )}
       </div>
 
-      <aside className="catalog-filter catalog-filter--sticky hidden w-72 shrink-0 lg:block">
-        <div className="catalog-filter-head">
-          <div className="catalog-filter-head__icon" aria-hidden="true">
-            <SlidersHorizontal className="h-4 w-4" />
+      <div
+        className={`catalog-filter-col hidden shrink-0 lg:block${
+          collapsed ? ' catalog-filter-col--collapsed' : ''
+        }`}
+      >
+        <aside
+          className="catalog-filter catalog-filter-col__panel"
+          inert={collapsed}
+        >
+          <div className="catalog-filter-head">
+            <button
+              type="button"
+              onClick={() => onToggleCollapsed(true)}
+              aria-expanded
+              aria-label="ซ่อนตัวกรองสินค้า"
+              title="ซ่อนตัวกรอง"
+              className="catalog-filter-head__icon catalog-filter-head__collapse"
+            >
+              <PanelLeftClose className="h-4 w-4" aria-hidden="true" />
+            </button>
+            <div className="min-w-0 flex-1">
+              <p className="font-heading text-sm font-semibold text-ink">
+                ตัวกรองสินค้า
+              </p>
+              <p className="mt-0.5 text-xs text-graphite">
+                เลือกประเภทและยี่ห้อที่ต้องการ
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="font-heading text-sm font-semibold text-ink">
-              ตัวกรองสินค้า
-            </p>
-            <p className="mt-0.5 text-xs text-graphite">
-              เลือกประเภทและยี่ห้อที่ต้องการ
-            </p>
-          </div>
-        </div>
-        {content}
-      </aside>
+          {content}
+        </aside>
+
+        <button
+          type="button"
+          onClick={() => onToggleCollapsed(false)}
+          aria-label="แสดงตัวกรองสินค้า"
+          className="catalog-filter-rail__btn catalog-filter-col__rail"
+          inert={!collapsed}
+        >
+          <SlidersHorizontal className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span className="catalog-filter-rail__text">ตัวกรอง</span>
+          {hasActiveFilters && (
+            <span className="catalog-filter-rail__badge">{activeCount}</span>
+          )}
+        </button>
+      </div>
     </>
   );
 }

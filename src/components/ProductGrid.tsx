@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
@@ -6,7 +7,9 @@ interface ProductGridProps {
   columns?: 3 | 4;
 }
 
-export default function ProductGrid({ products, columns = 4 }: ProductGridProps) {
+// Memoized so unrelated parent re-renders (e.g. collapsing the filter sidebar)
+// don't re-render the whole product list, keeping the layout animation smooth.
+function ProductGrid({ products, columns = 4 }: ProductGridProps) {
   const colsClass =
     columns === 3
       ? "sm:grid-cols-2 md:grid-cols-3"
@@ -20,3 +23,5 @@ export default function ProductGrid({ products, columns = 4 }: ProductGridProps)
     </div>
   );
 }
+
+export default memo(ProductGrid);

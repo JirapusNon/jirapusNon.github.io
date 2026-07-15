@@ -173,14 +173,56 @@ export default function ProductCard({
     );
   }
 
-  // ── Action-menu card: whole card is a trigger; click opens a choice menu ──
+  // ── Action-menu card ──
+  // Desktop (≥lg): the whole card links to the detail page; the LINE icon in the
+  // corner expands into a "สอบถาม / สั่งซื้อ" button on card hover.
+  // Mobile/tablet (<lg): unchanged — tapping the card opens the choice menu.
   return (
-    <article
-      ref={rootRef}
-      className={`product-card group relative flex overflow-hidden ${
-        isList ? 'flex-row sm:flex-col' : 'flex-col'
-      }`}
-    >
+    <>
+      <article className="product-card group relative hidden overflow-hidden lg:flex lg:flex-col">
+        <Link href={detailHref} className="flex flex-1 cursor-pointer flex-col">
+          <span className={mediaClass}>
+            {imageEl}
+            {badgeOverlay}
+          </span>
+
+          <span className="product-card__body flex flex-1 flex-col border-t border-border-subtle p-4">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-graphite">
+              {product.brand}
+            </span>
+            <h3 className="product-card__title mt-0.5 line-clamp-2 text-sm font-semibold text-ink sm:text-base">
+              {product.name}
+            </h3>
+            <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-graphite">
+              {product.description}
+            </p>
+
+            <span className="product-card__price-row mt-auto flex items-center justify-between gap-2 pt-3">
+              <span className="product-card__price font-heading text-base font-bold text-accent sm:text-lg">
+                ฿{formatPrice(product.price)}
+              </span>
+            </span>
+          </span>
+        </Link>
+
+        <a
+          href={lineHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="product-card__line-fab"
+          aria-label={`สอบถาม / สั่งซื้อ ${product.name} ทาง LINE`}
+        >
+          <LineIcon className="product-card__line-fab-icon h-4 w-4 shrink-0" />
+          <span className="product-card__line-fab-label">สอบถาม / สั่งซื้อ</span>
+        </a>
+      </article>
+
+      <article
+        ref={rootRef}
+        className={`product-card group relative flex overflow-hidden lg:hidden ${
+          isList ? 'flex-row sm:flex-col' : 'flex-col'
+        }`}
+      >
       <button
         ref={triggerRef}
         type="button"
@@ -242,8 +284,17 @@ export default function ProductCard({
           </button>
 
           <div className="product-card__menu-panel">
-            <a
+            <Link
               ref={firstActionRef}
+              href={detailHref}
+              role="menuitem"
+              className="pcm-action pcm-action--detail"
+              onClick={() => setOpen(false)}
+            >
+              <DetailIcon className="h-4 w-4 shrink-0" />
+              ดูรายละเอียดสินค้า
+            </Link>
+            <a
               href={lineHref}
               target="_blank"
               rel="noopener noreferrer"
@@ -254,19 +305,11 @@ export default function ProductCard({
               <LineIcon className="h-4 w-4 shrink-0" />
               สอบถาม / สั่งซื้อ
             </a>
-            <Link
-              href={detailHref}
-              role="menuitem"
-              className="pcm-action pcm-action--detail"
-              onClick={() => setOpen(false)}
-            >
-              <DetailIcon className="h-4 w-4 shrink-0" />
-              ดูรายละเอียดสินค้า
-            </Link>
           </div>
         </div>
       )}
-    </article>
+      </article>
+    </>
   );
 }
 

@@ -25,10 +25,20 @@ const CHANNELS = [
   },
 ] as const;
 
+export const OPEN_CONTACT_EVENT = 'rnk:open-contact';
+
 export default function ContactFab() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    function openSheet() {
+      setOpen(true);
+    }
+    window.addEventListener(OPEN_CONTACT_EVENT, openSheet);
+    return () => window.removeEventListener(OPEN_CONTACT_EVENT, openSheet);
+  }, []);
 
   useEffect(() => {
     if (!open) return;

@@ -91,26 +91,17 @@ export default function HeroSection() {
             ))}
           </ul>
 
-          {/* Desktop/tablet: CTA row below the trust chips */}
-          <div className="hero-animate hero-animate-5 mt-4 hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
+          {/* Desktop/tablet: CTA gets its own beat below the trust chips */}
+          {/* <div className="hero-animate hero-animate-5 mt-7 hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
             <a
               href="#catalog"
               onClick={scrollToCatalog}
-              className="btn btn-tonal-navy px-6 shadow-sm hover:shadow-md"
+              className="btn btn-accent hero-cta shadow-sm hover:shadow-md"
             >
               ดูสินค้าทั้งหมด
-              <ArrowRightIcon className="btn-tonal-navy__icon h-4 w-4 shrink-0" />
+              <ArrowRightIcon className="hero-cta__arrow h-4 w-4 shrink-0" />
             </a>
-            <a
-              href={CONTACT.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-line-solid shrink-0 px-6 shadow-sm hover:shadow-md"
-            >
-              <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อผ่าน LINE
-            </a>
-          </div>
+          </div> */}
 
           {/* Mobile: soft badge cards instead of a plain text row */}
           <div className="hero-animate hero-animate-6 mt-8 grid grid-cols-2 gap-2 sm:hidden">

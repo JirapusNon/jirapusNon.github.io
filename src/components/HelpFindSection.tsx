@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import SectionKicker from '@/components/SectionKicker';
-import LineIcon from '@/components/LineIcon';
-import { BUSINESS, CONTACT } from '@/lib/constants';
+import { OPEN_CONTACT_EVENT } from '@/components/ContactFab';
+import { BUSINESS } from '@/lib/constants';
 
 export default function HelpFindSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -94,20 +94,15 @@ export default function HelpFindSection() {
             </div>
 
             <div className="help-find-band__actions">
-              <a
-                href={CONTACT.lineUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-line-solid"
-              >
-                <LineIcon className="h-4 w-4" />
-                ให้ทีมงานช่วยหา
-              </a>
-              <a
-                href={CONTACT.phoneHref}
-                className="btn btn-secondary help-find-band__call"
+              <button
+                type="button"
+                onClick={() =>
+                  window.dispatchEvent(new CustomEvent(OPEN_CONTACT_EVENT))
+                }
+                className="btn btn-line-solid help-find-band__cta"
               >
                 <svg
+                  className="h-4 w-4"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -116,10 +111,11 @@ export default function HelpFindSection() {
                   strokeLinejoin="round"
                   aria-hidden="true"
                 >
-                  <path d="M2.5 5.5c0 8.008 6.492 14.5 14.5 14.5.69 0 1.36-.096 2-.276a1.5 1.5 0 0 0 1.09-1.44v-2.19a1.5 1.5 0 0 0-1.2-1.47l-2.02-.404a1.5 1.5 0 0 0-1.5.62l-.5.7a11.06 11.06 0 0 1-4.83-4.83l.7-.5a1.5 1.5 0 0 0 .62-1.5l-.404-2.02A1.5 1.5 0 0 0 6.906 3.5H4.716A1.5 1.5 0 0 0 3.276 4.59c-.18.64-.276 1.31-.276 2Z" />
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
                 </svg>
-                โทรสอบถาม
-              </a>
+                ให้ทีมงานช่วยหา
+              </button>
             </div>
           </div>
         </div>

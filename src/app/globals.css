@@ -562,6 +562,23 @@ body {
   }
 }
 
+/* iPad / tablet: the brand column narrows enough that the four channels
+   wrap, leaving a stray "|" divider at the start of a wrapped line. Drop the
+   dividers and space the channels with a plain gap instead. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-footer__channels {
+    column-gap: 1.25rem;
+  }
+
+  .site-footer__channel-row:not(:first-child) {
+    margin-left: 0;
+  }
+
+  .site-footer__channel-row:not(:first-child)::before {
+    content: none;
+  }
+}
+
 .site-footer__channel-link {
   color: var(--color-footer-text);
   text-decoration: none;
@@ -1438,6 +1455,29 @@ body {
 .hero-trust-chip__icon--invoice {
   background: var(--color-navy-800);
   color: #ffffff;
+}
+
+/* ── Hero CTA: colour and shape come from .btn-accent so it speaks the same
+   language as the header and section CTAs; this only sizes it up to carry
+   the hero on its own. ── */
+.hero-cta {
+  padding: 0.875rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.hero-cta__arrow {
+  transition: transform 200ms ease;
+}
+
+.hero-cta:hover .hero-cta__arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta:hover .hero-cta__arrow {
+    transform: none;
+  }
 }
 
 .hero-animate-6 {
@@ -2944,17 +2984,27 @@ body {
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   background: var(--color-card);
+  /* Horizontal frame lives on the non-scrolling viewport so the cards inside
+     always rest symmetrically — the scrolling track carries no inline padding
+     that would push the row off-center. */
+  padding-inline: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .featured-carousel__viewport {
+    padding-inline: 1rem;
+  }
 }
 
 .featured-carousel__track {
-  scroll-padding-inline: 0.75rem;
-  padding: 0.75rem;
+  /* framing padding lives on the viewport, not the scrolling track */
+  padding-block: 0.75rem;
+  padding-inline: 0;
 }
 
 @media (min-width: 640px) {
   .featured-carousel__track {
-    scroll-padding-inline: 1rem;
-    padding: 1rem;
+    padding-block: 1rem;
   }
 }
 
@@ -3221,13 +3271,84 @@ body {
   filter: brightness(1.04);
 }
 
+/* Desktop LINE action — a corner icon that expands into a labelled button when
+   the card is hovered. Sits where the cart badge is on the tap-menu card. */
+.product-card__line-fab {
+  position: absolute;
+  bottom: 0.875rem;
+  right: 0.875rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  height: 2.125rem;
+  padding: 0 0.5625rem;
+  border-radius: 9999px;
+  color: #ffffff;
+  background: var(--color-line);
+  box-shadow: 0 3px 9px color-mix(in srgb, var(--color-line) 30%, transparent);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    padding 450ms cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 200ms ease,
+    box-shadow 320ms var(--card-ease);
+}
+
+.product-card__line-fab:hover {
+  background: var(--color-line-hover);
+}
+
+.product-card__line-fab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-line) 45%, transparent);
+}
+
+.product-card__line-fab-label {
+  display: inline-block;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0;
+  transition:
+    max-width 450ms cubic-bezier(0.65, 0, 0.35, 1),
+    margin-left 450ms cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 320ms ease-in-out;
+}
+
+@media (hover: hover) {
+  .product-card:hover .product-card__line-fab {
+    padding: 0 0.9375rem;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-line) 38%, transparent);
+  }
+
+  .product-card:hover .product-card__line-fab-label {
+    max-width: 6.25rem;
+    margin-left: 0.4375rem;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card__line-fab,
+  .product-card__line-fab-label {
+    transition: none;
+  }
+}
+
+/* Frosted overlay — the card gets a soft tinted blur on tap, with the action
+   panel floating in the centre (rather than pinned to the bottom). */
 .product-card__menu {
   position: absolute;
   inset: 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem;
   border-radius: inherit;
   background: color-mix(in srgb, var(--color-primary) 42%, transparent);
   backdrop-filter: blur(3px);
@@ -3239,6 +3360,7 @@ body {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3257,13 +3379,14 @@ body {
 
 .product-card__menu-panel {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.625rem;
-  border-radius: inherit;
+  border-radius: var(--radius-xl);
   background: var(--color-card);
-  box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.14);
-  animation: pcm-slide-up 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
+  animation: pcm-pop 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pcm-action {
@@ -3328,6 +3451,17 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pcm-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -3462,6 +3596,161 @@ body {
   color: var(--color-cmyk-c);
   background: color-mix(in srgb, var(--color-cmyk-c) 10%, var(--color-card));
   border: 1px solid color-mix(in srgb, var(--color-cmyk-c) 22%, transparent);
+}
+
+/* Desktop collapse toggle — the header icon is the hide control (panel-collapse
+   glyph shown at rest), tinting on hover so it reads as interactive. */
+.catalog-filter-head__collapse {
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.catalog-filter-head__collapse:hover {
+  color: var(--color-accent-700);
+  background: color-mix(in srgb, var(--color-accent) 14%, var(--color-card));
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+.catalog-filter-head__collapse:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-accent-400) 60%, transparent);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-accent-400) 30%, transparent);
+}
+
+/* Catalog layout — on desktop the filter + results sit in a two-column grid.
+   Animating grid-template-columns (reliable, unlike flex-item width) slides the
+   product grid smoothly as the filter collapses to / expands from its rail. */
+@media (min-width: 1024px) {
+  .catalog-layout {
+    display: grid;
+    grid-template-columns: 18rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    transition: grid-template-columns 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .catalog-layout--filter-collapsed {
+    grid-template-columns: 2.875rem minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-layout {
+    transition: none;
+  }
+}
+
+/* Desktop filter column — fills its grid track (18rem expanded, 2.875rem
+   collapsed). The track width is what animates (see .catalog-layout), so the
+   product grid beside it slides in/out smoothly. This element just clips the
+   fixed-width panel as the track narrows. */
+.catalog-filter-col {
+  position: sticky;
+  top: calc(var(--site-header-offset) + 0.75rem);
+  align-self: start;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Full panel: fixed width so it clips cleanly (rather than reflowing) as the
+   column narrows, cross-fading out while the rail fades in. */
+.catalog-filter-col__panel {
+  width: 18rem;
+  max-height: calc(100dvh - var(--site-header-offset) - 1.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transition: opacity 150ms ease;
+}
+
+.catalog-filter-col--collapsed .catalog-filter-col__panel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.catalog-filter-col__rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.875rem;
+  opacity: 0;
+  pointer-events: none;
+  /* opacity transition is declared on .catalog-filter-rail__btn (same element,
+     later in the cascade) so it isn't overridden by that rule's shorthand */
+}
+
+.catalog-filter-col--collapsed .catalog-filter-col__rail {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 90ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-filter-col,
+  .catalog-filter-col__panel,
+  .catalog-filter-col__rail {
+    transition: none;
+  }
+}
+
+.catalog-filter-rail__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  width: 2.875rem;
+  padding: 0.875rem 0.25rem;
+  border-radius: 1.125rem;
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-card) 94%, var(--color-navy-50));
+  border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 150ms ease;
+}
+
+.catalog-filter-rail__btn:hover {
+  color: var(--color-cmyk-c);
+  border-color: color-mix(in srgb, var(--color-cmyk-c) 35%, transparent);
+  box-shadow: var(--shadow-md);
+}
+
+.catalog-filter-rail__btn:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-accent-400) 55%, transparent);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-accent-400) 30%, transparent);
+}
+
+.catalog-filter-rail__text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.catalog-filter-rail__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-on-primary);
+  background: var(--color-cmyk-c);
 }
 
 .catalog-filter-group__head {
@@ -4286,7 +4575,7 @@ body {
   height: 0.4375rem;
   border-radius: 9999px;
   opacity: 0.5;
-  animation: help-find-float 6s ease-in-out infinite;
+  animation: help-find-float 4.5s ease-in-out infinite;
 }
 
 .help-find-band__spark > span:nth-child(1) {
@@ -4321,12 +4610,20 @@ body {
 @keyframes help-find-float {
   0%,
   100% {
-    transform: translateY(0);
-    opacity: 0.4;
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  25% {
+    transform: translate(4px, -10px);
+    opacity: 0.7;
   }
   50% {
-    transform: translateY(-7px);
-    opacity: 0.65;
+    transform: translate(-3px, -18px);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translate(-6px, -8px);
+    opacity: 0.6;
   }
 }
 
@@ -4365,6 +4662,24 @@ body {
 .help-find-band__icon svg {
   width: 1.5rem;
   height: 1.5rem;
+  transform-origin: center;
+  animation: help-find-scan 3.2s ease-in-out infinite;
+}
+
+@keyframes help-find-scan {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(2.5px, -1.5px) rotate(-9deg);
+  }
+  50% {
+    transform: translate(-2.5px, 1.5px) rotate(9deg);
+  }
+  80% {
+    transform: translate(1.5px, 1px) rotate(-5deg);
+  }
 }
 
 .help-find-band__lead-copy {
@@ -4462,7 +4777,8 @@ body {
     transform: none;
   }
   .help-find-band__spark > span,
-  .help-find-band__pulse {
+  .help-find-band__pulse,
+  .help-find-band__icon svg {
     animation: none;
   }
   .help-find-band__actions .btn:hover,

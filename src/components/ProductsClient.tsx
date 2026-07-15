@@ -73,6 +73,8 @@ export default function ProductsClient() {
   const [appliedTypes, setAppliedTypes] = useState<InkType[]>(initialTypes);
   const [appliedQuery, setAppliedQuery] = useState(initialQuery);
 
+  const [filterCollapsed, setFilterCollapsed] = useState(false);
+
   const [resultsPhase, setResultsPhase] = useState<
     'idle' | 'fade-out' | 'fade-in'
   >('idle');
@@ -223,7 +225,11 @@ export default function ProductsClient() {
   const isResultsAnimating = resultsPhase !== 'idle';
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+    <div
+      className={`catalog-layout flex flex-col gap-6${
+        filterCollapsed ? ' catalog-layout--filter-collapsed' : ''
+      }`}
+    >
       {/* Mobile/tablet: search hoisted to the top so it's the first control */}
       <CatalogSearchField
         query={query}
@@ -236,6 +242,8 @@ export default function ProductsClient() {
         onToggleBrand={handleToggleBrand}
         onToggleType={handleToggleType}
         onReset={handleReset}
+        collapsed={filterCollapsed}
+        onToggleCollapsed={setFilterCollapsed}
       />
 
       <div className="flex-1 min-w-0">
