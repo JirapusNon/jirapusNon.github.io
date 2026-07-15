@@ -579,5 +579,88 @@
     "volumeMl": null,
     "createdAt": "2026-06-15",
     "description": "โทนเนอร์แท้ Pantum TL-410 ราคาประหยัด ให้งานพิมพ์คมชัด เหมาะสำหรับใช้งานทั่วไปในสำนักงานขนาดเล็ก"
+  },
+  {
+    "id": "30",
+    "slug": "pantum-pc-211ev",
+    "name": "โทนเนอร์แท้ Pantum PC-211EV",
+    "brand": "Pantum",
+    "type": "โทนเนอร์",
+    "compatiblePrinters": [
+      "Pantum P2200",
+      "Pantum P2500W",
+      "Pantum M6500",
+      "Pantum M6550",
+      "Pantum M6600"
+    ],
+    "price": 1290,
+    "image": "/products/photos/epson2.png",
+    "inStock": true,
+    "featured": false,
+    "color": "ดำ (Black)",
+    "volumeMl": null,
+    "createdAt": "2026-06-20",
+    "description": "โทนเนอร์แท้ Pantum PC-211EV สำหรับเครื่องพิมพ์เลเซอร์ตระกูล P2500 และ M6500 ให้ตัวอักษรคมชัด ติดตั้งง่าย"
+  },
+  {
+    "id": "31",
+    "slug": "pantum-compatible-pc-211",
+    "name": "โทนเนอร์เทียบเท่า Pantum PC-211",
+    "brand": "Pantum",
+    "type": "หมึกเทียบเท่า",
+    "compatiblePrinters": [
+      "Pantum P2200",
+      "Pantum P2500W",
+      "Pantum M6500",
+      "Pantum M6550"
+    ],
+    "price": 390,
+    "image": "/products/photos/cannon.png",
+    "inStock": true,
+    "featured": false,
+    "color": "ดำ (Black)",
+    "volumeMl": null,
+    "createdAt": "2026-06-22",
+    "description": "โทนเนอร์เทียบเท่า Pantum PC-211 คุณภาพดี ช่วยลดต้นทุนงานพิมพ์ ใช้แทนตลับแท้ได้ทันที"
+  },
+  {
+    "id": "32",
+    "slug": "pantum-tl-420h",
+    "name": "โทนเนอร์แท้ Pantum TL-420H ความจุสูง",
+    "brand": "Pantum",
+    "type": "โทนเนอร์",
+    "compatiblePrinters": [
+      "Pantum P3300DW",
+      "Pantum M7100DW",
+      "Pantum M7200FDW"
+    ],
+    "price": 1750,
+    "image": "/products/photos/hp.avif",
+    "inStock": true,
+    "featured": false,
+    "color": "ดำ (Black)",
+    "volumeMl": null,
+    "createdAt": "2026-06-25",
+    "description": "โทนเนอร์แท้ Pantum TL-420H รุ่นความจุสูง พิมพ์ได้จำนวนแผ่นมากกว่ารุ่นมาตรฐาน คุ้มค่าสำหรับงานพิมพ์ปริมาณมาก"
+  },
+  {
+    "id": "33",
+    "slug": "pantum-ctl-1100c",
+    "name": "โทนเนอร์แท้ Pantum CTL-1100C สีฟ้า",
+    "brand": "Pantum",
+    "type": "โทนเนอร์",
+    "compatiblePrinters": [
+      "Pantum CP1100",
+      "Pantum CM1100ADW",
+      "Pantum CM1100DW"
+    ],
+    "price": 1450,
+    "image": "/products/photos/brother.webp",
+    "inStock": false,
+    "featured": false,
+    "color": "ฟ้า (Cyan)",
+    "volumeMl": null,
+    "createdAt": "2026-06-28",
+    "description": "โทนเนอร์แท้ Pantum CTL-1100C สีฟ้า สำหรับเครื่องพิมพ์เลเซอร์สีตระกูล CP1100 และ CM1100 ให้สีสดใสตรงตามต้นฉบับ"
   }
 ]

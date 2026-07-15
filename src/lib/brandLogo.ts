@@ -16,8 +16,9 @@ const BRAND_LOGOS: Record<Brand, BrandLogoStyle> = {
   "Fuji Xerox": { monogram: "FX", bg: "bg-[#E2231A]", image: "/brands/fujixerox.svg" },
   Lexmark: { monogram: "LM", bg: "bg-[#ED1C24]", image: "/brands/lexmark.svg" },
   Kyocera: { monogram: "KY", bg: "bg-[#D70926]", image: "/brands/kyocera.svg" },
-  // No reliably-licensed official logo source found for Pantum; falls back to monogram.
-  Pantum: { monogram: "PT", bg: "bg-[#0A5FAA]" },
+  // No reliably-licensed official logo source found for Pantum; pantum.svg is a
+  // plain "P" placeholder, not the real wordmark. Swap it when we have the asset.
+  Pantum: { monogram: "P", bg: "bg-[#0A5FAA]", image: "/brands/pantum.svg" },
 };
 
 export function getBrandLogoStyle(brand: Brand): BrandLogoStyle {
