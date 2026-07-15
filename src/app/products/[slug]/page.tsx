@@ -183,16 +183,12 @@ export default async function ProductDetailPage({
 
         {related.length > 0 && (
           <section className="related-showcase mt-8">
-            <div className="hero-section-mesh" aria-hidden="true" />
-            <div className="hero-section-glow" aria-hidden="true" />
-            <div className="relative z-10">
-              <p className="spec-label">สินค้าที่เกี่ยวข้อง</p>
-              <h2 className="font-heading mt-2 text-xl font-semibold text-ink">
-                ใช้กับเครื่องพิมพ์รุ่นเดียวกัน
-              </h2>
-              <div className="mt-6">
-                <ProductGrid products={related} />
-              </div>
+            <p className="spec-label">สินค้าที่เกี่ยวข้อง</p>
+            <h2 className="font-heading mt-2 text-xl font-semibold text-ink">
+              ใช้กับเครื่องพิมพ์รุ่นเดียวกัน
+            </h2>
+            <div className="mt-6">
+              <ProductGrid products={related} />
             </div>
           </section>
         )}

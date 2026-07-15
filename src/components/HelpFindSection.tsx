@@ -32,9 +32,8 @@ export default function HelpFindSection() {
       ref={sectionRef}
       id="help-find"
       aria-labelledby="help-find-heading"
-      className={`help-find-section catalog-section scroll-mt-20 section-surface-canvas ${
-        visible ? 'help-find-section--visible' : ''
-      }`}
+      className={`help-find-section catalog-section scroll-mt-20 section-surface-muted ${visible ? 'help-find-section--visible' : ''
+        }`}
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="help-find-header section-intro">
@@ -46,8 +45,8 @@ export default function HelpFindSection() {
             หาหมึกรุ่นที่ต้องการไม่เจอ?
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-graphite sm:text-[0.9375rem]">
-            ไม่ต้องเสียเวลาไล่หาเอง — ทีมงาน RNK
-            ช่วยเช็กหมึกที่ตรงกับรุ่นเครื่องพิมพ์ พร้อมเช็กสต็อกและราคาให้ทันที
+            ลดความสับสนและป้องกันการซื้อผิดรุ่น
+            ให้เราช่วยเลือกหมึกที่ถูกต้องและคุ้มค่าที่สุดสำหรับคุณ
           </p>
         </div>
 
@@ -88,7 +87,7 @@ export default function HelpFindSection() {
                 </p>
                 <p className="help-find-band__note">
                   <span className="help-find-band__pulse" aria-hidden="true" />
-                  {BUSINESS.responseTime}
+                  พร้อมบริการและให้คำปรึกษาทันที
                 </p>
               </div>
             </div>

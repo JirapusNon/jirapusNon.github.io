@@ -6,6 +6,9 @@ import ProductCard from "./ProductCard";
 
 const COPIES = 3;
 const AUTO_PLAY_MS = 2000;
+// After the user's last interaction, wait this long before auto-play resumes
+// (debounce: every new interaction restarts the countdown).
+const RESUME_DELAY_MS = 2000;
 
 function getSetWidth(el: HTMLElement, productCount: number): number {
   // One product set spans exactly `productCount` card steps. Deriving the set
@@ -95,16 +98,9 @@ export default function ProductCarousel({
   const dragStartX = useRef(0);
   const dragStartScrollLeft = useRef(0);
   const animationFrame = useRef<number | null>(null);
-  const autoPlayEnabledRef = useRef(true);
+  const reducedMotionRef = useRef(false);
   const autoPlayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const stopAutoPlay = useCallback(() => {
-    autoPlayEnabledRef.current = false;
-    if (autoPlayTimerRef.current !== null) {
-      clearInterval(autoPlayTimerRef.current);
-      autoPlayTimerRef.current = null;
-    }
-  }, []);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const applyNormalize = useCallback(
     (adjustDragOrigin = false) => {
@@ -162,36 +158,60 @@ export default function ProductCarousel({
     [applyNormalize]
   );
 
-  useEffect(() => {
-    if (products.length === 0) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) {
-      autoPlayEnabledRef.current = false;
-      return;
-    }
-
+  const startAutoPlay = useCallback(() => {
+    if (reducedMotionRef.current) return;
+    if (autoPlayTimerRef.current !== null) return;
     autoPlayTimerRef.current = setInterval(() => {
-      if (!autoPlayEnabledRef.current || isDragging.current) return;
+      if (isDragging.current) return;
       if (animationFrame.current !== null) return;
       scroll("right");
     }, AUTO_PLAY_MS);
+  }, [scroll]);
+
+  // Debounce-style pause: every interaction stops the interval and restarts
+  // the resume countdown, so auto-play only comes back RESUME_DELAY_MS after
+  // the LAST interaction — not the first.
+  const pauseAutoPlay = useCallback(() => {
+    if (autoPlayTimerRef.current !== null) {
+      clearInterval(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = null;
+    }
+    if (resumeTimerRef.current !== null) {
+      clearTimeout(resumeTimerRef.current);
+    }
+    resumeTimerRef.current = setTimeout(() => {
+      resumeTimerRef.current = null;
+      startAutoPlay();
+    }, RESUME_DELAY_MS);
+  }, [startAutoPlay]);
+
+  useEffect(() => {
+    if (products.length === 0) return;
+
+    reducedMotionRef.current = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    startAutoPlay();
 
     return () => {
       if (autoPlayTimerRef.current !== null) {
         clearInterval(autoPlayTimerRef.current);
         autoPlayTimerRef.current = null;
       }
+      if (resumeTimerRef.current !== null) {
+        clearTimeout(resumeTimerRef.current);
+        resumeTimerRef.current = null;
+      }
     };
-  }, [products.length, scroll]);
+  }, [products.length, startAutoPlay]);
 
   function handleNavClick(direction: "left" | "right") {
-    stopAutoPlay();
+    pauseAutoPlay();
     scroll(direction);
   }
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
-    stopAutoPlay();
+    pauseAutoPlay();
     const el = scrollRef.current;
     if (!el) return;
     if (animationFrame.current !== null) {
@@ -206,6 +226,9 @@ export default function ProductCarousel({
   }
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    // Any pointer movement over the cards counts as interaction — it keeps
+    // resetting the resume countdown while the user is engaged with the row.
+    pauseAutoPlay();
     const el = scrollRef.current;
     if (!el || !isDragging.current) return;
     const dx = e.pageX - dragStartX.current;
@@ -216,6 +239,8 @@ export default function ProductCarousel({
 
   function endDrag() {
     if (!isDragging.current) return;
+    // Count the resume delay from the moment the user lets go.
+    pauseAutoPlay();
     isDragging.current = false;
     applyNormalize();
     const el = scrollRef.current;
@@ -265,8 +290,10 @@ export default function ProductCarousel({
           onMouseLeave={endDrag}
           onClickCapture={handleClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          onTouchStart={stopAutoPlay}
-          onWheel={stopAutoPlay}
+          onTouchStart={pauseAutoPlay}
+          onTouchMove={pauseAutoPlay}
+          onTouchEnd={pauseAutoPlay}
+          onWheel={pauseAutoPlay}
           onScroll={handleUserScroll}
           className={
             featured
