@@ -9,6 +9,10 @@ export const CONTACT = {
   facebookUrl: 'https://facebook.com/rnkink',
   messengerUrl: 'https://m.me/rnkink',
   instagramUrl: 'https://instagram.com/rnkink',
+  // TODO: ใส่ URL ร้านจริง — ค่านี้เป็น placeholder ยังใช้งานไม่ได้
+  shopeeUrl: 'https://shopee.co.th/rnkink',
+  // TODO: ใส่ URL บัญชีจริง — ค่านี้เป็น placeholder ยังใช้งานไม่ได้
+  tiktokUrl: 'https://tiktok.com/@rnkink',
   email: 'sales@rnkproducts.co.th',
   address: '123 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110',
   addressShort: 'กรุงเทพฯ',
@@ -69,6 +73,45 @@ export const HOME_CTA = {
   phoneButton: 'โทรสอบถาม',
   contactButton: 'ข้อมูลติดต่อเพิ่มเติม',
 } as const;
+
+/* ช่องทางการจัดจำหน่าย — LINE มาก่อนเพราะเป็นช่องทางที่ทีมงานตอบจริง
+   `id` ผูกกับคลาส .channel-tile--{id} ใน globals.css ที่กำหนดสีแบรนด์ */
+export const SALES_CHANNELS = [
+  {
+    id: 'line',
+    name: 'LINE',
+    handle: CONTACT.lineId,
+    url: CONTACT.lineUrl,
+  },
+  {
+    id: 'shopee',
+    name: 'Shopee',
+    handle: 'RNK Products',
+    url: CONTACT.shopeeUrl,
+    // ลบบรรทัดนี้ออกเมื่อใส่ URL จริงใน CONTACT.shopeeUrl แล้ว
+    pending: true,
+  },
+  {
+    id: 'facebook',
+    name: 'Facebook',
+    handle: 'RNK Products',
+    url: CONTACT.facebookUrl,
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    handle: '@rnkink',
+    url: CONTACT.instagramUrl,
+  },
+  {
+    id: 'tiktok',
+    name: 'TikTok',
+    handle: '@rnkink',
+    url: CONTACT.tiktokUrl,
+    // ลบบรรทัดนี้ออกเมื่อใส่ URL จริงใน CONTACT.tiktokUrl แล้ว
+    pending: true,
+  },
+] as const;
 
 export const STORE = {
   eyebrow: 'คลังสินค้า · กรุงเทพฯ',

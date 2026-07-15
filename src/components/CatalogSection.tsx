@@ -22,7 +22,11 @@ export default function CatalogSection({ children }: CatalogSectionProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+      // threshold ต้องเป็น 0 เท่านั้น: section นี้สูงกว่าจอมาก (~8,200px บนมือถือ)
+      // ถ้าใช้ threshold แบบสัดส่วน จอเตี้ย ๆ อย่าง iPhone SE (667px) จะเห็นได้
+      // สูงสุดแค่ ~7.7% ของ section ทำให้ observer ไม่ยิงเลย และ section
+      // ค้างอยู่ที่ opacity: 0 ตลอด
+      { threshold: 0, rootMargin: '0px 0px -32px 0px' }
     );
 
     observer.observe(el);

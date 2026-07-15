@@ -6,6 +6,7 @@ import FeaturedSection from '@/components/FeaturedSection';
 import ProductsClient from '@/components/ProductsClient';
 import ProductGridSkeleton from '@/components/ProductSkeleton';
 import HelpFindSection from '@/components/HelpFindSection';
+import ChannelsSection from '@/components/ChannelsSection';
 // import TrustStats from '@/components/TrustStats'; // temporarily hidden
 import { getFeatured } from '@/lib/products';
 
@@ -24,6 +25,8 @@ export default function Home() {
           <ProductsClient />
         </Suspense>
       </CatalogSection>
+
+      <ChannelsSection />
 
       <HelpFindSection />
 

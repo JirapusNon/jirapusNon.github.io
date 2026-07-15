@@ -1,8 +1,5 @@
 'use client';
 
-import LineIcon from '@/components/LineIcon';
-import { CONTACT } from '@/lib/constants';
-
 const TRUST_POINTS = [
   {
     label: 'ส่งฟรีทั่วประเทศ',
@@ -118,26 +115,6 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* Mobile: CTAs after the trust badges, LINE as primary */}
-          <div className="hero-animate hero-animate-7 mt-5 flex flex-col items-center gap-3 sm:hidden">
-            <a
-              href={CONTACT.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-line-solid w-full justify-center px-6 shadow-sm hover:shadow-md"
-            >
-              <LineIcon className="h-5 w-5 shrink-0" />
-              สั่งซื้อผ่าน LINE
-            </a>
-            <a
-              href="#catalog"
-              onClick={scrollToCatalog}
-              className="hero-secondary-link inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-navy-700"
-            >
-              ดูสินค้าทั้งหมด
-              <ArrowRightIcon className="h-3.5 w-3.5 shrink-0" />
-            </a>
-          </div>
         </div>
       </div>
     </section>
