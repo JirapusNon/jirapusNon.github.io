@@ -5072,6 +5072,15 @@ body {
   }
 }
 
+.contact-cta__actions--aside {
+  grid-template-columns: 1fr;
+  margin-top: 1.25rem;
+}
+
+.contact-cta__actions--aside .contact-action__label {
+  font-weight: 400;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .contact-cta__pulse {
     animation: none;

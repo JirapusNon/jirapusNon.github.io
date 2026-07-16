@@ -2,10 +2,10 @@ export const SITE_NAME = 'RNK Products';
 export const SITE_TAGLINE = 'หมึกและอุปกรณ์สำนักงาน';
 
 export const CONTACT = {
-  lineUrl: 'https://line.me/ti/p/@rnkink',
-  lineId: '@rnkink',
-  phone: '02-123-4567',
-  phoneHref: 'tel:021234567',
+  lineUrl: 'https://line.me/ti/p/~0863132196',
+  lineId: '0863132196',
+  phone: '086-313-2196',
+  phoneHref: 'tel:0863132196',
   facebookUrl: 'https://facebook.com/rnkink',
   messengerUrl: 'https://m.me/rnkink',
   instagramUrl: 'https://instagram.com/rnkink',

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Award, Building2, Hash, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Award, Building2, Clock, Hash, MapPin, Phone } from 'lucide-react';
 import BackButton from '@/components/BackButton';
 import TrustBadges from '@/components/TrustBadges';
 import LineIcon from '@/components/LineIcon';
@@ -122,50 +122,6 @@ export default function ContactAboutSection() {
                   </li>
                 ))}
               </ul>
-
-              <div className="contact-cta">
-                <div className="contact-cta__head">
-                  <span className="contact-cta__eyebrow">
-                    <span className="contact-cta__pulse" aria-hidden="true" />
-                    พร้อมให้บริการ
-                  </span>
-                  <p className="contact-cta__title font-heading">
-                    ติดต่อทีมงานได้ทันที
-                  </p>
-                  <p className="contact-cta__sub">
-                    ตอบกลับเร็วในเวลาทำการ · {BUSINESS.hours}
-                  </p>
-                </div>
-
-                <div className="contact-cta__actions">
-                  <a
-                    href={CONTACT.lineUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-action contact-action--line"
-                  >
-                    <span className="contact-action__icon">
-                      <LineIcon className="h-5 w-5" />
-                    </span>
-                    <span className="contact-action__text">
-                      <span className="contact-action__label">แชท LINE</span>
-                      <span className="contact-action__value">{CONTACT.lineId}</span>
-                    </span>
-                    <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
-                  </a>
-
-                  <a href={CONTACT.phoneHref} className="contact-action">
-                    <span className="contact-action__icon">
-                      <Phone className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <span className="contact-action__text">
-                      <span className="contact-action__label">โทรเลย</span>
-                      <span className="contact-action__value font-mono">{CONTACT.phone}</span>
-                    </span>
-                    <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             <aside className="contact-detail__aside" aria-label="ข้อมูลองค์กร">
@@ -198,7 +154,45 @@ export default function ContactAboutSection() {
                     <p className="contact-facts__value">{CONTACT.address}</p>
                   </div>
                 </li>
+                <li className="contact-facts__row">
+                  <span className="contact-facts__icon">
+                    <Clock className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div className="contact-facts__body">
+                    <p className="contact-facts__label">เวลาทำการ</p>
+                    <p className="contact-facts__value">{BUSINESS.hours}</p>
+                  </div>
+                </li>
               </ul>
+
+              <div className="contact-cta__actions contact-cta__actions--aside">
+                <a href={CONTACT.phoneHref} className="contact-action">
+                  <span className="contact-action__icon">
+                    <Phone className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="contact-action__text">
+                    <span className="contact-action__label">โทรเลย</span>
+                    <span className="contact-action__value font-mono">{CONTACT.phone}</span>
+                  </span>
+                  <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
+                </a>
+
+                <a
+                  href={CONTACT.lineUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-action"
+                >
+                  <span className="contact-action__icon">
+                    <LineIcon className="h-5 w-5" />
+                  </span>
+                  <span className="contact-action__text">
+                    <span className="contact-action__label">แชท LINE</span>
+                    <span className="contact-action__value">{CONTACT.lineId}</span>
+                  </span>
+                  <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
+                </a>
+              </div>
             </aside>
           </div>
 
