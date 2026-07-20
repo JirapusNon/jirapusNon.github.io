@@ -50,12 +50,6 @@ const CONTACT_DETAILS = [
     href: `mailto:${CONTACT.email}`,
     Icon: MailIcon,
   },
-  {
-    id: 'hours',
-    label: 'เวลาทำการ',
-    value: BUSINESS.hours,
-    Icon: ClockIcon,
-  },
 ] as const;
 
 export default function Footer() {
@@ -117,20 +111,16 @@ export default function Footer() {
                       </dt>
                       <dd>
                         <span className="sr-only">{item.label}: </span>
-                        {'href' in item ? (
-                          <a
-                            href={item.href}
-                            title={item.value}
-                            {...('external' in item && item.external
-                              ? { target: '_blank', rel: 'noopener noreferrer' }
-                              : {})}
-                            className="site-footer__channel-link"
-                          >
-                            {item.value}
-                          </a>
-                        ) : (
-                          item.value
-                        )}
+                        <a
+                          href={item.href}
+                          title={item.value}
+                          {...('external' in item && item.external
+                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                            : {})}
+                          className="site-footer__channel-link"
+                        >
+                          {item.value}
+                        </a>
                       </dd>
                     </div>
                   ))}
@@ -251,25 +241,6 @@ function MailIcon({ className }: Readonly<{ className?: string }>) {
         strokeLinejoin="round"
         strokeWidth={1.75}
         d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-      />
-    </svg>
-  );
-}
-
-function ClockIcon({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.75}
-        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
   );

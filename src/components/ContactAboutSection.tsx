@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Award, Building2, Clock, Hash, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Award, Building2, Hash, MapPin, Phone } from 'lucide-react';
 import BackButton from '@/components/BackButton';
 import TrustBadges from '@/components/TrustBadges';
 import LineIcon from '@/components/LineIcon';
@@ -154,15 +154,6 @@ export default function ContactAboutSection() {
                     <p className="contact-facts__value">{CONTACT.address}</p>
                   </div>
                 </li>
-                <li className="contact-facts__row">
-                  <span className="contact-facts__icon">
-                    <Clock className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                  <div className="contact-facts__body">
-                    <p className="contact-facts__label">เวลาทำการ</p>
-                    <p className="contact-facts__value">{BUSINESS.hours}</p>
-                  </div>
-                </li>
               </ul>
 
               <div className="contact-cta__actions contact-cta__actions--aside">
@@ -176,6 +167,18 @@ export default function ContactAboutSection() {
                   </span>
                   <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
                 </a>
+
+                <span className="contact-action contact-action--static">
+                  <span className="contact-action__icon">
+                    <Phone className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="contact-action__text">
+                    <span className="contact-action__label">โทรศัพท์</span>
+                    <span className="contact-action__value font-mono">
+                      {CONTACT.phoneLandline}
+                    </span>
+                  </span>
+                </span>
 
                 <a
                   href={CONTACT.lineUrl}

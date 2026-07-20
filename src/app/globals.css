@@ -5168,6 +5168,17 @@ body {
   color: var(--color-accent-700);
 }
 
+/* Static fact, not a link — no pointer affordance, no hover lift */
+.contact-action--static {
+  cursor: default;
+}
+
+.contact-action--static:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--color-border);
+}
+
 /* LINE — the primary action, filled in the brand green */
 .contact-action--line {
   background: var(--color-line);

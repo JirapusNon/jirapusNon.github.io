@@ -3,13 +3,10 @@ import { MapPin } from 'lucide-react';
 import ContactAboutSection from '@/components/ContactAboutSection';
 import { CONTACT } from '@/lib/constants';
 
-const MAP_QUERY = encodeURIComponent(`RNK Products, ${CONTACT.address}`);
-const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${MAP_QUERY}&z=16&output=embed`;
-
 export const metadata: Metadata = {
   title: 'ติดต่อเรา',
   description:
-    'ติดต่อ RNK Products คลังหมึกพิมพ์และอุปกรณ์สำนักงานในกรุงเทพฯ โทร แชท LINE แผนที่ และข้อมูลเกี่ยวกับเรา',
+    'ติดต่อ RNK Products คลังหมึกพิมพ์และอุปกรณ์สำนักงานในบางพลี สมุทรปราการ โทร แชท LINE แผนที่ และข้อมูลเกี่ยวกับเรา',
 };
 
 export default function ContactPage() {
@@ -28,10 +25,10 @@ export default function ContactPage() {
 
           <div className="store-map-frame">
             <iframe
-              src={MAP_EMBED_SRC}
+              src={CONTACT.mapEmbedSrc}
               className="store-map-frame__iframe"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
               title="แผนที่ที่ตั้ง RNK Products"
             />
           </div>

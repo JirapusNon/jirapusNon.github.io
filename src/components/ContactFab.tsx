@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import LineIcon from '@/components/LineIcon';
-import { BUSINESS, CONTACT } from '@/lib/constants';
+import { CONTACT } from '@/lib/constants';
 
 const CHANNELS = [
   {
@@ -118,11 +118,6 @@ export default function ContactFab() {
                   </span>
                 </a>
               ))}
-
-              <p className="contact-sheet__hours">
-                <ClockIcon className="contact-sheet__hours-icon" />
-                เวลาทำการ · {BUSINESS.hours}
-              </p>
             </div>
           </div>
         </div>
@@ -210,21 +205,3 @@ function ArrowIcon({ className }: Readonly<{ className?: string }>) {
   );
 }
 
-function ClockIcon({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.8}
-        d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"
-      />
-    </svg>
-  );
-}

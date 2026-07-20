@@ -21,12 +21,6 @@ const TRUST_CARDS = [
     value: BUSINESS.aboutHomeTrust.payment,
     Icon: PaymentIcon,
   },
-  {
-    id: 'hours',
-    label: 'เวลาทำการ',
-    value: BUSINESS.hours,
-    Icon: ClockIcon,
-  },
 ] as const;
 
 export default function AboutSectionHome() {
@@ -172,10 +166,3 @@ function PaymentIcon() {
   );
 }
 
-function ClockIcon() {
-  return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  );
-}
